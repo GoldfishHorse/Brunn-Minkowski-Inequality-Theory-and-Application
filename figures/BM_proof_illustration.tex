@@ -1,0 +1,119 @@
+\documentclass[tikz,border=3.14mm]{standalone}
+\usetikzlibrary{patterns, arrows.meta, calc, decorations.pathreplacing}
+\usepackage{amsmath, amssymb}
+\usepackage {xeCJK}
+\begin{document}
+\begin{tikzpicture}[scale=2, >=Stealth]
+
+% ========== 左侧图片 ==========
+\begin{scope}[xshift=-2.2cm]
+% 定义闭凸集 K_lambda (不规则凸多边形)，确保原点在内部
+\coordinate (K1) at (-0.5,-0.3);
+\coordinate (K2) at (1.5,-0.5);
+\coordinate (K3) at (2.0,1.0);
+\coordinate (K4) at (1.0,2.0);
+\coordinate (K5) at (-0.5,1.2);
+
+% 填充凸集
+\fill[pattern=north east lines, pattern color=gray!30] (K1) -- (K2) -- (K3) -- (K4) -- (K5) -- cycle;
+\draw[thick] (K1) -- (K2) -- (K3) -- (K4) -- (K5) -- cycle;
+\node at (0.1,0.5) {$K_\lambda$};
+
+% 原点 - 确保在凸集内部
+\fill[black] (0.5,0.4) circle (1.5pt) node[below left] {$\mathbf{0}$};
+
+% 方向 u (右上方向)
+\def\uangle{40}
+
+% 找到凸集在 u 方向的支撑点（切点）
+\coordinate (supportU) at (1.8,1.25); % 手动调整确保相切
+\coordinate (supportNegU) at (-0.3,-0.55); % 手动调整确保相切
+
+% 定义超平面上的两个点
+\coordinate (H1) at ($(supportU) + ({\uangle+90}:1.8)$);
+\coordinate (H2) at ($(supportU) + ({\uangle-90}:1.2)$);
+
+% 绘制支撑超平面 H(u,β_λ) - 垂直于 u 且与凸集相切
+\draw[thick] (H1) -- (H2);
+\node[right] at ($(supportU) + ({\uangle+90}:1.3)$) {$H_{\mathbf{u},\beta_\lambda}$};
+
+% 绘制支撑超平面 H(-u,-α_λ) - 垂直于 -u 且与凸集相切
+\draw[thick] ($(supportNegU) + ({\uangle+90}:2.0)$) -- ($(supportNegU) + ({\uangle-90}:0.8)$);
+\node[left] at ($(supportNegU) + ({\uangle+90}:1.0)$) {$H_{-\mathbf{u},-\alpha_\lambda}$};
+
+% 计算从原点到超平面的垂足
+\coordinate (O) at (0.5,0.4);
+\coordinate (footU) at ($(H1)!(O)!(H2)$); % 正确的垂足计算
+
+% 绘制从原点到支撑超平面的距离
+\draw[dashed, thick, purple] (O) -- (footU);
+
+% 使用大括号表示距离
+\draw[decorate, decoration={brace, amplitude=5pt, raise=2pt}, purple, thick] 
+  (O) -- (footU) node [midway, above left, xshift=-5pt, yshift=5pt] {$h(K_\lambda, \mathbf{u})$};
+
+% 在垂足处绘制垂直符号
+\draw[purple] ($(footU) + ({\uangle+90}:0.15)$) -- ($(footU) + ({\uangle+90}:0.15) - ({\uangle}:0.15)$)
+              -- ($(footU) - ({\uangle}:0.15)$);
+
+% 添加法向量标记
+\draw[->, thick, blue] (supportU) -- ($(supportU) + (\uangle:0.5)$) node[midway, above] {$\mathbf{u}$};
+\draw[->, thick, blue] (supportNegU) -- ($(supportNegU) + ({\uangle+180}:0.4)$) node[midway, below] {$-\mathbf{u}$};
+\end{scope}
+
+% ========== 右侧图片 ==========
+\begin{scope}[xshift=2.2cm]
+% 使用相同的凸集 K_lambda
+\coordinate (K1) at (-0.5,-0.3);
+\coordinate (K2) at (1.5,-0.5);
+\coordinate (K3) at (2.0,1.0);
+\coordinate (K4) at (1.0,2.0);
+\coordinate (K5) at (-0.5,1.2);
+
+% 填充凸集
+\fill[pattern=north east lines, pattern color=gray!30] (K1) -- (K2) -- (K3) -- (K4) -- (K5) -- cycle;
+\draw[thick] (K1) -- (K2) -- (K3) -- (K4) -- (K5) -- cycle;
+\node at (0.1,0.5) {$K_\lambda$};
+
+% 原点
+\fill[black] (0.5,0.4) circle (1.5pt) node[below left] {$\mathbf{0}$};
+
+% 方向 u (与左侧相同)
+\def\uangle{40} 
+\coordinate (supportU) at (1.8,1.25); % 手动调整确保相切
+\coordinate (supportNegU) at (-0.3,-0.55); % 手动调整确保相切
+\coordinate (H1) at ($(supportU) + ({\uangle+90}:2.1)$);
+\coordinate (H2) at ($(supportU) + ({\uangle-90}:0.9)$);
+\draw[thick] ($(supportNegU) + ({\uangle+90}:2.1)$) -- ($(supportNegU) + ({\uangle-90}:0.9)$); 
+\draw[thick] (H1) -- (H2);
+
+% 绘制多个平行超平面 (沿u方向平移)
+\foreach \i in {0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4} {
+  \coordinate (shiftU) at ($(\uangle:\i)$);
+  \coordinate (H1i) at ($(K1) + (shiftU) + ({\uangle+90}:1.8)$);
+  \coordinate (H2i) at ($(K1) + (shiftU) + ({\uangle-90}:1.2)$);
+  \draw[dashed, gray] (H1i) -- (H2i);
+}
+
+% 选择一个特定的超平面并标记
+\coordinate (selectedShift) at ($(\uangle:0.6)$);
+\coordinate (H1s) at ($(K1) + (selectedShift) + ({\uangle+90}:1.8)$);
+\coordinate (H2s) at ($(K1) + (selectedShift) + ({\uangle-90}:1.2)$);
+\draw[thick, red] (H1s) -- (H2s);
+
+% 标记超平面与凸集的交线
+\coordinate (midPoint) at ($(H1s)!0.5!(H2s)$);
+\coordinate (braceStart) at ($(midPoint) + ({\uangle+90}:0.4)$);
+\coordinate (braceEnd) at ($(midPoint) + ({\uangle-90}:0.9)$);
+
+% 绘制大括号表示n-1维
+\draw[decorate, decoration={brace, amplitude=5pt, mirror}, thick, red] 
+  (braceStart) -- (braceEnd) node [midway, right, xshift=5pt] {$n-1\text{ 维 }$ };
+
+% 添加法向量标记
+
+\draw[->, thick, blue] (supportU) -- ($(supportU) + (\uangle:0.5)$) node[midway, above] {$\mathbf{u}$};
+\end{scope}
+
+\end{tikzpicture}
+\end{document}

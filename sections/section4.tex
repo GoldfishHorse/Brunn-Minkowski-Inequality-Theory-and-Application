@@ -1,0 +1,743 @@
+\chapter{混合体积与变分公式}\label{chapter:4}
+
+\section{表面积与混合体积}
+
+回忆一下我们最开始的例~\ref{ex:minkowski_sum}，以及图~\ref{fig:Minkowski_sum}。
+设有边长为 $l$ 的正方形 $K=[-l/2,l/2]\times[-l/2,l/2]$、圆盘 $\epsilon B_2=\{(x,y):x^2+y^2\le\epsilon^2\}$，显见
+\begin{align*}
+V_n(K+\epsilon B_2)&=V_n(K)+4l\epsilon+V_n(\epsilon B_2)\\
+&=l^2+4l\epsilon+\pi\epsilon^2
+\end{align*}
+于是存在极限
+\begin{align*}
+\lim_{\epsilon\to 0}\frac{V_n(K+\epsilon B_2)-V_n(K)}{\epsilon}&=\lim_{\epsilon\to 0^+}\frac{4l\epsilon+\pi\epsilon^2}{\epsilon}\\
+&=4l
+\end{align*}
+正是正方形的周长。
+
+这个现象可以推广：对于一般的 $K\subset\mathbb{R}^n$，我们也可以把它与 $\epsilon B_n$ 相加，然后把原本的 $K$ 给挖掉, 见图~\ref{fig:eps_extension}；
+剩下的部分可以近似看成一个能够铺展开成``长方形"，其高是 $\epsilon$，底则可以看作是 $K$ 的``周长 (perimeter)"——只不过这个``周长"是 $n-1$ 维的，所以叫做``表面积"更加合适。
+ 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/surface_1.pdf}
+    \caption{$K + \epsilon B_n$ 等同于 $K$ 的边界向外扩展出 $\epsilon$, 因而可用 $\epsilon\to 0^+$ 时的极限来定义 $K$ 的表面积。}
+    \label{fig:eps_extension}
+\end{figure}
+
+因此可以说
+\begin{align*}
+& V_n(K+\epsilon B_n)-V_n(K)\approx K\text{ 的表面积}\times \epsilon\\
+\implies & \lim_{\epsilon\to 0^+}\frac{V_n(K+\epsilon B_n)-V_n(K)}{\epsilon}=K\text{ 的表面积}
+\end{align*}
+
+\begin{definition}[表面积]\label{def:surface_area}
+设 $K\subset\mathbb{R}^n$ 是凸体，则定义其\emph{表面积} (surface area) 为
+\[
+S(K):=\lim_{\epsilon\to 0^+}\frac{V_n(K+\epsilon B_n)-V_n(K)}{\epsilon}
+\]
+\end{definition}
+
+\begin{corollary}
+设 $\lambda>0$，那么 $S(\lambda K)=\lambda^{n-1}S(K)$。
+\end{corollary}
+
+\begin{proof}
+\begin{align*}
+S(\lambda K) &=\lim_{\epsilon\to0^+}\frac{V_n(\lambda K+\epsilon B_n)-V_n(\lambda K)}{\epsilon}\\
+&=\lim_{\epsilon\to0^+}\frac{\lambda^{n-1}\big(V_n(K+\tfrac{\epsilon}{\lambda}B_n)-V_n(K)\big)}{\frac \epsilon \lambda}\\
+&=\lambda^{n-1}S(K)
+\end{align*}
+\end{proof}
+
+\begin{remark}
+    可以证明，对于凸体，定义~\ref{def:surface_area} 中的极限总是存在的，并且正是凸体在测度意义上的表面积，即 $\mathcal{H}^{n-1}(\partial K)$。
+    其中 $\mathcal{H}^{n-1}$ 代表 $n-1$ 维 Hausdorff 测度，$\partial K$ 代表 $K$ 的边界。
+    更一般地，这个定义还可以再推广到一类表面 ``足够良好" 的紧集，有这样的定理\footnotemark
+    \begin{theorem*}
+        对紧集$K\subset\mathbb R^n$，若其内部非空且边界是\emph{可求长的} (rectifiable), 那么 
+        \[S(K)=\lim_{\epsilon\to 0^+}\frac{V_n(K+\epsilon B_n)-V_n(K)}{\epsilon}=\mathcal{H}^{n-1}(\partial K)\]
+    \end{theorem*}
+    有时，$S(K)$ 也称 \emph{Minkowski content}。
+\end{remark}
+\footnotetext{
+    该定理的叙述，笔者参考的是 Böröczky, K. J., Figalli, A., \& Ramos, J. P. (2025).\emph{ Isoperimetric inequalities, Brunn-Minkowski theory and Minkowski type Monge-Ampère equations on the sphere} . \url{https://users.renyi.hu/~carlos/Brunn-Minkowski-Book-2024-02-05.pdf} 一书的 Theorem 4.1.4 (p. 102)。
+    不过对此叙述最详尽的专著应属 H. Federer (1969). \textit{Geometric measure theory}. Springer-Verlag.
+    % 关于 Hausdorff 测度的定义和性质，可以参考例如 Mattila, P. (1995). \textit{Geometry of sets and measures in Euclidean spaces: Fractals and rectifiability}. Cambridge University Press。
+}
+
+在表面积的定义中，球 $\epsilon B_n$ 是个很特殊的对象，它是``各项同性"的，能保证 $K+\epsilon B_n$ 总沿 $K$ 的边界扩展出 $\epsilon$。
+我们不禁会想：如果把``球"换成一个一般的凸体，会得到什么样的结果？显然，此时边界各处拓展出去的距离就不一样了：
+如果 $K,L$ 是两个一般的凸体，那么在 $K$ 的边界上， $K+\epsilon L$ 关于表面法方向 $u\in\mathbb{S}^{n-1}$ 至多能扩展出去 $\epsilon h_L(u)$，其中 $h_L(u)$ 代表凸体 $L$ 的支撑函数。再把 $K$ 挖掉，剩下的部分展开后就不能用长方形近似了，因为它的``高"在不停变化，是一个锯齿形，如图~\ref{fig:surface_mix}。
+ 
+\begin{figure}[hb]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/surface_2.png}
+    \caption{将定义~\ref{def:surface_area} 中的球换成任意的凸体 $L$ ，$K$ 边界向外扩展出去的距离就不再总是相同的。
+    底部蓝色线代表 $K$ 的表面，灰色代表`` $K+\epsilon B_n$ 和 $K+\epsilon L$ 扩展出去的部分"}
+    \label{fig:surface_mix}
+\end{figure}
+
+我们可以猜测，当 $\epsilon\to 0$ 时， $(K+\epsilon L)\setminus K$ 的体积应该可以写作积分的形式
+\[
+V_n(K+\epsilon L)-V_n(K)\approx \int_{\mathbb{S}^{n-1}}\epsilon h_L(u)\mathrm{d}A(u)
+\]
+即，
+\begin{equation}
+\lim_{\epsilon \to 0^+}\frac{V_n(K+\epsilon L)-V_n(L)}{\epsilon}=\int_{\mathbb{S}^{n-1}} h_L(u)\mathrm{d}A(u) \label{eq:4-1}\tag{4-1}
+\end{equation}
+这个 $A(u)$ 代表上图右下锯齿形的``底边"，表述某种和 $K$ 的表面积有关的测度\footnote{因为当 $L=B_n$ 时， $h_L(u)\equiv 1$，根据定义应该有 $\displaystyle \int_{\mathbb{S}^{n-1}}\mathrm{d}A(u)=S(K)$}。具体如何定义 $A(u)$ 暂且不表，我们后文中会给出上述等式的严格论述。
+
+\begin{definition}[混合体积]\label{def:mix_volume}
+设 $K,L\subset\mathbb{R}^n$ 是凸体，定义 $K$ 和 $L$ 的\emph{第一混合体积} (first mixed volume) 为
+\[
+V_1(K,L)=\frac1n\lim_{\epsilon\to 0^+}\frac{V_n(K+\epsilon L)-V_n(K)}{\epsilon}
+\]
+\end{definition}
+
+根据定义， $K$ 的表面积可以写作 $S(K)=nV_1(K,B_n)$。
+
+\section{Minkowski 第一不等式}
+
+\begin{theorem}[Minkowski 第一不等式]\label{thm:minkowski}
+设 $K,L\subset\mathbb{R}^n$ 是凸体，那么成立不等式
+\[
+V_1(K,L)\ge V_n(K)^{\frac{n-1}{n}}V_n(L)^{\frac 1n}
+\]
+不等号成立当且仅当 $K,L$ 位似，即存在 $c>0$ 和 $x_0\in\mathbb{R}^n$ 使得 $L=cK+x_0$。
+\end{theorem}
+
+\subsection{特例：等周不等式和 Urysohn 不等式}
+
+在证明该定理之前，我们先看看这个定理能推导出什么结论。
+
+\begin{corollary}[等周不等式]
+注意到根据定义~\ref{def:surface_area}，单位球的表面积和体积满足关系
+\begin{align*}
+S(B_n)&=nV_1(B_n,B_n)\\
+&=\lim_{\epsilon \to 0^+}\frac{V_n((1+\epsilon)B_n)-V_n(B_n)}{\epsilon}\\
+&=\left(\lim_{\epsilon \to 0^+}\frac{(1+\epsilon)^n-1}{\epsilon}\right)V_n(B_n)\\
+&=nV_n(B_n)
+\end{align*}
+在定理~\ref{thm:minkowski} 中取 $L=B_n$ 为单位球，那么
+\begin{align*}
+S(K)=nV_1(K,B_n)&\ge n V_n(K)^{\frac{n-1}n}V_n(B_n)^{\frac 1n}\\
+&=\color{DarkBlue}{nV_n(B_n)}\left(\frac{V_n(K)}{V_n(B_n)}\right)^{\frac{n-1}n}\\
+&=\color{DarkBlue}{S(B_n)}\left(\frac{V_n(K)}{V_n(B_n)}\right)^{\frac{n-1}n}
+\end{align*}
+得出
+\[
+\left(\frac{S(K)}{S(B_n)}\right)^{\frac1{n-1}}\ge\left(\frac{V_n(K)}{V_n(B_n)}\right)^{\frac1{n}}
+\]
+取等当且仅当 $K$ 是一个球。
+这个不等式表明了：表面积一定的凸体，其体积在该凸体为球时取得最大值；体积一定的凸体，表面积在该凸体为球时取得最小值。这便是著名的\emph{等周不等式} (Isoperimetric inequality)。
+\end{corollary}
+
+\begin{corollary}[Urysohn 不等式]
+如果在定理~\ref{thm:minkowski}  中取 $K=B_n$ 为单位球，又会怎样？有
+\begin{align*}
+V_1(B_n,L)&\ge V_n(B_n)^{\frac{n-1}{n}}V_n(L)^{\frac1n}\\
+&=V_n(B_n)\left(\frac{V_n(L)}{V_n(B_n)}\right)^{\frac 1n}
+\end{align*}
+即
+\[
+\frac{V_1(B_n,L)}{V_n(B_n)} \ge \left(\frac{V_n(L)}{V_n(B_n)}\right)^{\frac 1n}
+\]
+取等当且仅当 $L$ 是一个球。
+
+上面的不等式左侧可以改写作
+\begin{align*}
+\frac{V_1(B_n,L)}{V_n(B_n)}&=\frac1{\color{DarkBlue}{nV_n(B_n)}}\int_{\mathbb{S}^{n-1}}h_L(u)\mathrm{d}\sigma(u)\\
+&=\frac1{\color{DarkBlue}{S(B_n)}}\int_{\mathbb{S}^{n-1}}h_L(u)\mathrm{d}\sigma(u)\\
+&:=W(L)
+\end{align*}
+其中 $\sigma$ 代表球面 $\mathbb{S}^{n-1}$ 上的面积测度。上式所定义的 $W(L)$ 称作凸体 $L$ 的\emph{均宽} (mean-width)，则有
+\[
+W(L)\ge\left(\frac{V_n(L)}{V_n(B_n)}\right)^{1/n}
+\]
+这被称作 \emph{Urysohn 不等式}。
+\end{corollary}
+
+\begin{remark}
+上面两个不等式都可以用第~\ref{chapter:3} 章中介绍的 Steiner 对称化的技巧证明——回忆一下，我们曾在说过，如果不等式在球的情况下达到最大或最小值时，很可能就能利用 Steiner 对称化的技巧解决。
+以等周不等式为例，我们只需证明 Steiner 对称化的另一性质:
+\begin{proposition}
+设 $K\subset\mathbb{R}^n$ 是凸体，则有 $S(S_uK)\le S(K)$。
+\end{proposition}
+\begin{proof}
+用命题~\ref{prop:steiner_monotone} 和~\ref{prop:steiner_scaling}，对 $\epsilon >0$，
+\[
+S_u(K+\epsilon B_n)\supseteq S_u K+\epsilon S_u(B_n)=S_u K+\epsilon B_n
+\]
+因而再结合体积不变 (命题~\ref{prop:steiner_volume})，
+\begin{align*}
+\frac{V_n(S_uK+\epsilon B_n)-V_n(S_uK)}{\epsilon} \le \frac{V_n(S_u(K+\epsilon B_n))-V_n(S_uK)}{\epsilon}=\frac{V_n(K+\epsilon B_n)-V_n(K)}{\epsilon}
+\end{align*}
+\end{proof}
+
+该性质告诉我们表面积泛函 $S(K)$ 在 Steiner 对称化操作下是单调递减的，由 \hyperref[thm:gross]{Gross 定理} 以及表面积在 Hausdorff 度量下连续，立即可以证明等周不等式。
+至于如何用 Steiner 对称化证明 Urysohn 不等式，我们留给读者 :-)
+\end{remark}
+
+\subsection{Minkowski 第一不等式的证明}
+
+接下来我们用 BM 不等式来证明 Minkowski 第一不等式。在此之前，先证明 BM 不等式的一个推论：
+
+\begin{lemma}\label{lem:concave}
+设 $K,L\subset\mathbb{R}^n$ 是凸体，那么 $f(t):=V_n\big((1-t)K+tL\big)^{1/n}$， $0\le t\le 1$ 是凹函数。
+\end{lemma}
+
+\begin{proof}
+对任意 $0\le t_1,t_2\le 1$ 和 $0\le \lambda\le1$，
+\begin{align*}
+&f\big((1-\lambda)t_1+\lambda t_2\big)\\
+&=V_n\Big((1-(1-\lambda)t_1-\lambda t_2)K+((1-\lambda)t_1+\lambda t_2)L\Big)^{1/n}\\
+&=V_n\Big((1-\lambda)\big((1-t_1)K+t_1L\big)+\lambda\big((1-t_2)K+t_2L\big)\Big)^{1/n}\tag{定理~\ref{thm:BM-convex}}\\
+&\ge (1-\lambda)V_n\big((1-t_1)K+t_1L\big)^{1/n}+\lambda V_n\big((1-t_2)K+t_2L\big)^{1/n}\\
+&=(1-\lambda)f(t_1)+\lambda f(t_2)
+\end{align*}
+其中第三行用了 BM 不等式。
+\end{proof}
+
+\begin{remark}
+事实上， $V_n\big((1-t)K+tL\big)$ 可以写作关于 $t$ 的 $n$ 次多项式。
+更一般地，对于凸体 $K_1,\ldots,K_m\subset\mathbb{R}^n$ 和实数 $\lambda_1,\ldots,\lambda_m\ge 0$， $V_n\left(\lambda_1K_1+\cdots+\lambda_mK_m\right)$ 可以写作 $\lambda_1,\ldots,\lambda_m$ 的 $n$ 次齐次多项式。
+这个结论一般会写成
+\[V_n(K+\lambda L)=\sum_{i=0}^n c_i \lambda^i\]
+其中 $c_i$ 是某些与 $K,L$ 有关的非负常数。特别地，当 $L=B_n$ 时， 该式称作 \emph{Steiner 公式}。
+详细的理论可以参考 Gruber, P. M. (2007). \textit{Convex and discrete geometry}. Berlin, Heidelberg: Springer Berlin Heidelberg 的 Theorem 6.5 等。
+\end{remark}
+
+\begin{proof}[Minkowski 第一不等式的证明]
+第一混合体积 $V_1(K,L)$ 的定义式不太好用，为此，我们考虑改写其形式
+\begin{align*}
+V_1(K,L)&=\frac1n\lim_{\epsilon\to 0^+}\frac{V_n(K+\epsilon L)-V_n(K)}{\epsilon}\\
+&=\frac1n\lim_{t\to 0^+}\frac{V_n\left(K+\frac{t}{1-t} L\right)-V_n(K)}{\frac{t}{1-t}} \tag{令 $\epsilon=\frac t{1-t}$}\\
+&=\frac1n\lim_{t\to 0^+}\frac{1-t}{t}\bigg(\bigg(\frac 1{1-t}\bigg)^nV_n\big((1-t)K+tL\big)-V_n(K)\bigg)\\
+&=\frac1n\lim_{t\to 0^+}\underbrace{\frac1{(1-t)^{n-1}}}_{\to 1}\frac1{t}\bigg(V_n\big((1-t)K+tL\big)-(1-t)^nV_n(K)\bigg)\\
+&=\frac1n\lim_{t\to 0^+}\frac{V_n\big((1-t)K+tL\big)-V_n(K)}{t}+\frac1n V_n(K)\underbrace{\lim_{t\to 0^+}\frac{1-(1-t)^n}{t}}_{=n}\\
+&=\frac1n\lim_{t\to 0^+}\frac{V_n\big((1-t)K+tL\big)-V_n(K)}{t}+V_n(K)
+\end{align*}
+因而，若记 $f(t):= V_n\big((1-t)K+tL\big) ^{1/n}$， $0\le t\le1$，则上面的结果可写作
+\begin{align*}
+V_1(K,L)-V_n(K)&=\frac1n\lim_{t\to 0^+}\frac{V_n\big((1-t)K+tL\big)-V_n(K)}{t}\\
+&=\frac1n \frac{\mathrm{d}f^n}{\mathrm{d}t}(0^+)\\
+&=f^{n-1}(0)f'(0^+)
+\end{align*}
+
+我们知道 $f^{n-1}(0)=V_n(K)^{\frac{n-1}{n}}$，于是，要证 Minkowski 第一不等式即 $V_1(K,L)\ge V_n(K)^{\frac{n-1}{n}}V_n(L)^{\frac 1n}$ 成立，只需证明
+\begin{align*}
+f'(0^+)&=\frac{V_1(K,L)-V_n(K)}{V_n(K)^{\frac{n-1}n}}\\
+&\ge \frac{V_n(K)^{\frac{n-1}n} V(L)^{\frac1n}-V_n(K)}{V_n(K)^{\frac{n-1}n}}\\
+&=V_n(L)^{\frac1n}-V_n(K)^{\frac1n}\\
+&=f(1)-f(0)
+\end{align*}
+
+而根据引理~\ref{lem:concave}，
+\begin{align*}
+& f(t)=f((1-t)\cdot 0+t\cdot 1)\ge (1-t)f(0)+t f(1),\;\forall\, 0<t<1\\
+\implies&\frac{f(t)-f(0)}{t}\ge f(1)-f(0),\;\forall\, 0<t<1\\
+\overset{t\to0^+}{\implies}& f'(0^+) \ge f(1)-f(0)
+\end{align*}
+这就证明了 Minkowski 第一不等式。
+
+下证取等条件。一方面 (充分性)，若存在 $c>0$ 和 $x_0\in\mathbb{R}^n$ 使得 $L=cK+x_0$，则
+\begin{align*}
+& V_n(K+\epsilon L)=V_n(K+\epsilon cK+\epsilon x_0)=(1+\epsilon c)^nV_n(K)\\
+\implies & V_1(K,L)=\frac1n\lim_{\epsilon\to 0^+}\frac{ V_n(K+\epsilon L)-V_n(K)}{\epsilon}\\
+& \quad =\frac1n V_n(K)\lim_{\epsilon\to 0^+}\frac{(1+\epsilon c)^n-1}{\epsilon}\\
+& \quad =cV_n(K)\\
+& \quad =V_n(K)^{\frac{n-1}n}(c^n V_n(K))^{\frac1n}\\
+& \quad =V_n(K)^{\frac{n-1}n}V_n(L)^{\frac1n}
+\end{align*}
+即 Minkowski 第一不等式取等。
+
+反过来 (必要性)，若取等，则 $f'(0^+)=f(1)-f(0)$ 需成立，由引理~\ref{lem:concave}， $f$ 必须是一个线性函数，即 $f(t)=(1-t)f(0)+tf(1),\;\forall\, 0\le t\le 1$，这正是 BM 不等式取等。故 Minkowski 第一不等式取等蕴含 BM 不等式的取等条件，即 $K,L$ 位似。
+\end{proof}
+
+\section{混合体积的变分公式}
+
+接下来我们回到~\eqref{eq:4-1}式，来解决这样一个问题： $V_1(K,L)$ 的积分形式应该是什么？或者说，要使~\eqref{eq:4-1}式： $\displaystyle V_1(K,L)=\int_{\mathbb{S}^{n-1}} h_L(u)\mathrm{d}A(u) $ 成立，这个 $A(u)$ 到底应该是什么东西？
+
+\subsection{准备工作}
+
+为此，我们得先补充一些定义，
+
+\begin{definition}[支撑函数和超平面]
+设 $K\subset\mathbb{R}^n$ 是凸体， $u\in\mathbb{S}^{n-1}$，则称 $h_K(u):=\sup\limits_{x\in K} \langle x,u\rangle$ 是 $K$ 的\emph{支撑函数} (support function)， $H_K(u):=\{x\in\mathbb{R}^n:\langle x,u\rangle=h_K(u)\}$ 是 $K$ 的一个\emph{支撑超平面} (support plane)。
+\end{definition}
+
+\begin{definition}[法向量]
+设 $K\subset\mathbb{R}^n$ 是凸体， $\partial K$ 是其边界，若对 $x\in\partial K$，方向向量 $u\in\mathbb{S}^{n-1}$ 满足 $\langle x,u\rangle=h_K(u)$，即 $u$ 是过 $x$ 点的支撑超平面的法向量，则称 $u$ 是曲面 $\partial K$ 在 $x$ 处的\emph{法向量} (normal vector)。
+\end{definition}
+
+我们上述定义的法向量不一定唯一：在某个 $x\in\partial K$ 处可能存在多个法向量。如下左图所示，在左上方的尖点处会存在多个法向量 (事实上这些法向量构成一个闭锥，称作\emph{法锥} normal cone), 见~\ref{fig:normal_radial} 左图。
+
+同时，给定法向量 $u$，其对应的 $x$ 也可能不唯一（例如可能 $K$ 的一个``面"都有相同的法向量）。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/normal_radial.pdf}
+    \caption{左图：凸体 $K$ 上某些点可能存在多个法向量 (如尖点处)；给定法向量 $u$，其对应的边界点也可能不唯一 (如平面部分)。
+    右图：从原点出发，沿方向 $v$ 走到边界 $\partial K$ 上的点 $r_K(v)$，走过距离为 $\rho_K(v)$。}
+\label{fig:normal_radial}
+\end{figure}
+
+\begin{definition}[Gauss 映射和其逆]
+设 $x\in\partial K$，定义集合 $\nu_K(x)$： $u\in\nu_K(x)$ 当且仅当 $\langle x,u\rangle =h_K(u)$，即 $u$ 是 $x$ 处的法向量；称 $\nu_K$ 是 \emph{Gauss 映射}，它将 $\partial K$ 上的点映射到 $\mathbb{S}^{n-1}$ 上的点。
+反过来，对于给定的 $u\in\mathbb{S}^{n-1}$，定义集合 $\nu_K^{-1}(u)$： $x\in \nu_K^{-1}(u)$ 当且仅当 $\langle x,u\rangle =h_K(u)$，称其为 \emph{Gauss 逆映射}，它将 $\mathbb{S}^{n-1}$ 上的点映射到  $\partial K$。
+\end{definition}
+
+这里我们把 $\nu_K$ 和 $\nu_K^{-1}$ 都定义为集合，原因正如我们刚刚所说，在某些点处它们可能不唯一；不过实际上，这种点都是零测的 (相对于后面讨论的球面/表面积测度)。换句话说，这两个映射是``几乎处处"单值的，我们无需担心多值造成的影响。
+
+\begin{remark}
+简而言之，对于任意一个凸体 $K$，我们总能将其边界 $\partial K$ 划分成有限个部分，使得每个部分 (在合适坐标系下) 都是一个凸函数。\emph{Aleksandrov 定理}告诉我们凸函数几乎处处可微，因而我们可以说， $\partial K$ 上几乎处处每一个点存在唯一的支撑超平面以及法向量 (这种点又叫做正则点)，这说明我们可以把 $\nu_K$ 视作是几乎处处单值的。
+
+反过来也一样， $h_K$ 是一个凸函数，因而几乎处处可微。凸几何中有这样的结论： $h_K(u)$ 在 $u$ 处可微当且仅当支撑超平面 $H_K(u)$ 与 $K$ 的交集 (称作支撑集) 仅有一个点 ，即 $H_K(u)\cap K=\{x\}$ \footnotemark，这说明我们可以把 $\nu_K^{-1}$ 视作是几乎处处单值的。
+% 由于那些性质不好的、造成映射多值的点也不会产生影响，我们简单起见，
+后文中均将 $\nu_K(u)$ 和 $\nu^{-1}_K(x)$ 视作是唯一定义的。
+\end{remark}
+% \footnotetext{见 Schneider, R. (2013). \textit{Convex bodies: the Brunn–Minkowski theory} (Vol. 151). Cambridge university press. 的 Corollary 1.7.3，p.47}
+
+\begin{definition}[半径函数]\label{def:radial_func}
+设 $0\in K$，定义 $K$ 的\emph{半径函数} (radial function) $\rho_K:\mathbb{S}^{n-1}\to [0,\infty)$ 为从原点出发，在 $K$ 内沿 $v$ 方向的最大距离，
+\[
+\rho_K(v):=\sup\{r>0:rv\in K\}
+\]
+定义 $r_K(v):=\rho_K(v)v\in\partial K$，这是一个 $\mathbb{S}^{n-1}\to\partial K $ 的函数。
+\end{definition}
+
+上述定义亦见于~\ref{fig:normal_radial} 右图。本章接下来均假设原点 $0\in K$。
+
+\begin{definition}[半径 Gauss 映射及其逆]\label{def:radial_gauss_map}
+记  $\alpha_K:=\nu_k\circ r_K$ 为\emph{半径 Gauss 映射}。
+
+记 $r_K^{-1}:\partial K\to\mathbb{S}^{n-1}$ 为
+\[
+r_K^{-1}(x):=\frac{x}{\|x\|},\quad x\ne 0
+\]
+
+\emph{半径 Gauss 逆映射} 定义为 $\alpha_K^{-1}:=(\nu_k\circ r_K)^{-1}=r_K^{-1}\circ \nu_K^{-1}$。
+\end{definition}
+
+通俗地说，从原点出发，向 $u$ 方向一直走到 $K$ 的边界，在边界上这个点处的法向量就是 $\alpha_K(u)$。反过来，如果 $u$ 是边界上某个点的法向量，那么将这个点归一化，所得方向向量就是 $\alpha_K^{-1}(u)$。 $\alpha_K$ 和 $\alpha_K^{-1}$ 都是 $\mathbb{S}^{n-1}\to\mathbb{S}^{n-1}$ 的映射。
+
+如前对 Gauss 映射和其逆的讨论，我们可以将 $\alpha_K(u)$ 和 $\alpha_K^{-1}(u)$ 视作是几乎处处单值的。
+
+\subsection{关于凸体的体积}
+
+首先，可以将凸体 $K\subset\mathbb{R}^n$ 的体积写作积分的形式，并应用极坐标变换，有
+\begin{align*}
+V_n(K)&=\int_K\mathrm{d}x=\int_{\mathbb{S}^{n-1}}\int_0^{\rho_K(v)}r^{n-1}\mathrm{d}r\mathrm{d}v\\
+&=\frac1n\int_{\mathbb{S}^{n-1}}(\rho_K(v))^n\mathrm{d}v \label{eq:4-2}\tag{4-2}
+\end{align*}
+
+另一方面，记 $\displaystyle\mathrm{div}(x)=\sum_{i=1}^n\frac{\partial x_i}{\partial x_i}=n$ 代表 $x$ 的散度， $\mathcal H^{n-1}(x)$ 是 $\partial K$ 上的 $n-1$ 维 Hausdorff 测度（边界上的表面积微元），我们还能将体积写成
+\begin{align*}
+V_n(K)&=\int_K\mathrm{d}x=\frac1n\int_Kn\,\mathrm{d}x\\
+&=\frac1n\int_K\mathrm{div}(x)\,\mathrm{d}x\\
+&=\frac1n\int_{\partial K}\langle x,\nu_K(x)\rangle\,\mathrm{d}\mathcal H^{n-1}(x) \tag{散度定理}\\
+&=\frac1n\int_{\mathbb{S}^{n-1}}h_K(u)\mathrm{d}S(K,u) \label{eq:4-3}\tag{4-3}
+\end{align*}
+
+这里最后一行用 $u=\nu_K(x)$ 换元后，Gauss 映射把 $\mathcal{H}^{n-1}(x)$ 推送到了一个新的测度 $\mathrm{d}S(K,u)$，可以算出来是
+\[
+S(K,U):=\int_{\{x\in\partial K:x\in\nu^{-1}(u),u\in U\}}\mathrm{d}\mathcal H^{n-1}=\mathcal H^{n-1}(\nu_K^{-1}(U))
+\]
+其中 $U$ 是球面 $\mathbb{S}^{n-1}$ 中的 Borel 集。
+
+我们称 $\mathrm{d}S(K,u)$ 是 $K$ 的\emph{表面积测度}，由上可知，它由Gauss映射和 $\partial K$ 上的 $n-1$ 维 Hausdorff 测度诱导而来。什么意思呢？请看图~\ref{fig:gauss_map} 中的例子。
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/gauss_map.pdf}
+\caption{Gauss 逆映射 $\nu_K^{-1}$ 的示意图。对于方向 $u_1$，我们发现 $K$ 中有一个``面"即蓝色线段，上面每一个点的法向量都是 $u_1$，于是这条蓝色线段就是 $\nu^{-1}_K(u_1)$，其长度就是 $S(K,u_1)$；对于圆周上的一段橙色弧 $U$，对应到 $K$ 的边界上，也能找到一段橙色部分，其中点的法向量在 $U$ 中，这段橙色部分的长度就是 $S(K,U)$。}
+\label{fig:gauss_map}
+\end{figure}
+
+式~\eqref{eq:4-2}和式~\eqref{eq:4-3}为我们带来了两个测度：
+
+\begin{itemize} 
+\item (用半径函数) $\frac1n\rho_K^n (v)\mathrm{d}v$，其中 $\mathrm{d}v$ 代表球面测度；
+\item (用支撑函数) $\frac1n h_K(u)\mathrm{d}S(K,u)$。
+\end{itemize}
+
+
+\begin{figure} 
+\centering
+\includegraphics[width=0.7\textwidth]{figures/measure_comp.pdf}
+\caption{两个不同测度的比较：$\frac1n\rho_K^n (v)\mathrm{d}v$ 计算扇形面积， $\frac1n h_K(u)\mathrm{d}S(K,u)$ 计算三角形面积。}
+\label{fig:measure_comp}
+\end{figure}
+% \hfill\break
+
+举个二维的例子，见图~\ref{fig:measure_comp}，可以这样去理解：设 $u$ 是 $\partial K$ 上某一点的法向量，此点附近面积微元与原点所围成的部分能近似为一个扇形（高维情况下则是``锥"），上面第一个测度相当于用扇形面积来近似这部分面积；同时这部分也能视作一个三角形，第二个测度相当于用`` $\frac1n$×底面积×高"来近似这部分面积—— $h_K(u)$ 就是高，而 $S(K,u)$ 就是那个底面积。
+一个重要的观察是，这两个测度可以通过半径 Gauss 映射和其逆映射联系起来：
+
+\begin{corollary}\label{col:map_diagram}
+若作变换 $u=\alpha_K(v)$，则可将测度 $\frac1n\rho_K^n \mathrm{d}v$ 变为 $\frac1n h_K\mathrm{d}S(K,u)$；反之若作变换 $v=\alpha_K^{-1}(u)$，则可将测度 $\frac1n h_K\mathrm{d}S(K,u)$ 变回 $\frac1n\rho_K^n \mathrm{d}v$。 
+\end{corollary}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{./figures/map_diagram.pdf}
+\caption{推论~\ref{col:map_diagram} 的示意图: $\nu_K$、$r_K$ 和 $\alpha_K$ 三者的关系。}
+\end{figure}   
+后面定理~\ref{thm:var_wulff} 的证明中我们会用到这个代换。
+
+\subsection{推论：Minkowski 第一不等式等价于 BM 不等式}
+
+接下来我们终于能够回答一开始的问题了，答案是这样的
+
+\begin{theorem}[混合体积的变分公式]\label{thm:var}
+设 $K,L\subset\mathbb{R}^n$ 是凸体，有
+\begin{equation}
+V_1(K,L)=\frac1n\int_{\mathbb{S}^{n-1}}h_L(u)\mathrm{d}S(K,u) \label{eq:4-4}\tag{4-4}
+\end{equation}
+\end{theorem}
+
+通俗地说，这个式子说的是：``第一混合体积" $V_1(K,L)$ 可以视作是用 $K$ 做``底面积"，用 $L$ 做``高"算出来的体积。值得注意的是，测度 $\mathrm{d}S(K,u)$ 是仅依赖于 $K$ 的，而 $L$ 则是任意的。
+
+证明放在最后，我们先看它的一个推论。
+
+\begin{corollary}\label{cor:minkowski-bm}
+Minkowski 第一不等式等价于 Brunn-Minkowski 不等式。
+\end{corollary}
+
+\begin{proof}
+后者推前者已证 (定理~\ref{thm:minkowski} )，现用 Minkowski 第一不等式推 BM 不等式，首先，我们知道集合的 Minkowski 和总对应着支撑函数的和：
+\begin{align*}
+h_K(u)+h_L(u)&=\sup_{x\in K}\langle x,u\rangle+\sup_{y\in L}\langle y,u\rangle\\
+&=\sup\big\{\langle x+y,u\rangle:x\in K,y\in L\}\\
+&=\sup\big\{\langle z,u\rangle:z\in K+L\}\\
+&=h_{K+L}(u)
+\end{align*}
+于是由式~\eqref{eq:4-4}有
+\begin{align*}
+&V_1(K+L,K)+V_1(K+L,L)\\
+=&\frac1n\int_{\mathbb S^{n-1}}h_K(u)\mathrm{d}S(K+L,u)+\frac1n\int_{\mathbb S^{n-1}}h_L(u)\mathrm{d}S(K+L,u)\\
+=&\frac1n\int_{\mathbb S^{n-1}}h_{K+L}(u)\mathrm{d}S(K+L,u)\\
+=&V_n(K+L)
+\end{align*}
+而根据 Minkowski 第一不等式有
+\begin{align*}
+V_1(K+L,K)&\ge V_n(K+L)^{\frac{n-1}{n}}V_n(K)\\
+V_1(K+L,L)&\ge V_n(K+L)^{\frac{n-1}{n}}V_n(L) \tag{$*$}
+\end{align*}
+两式相加，立即得到
+\[
+V_n(K+L)=V_1(K+L,K)+V_1(K+L,L)\ge V_n(K+L)^{\frac{n-1}{n}}\big(V_n(K)^{\frac1n}+V_n(L)^{\frac1n}\big)
+\]
+正是 BM 不等式的等价形式 (定理~\ref{thm:BM-equivalence})。等号成立当且仅当 $(*)$ 两式都取等，即 $K$ 位似于 $K+L$ 且 $L$ 位似于 $K+L$，亦即， $K$ 与 $L$ 位似。
+\end{proof}
+
+\subsection{Wulff 形}
+
+相比于~\eqref{eq:4-4}，我们将证明一个更一般的结论。不过在这之前，还要介绍一个概念。
+
+回忆一下，我们在第一篇文章中就曾介绍过：可以用半空间的交来构造凸集
+\[
+K=\bigcap_{u\in\mathbb{S}^{n-1}}\{x\in\mathbb{R}^n:\langle x,u\rangle \le h_K(u)\}
+\]
+
+这种思想可以推广到函数$f:\mathbb{S}^{n-1}\to (0,\infty)$，只需将上式中的 $h_K(u)$ 替换成 $f(u)$，即可得到它的 \emph{Wulff 形} (Wulff shape)
+\begin{definition}[Wulff 形]\label{def:wulff}
+对连续正值函数 $f:\mathbb{S}^{n-1}\to (0,\infty)$ , 定义其 \emph{Wulff 形} 为
+\[
+[f]:=\bigcap_{u\in\mathbb{S}^{n-1}}\{x\in\mathbb{R}^n:\langle x,u\rangle \le f(u)\}
+\]
+    
+\end{definition}
+
+图~\ref{fig:wulff} 是一个 Wulff 形的形象例子。
+ 
+\begin{figure}
+    \centering 
+    \includegraphics[width=1.0\textwidth]{./figures/wulff/Wulff.png}
+    \caption{$f(\theta) = 1+0.45 \cos( 3\theta) + 0.15 \cos\theta$ 的 Wulff 形 (左) 和图像 (右)，五张图分别对应 $\theta=0,\frac{\pi}{3},\frac{2\pi}{3}, \pi, \frac{4\pi}{3}, \frac{5\pi}{3}$ 的情形。}
+    \label{fig:wulff}
+\end{figure}
+
+
+我们总结一下 Wulff 形的性质：
+
+\begin{proposition}\label{prop:wulff_convex}
+$[f]$ 是一个凸体。
+\end{proposition}
+
+\begin{proof}
+由于 $[f]$ 可以表示为下半空间的交，因而是一个闭凸集；进一步，由于 $f$ 连续，因而其在紧集上有界，故 $[f]$ 是凸体。
+\end{proof}
+
+\begin{proposition}\label{prop:wulff_origin}
+由于 $f>0$，可以注意到 $0\in\mathrm{int}[f]$ 也是成立的。
+\end{proposition}
+
+\begin{proposition}\label{prop:wulff_support}
+记 Wulff 形 $[f]$ 的支撑函数为 $h_{[f]}$，那么在 $\mathbb{S}^{n-1}$ 上有 $h_{[f]}\le f$。
+\end{proposition}
+\begin{remark}
+    这个其实从图~\ref{fig:wulff} 的例子里很容易看出来，由于 $[f]$ 是用下半空间 $H_{u,f(u)}^-:=\{x:\langle x,u\rangle \le f(u)\}$ 的交定义的，显然生成的凸体之支撑函数必然不超过 $f$。同时有这样的结论： $[f]$ 是最大的凸体使得其支撑函数满足 $h_{[f]}\le f$。
+\end{remark}
+
+\begin{proposition}\label{prop:wulff_measure}
+对 Wulff 形的表面测度 $\mathrm{d}S([f],u)$， $h_{[f]}=f$ 几乎处处成立。
+\end{proposition}
+
+\begin{proof}
+首先，对于任意 $x\in\partial [f]$，它必须位于至少一个半空间 $H_{u,f(u)}^-$ 的边界上（否则的话 $x$ 必为内点，不会在 $\partial [f]$），即，至少存在一个 $u\in\mathbb{S}^{n-1}$ 使得 $\langle x,u\rangle =f(u)$；如我们之前所说，在凸体的边界上，相对于其表面积测度，Gauss 映射几乎处处为单值，于是 $\partial [f]$ 上几乎所有的点都有唯一的法向量——对这些点有 $\langle x,u\rangle =h_{[f]}(u)$。这样一来，对几乎所有的 $u$， $h_{[f]}(u)=\langle x,u\rangle=f(u)$。
+\end{proof}
+
+\begin{proposition}\label{prop:wulff_eq}
+若 $K$ 是凸体且 $0\in\mathrm{int}(K)$，则 $[h_K]=K$。
+\end{proposition}
+
+最后，注意到
+\begin{align*}
+[f]&=\bigcap_{u\in\mathbb{S}^{n-1}}\big\{y\in\mathbb{R}^n:\langle y,u\rangle\le f(u)\big\}\\
+&=\bigcap_{u\in\mathbb{S}^{n-1}}\left\{y\in\mathbb{R}^n:\left\langle y,\frac{u}{f(u)}\right\rangle\le 1\right\}\\
+&=\left\{y\in\mathbb{R}^n:\text{ 对任意 }u\in\mathbb{S}^{n-1}\text{ 有 }\langle y,z\rangle \le 1,z:=\frac{u}{f(u)}\right\}
+\end{align*}
+如果我们定义函数 $g:\mathbb{S}^{n-1}\to (0,\infty)$ 的\emph{凸包} (convex hull) 为
+\[
+\langle g\rangle:=\mathrm{Conv}\big(\{g(u)u:u\in\mathbb{S}^{n-1}\}\big)
+\]
+那么有
+\begin{align*}
+[f]&=\left\{y\in\mathbb{R}^n:\langle y,z\rangle\le 1,\forall z\in\left\langle\frac1f\right\rangle\right\}\\
+&=\left\langle\frac1f\right\rangle^\circ
+\end{align*}
+即： 
+
+\begin{proposition}\label{prop:wulff_polar} 
+$f$ 的 Wulff 形是 $\langle 1/f\rangle$ 的极集。
+\end{proposition}
+
+后文中性质~\ref{prop:wulff_polar} 需要配合如下两个引理使用，
+
+\begin{lemma}[双极定理 (Bipolar theorem) 的一个特例]\label{lem:bipolar}
+设 $K\subset\mathbb{R}^n$ 是凸体， $0\in\mathrm{int}(K)$，那么 $K^{\circ\circ}=K$。(其证明已在第~\ref{chapter:1}章中提及过。)
+\end{lemma}
+
+\begin{lemma}\label{lem:support_radial}
+设 $K\subset\mathbb{R}^n$ 是凸体，$0\in\mathrm{int}(K)$，那么 $h_{K^\circ}=\frac1{\rho_K}$、 $\rho_{K^\circ}=\frac1{h_K}$。
+\end{lemma}
+
+\begin{proof}
+只需用定义，
+\begin{align*}
+\rho_{K^\circ}(v)&=\inf\{r>0:rv\in K^\circ\}\\
+&= \inf\{r>0:\langle x,rv\rangle\le 1,\forall x\in K\}\\
+&=1/\big(\sup\{r^{-1}>0:\langle x,v\rangle\le r^{-1},\forall x\in K\}\big)\\
+&=1/\Big(\sup_{x\in K}\langle x,v\rangle\Big)\\
+&=1/h_K(x)
+\end{align*}
+根据引理~\ref{lem:bipolar}，我们可以用 $K^\circ$ 取代上式中的 $K$，得到 $\rho_K=\rho_{K^{\circ\circ}}=1/h_{K^\circ}$。
+\end{proof}
+
+\subsection{变分公式的证明}
+我们本节证明一个更加一般的结论
+\begin{theorem}\label{thm:var_wulff}
+设 $f:\mathbb{S}^{n-1}\to(0,\infty)$ 是一个正的连续函数， $K\subset\mathbb{R}^n$ 为凸体，且 $0\in\mathrm{int}(K)$。记
+\[
+f_\epsilon:=h_K+\epsilon f,\quad \epsilon >0
+\]
+那么
+\begin{equation}
+\frac1n\lim_{\epsilon\to 0^+}\frac{V_n([f_\epsilon])-V_n(K)}{\epsilon}=\frac1n\int_{\mathbb{S}^{n-1}}f(u)\mathrm{d}S(K,u) \label{eq:4-5}\tag{4-5}
+\end{equation}
+\end{theorem}
+
+\begin{remark}
+\begin{itemize}
+\item 定理~\ref{thm:var} 中，不失一般性设 $0\in\mathrm{int}(K)$ 且 $0\in\mathrm{int}(L)$，则变分公式~\eqref{eq:4-4} 是定理~\ref{thm:var_wulff} 式~\eqref{eq:4-5}在取 $f=h_L$ 时的特例。
+\item 由于 $0\in\mathrm{int}K$， $h_K(u)>0$ 总成立，我们实际上能把 $f$ 的值域放宽至 $\mathbb{R}$——因为总能选取 $\epsilon>0$ 足够小使得 $f_\epsilon>0$ 成立；实际上可以证明定理的结论此时也是成立的。
+\end{itemize}
+\end{remark}
+
+\begin{proof}
+为了叙述清晰，我们将证明分为 6 步。
+\begin{enumerate}[label=\textbf{第\chinese*步}:, leftmargin=4em]
+\item 由于 $[f_\epsilon]$ 是凸体且 $0\in\mathrm{int}[f_\epsilon]$，应有 $\rho_{[f_\epsilon]}(v)>0$ 对一切 $v\in\mathbb{S}^{n-1}$ 都成立， 且有
+\[
+V_n([f_\epsilon])=\frac1n\int_{\mathbb{S}^{n-1}}\rho^n_{[f_\epsilon]}(v)\mathrm{d}v
+\]
+
+另一方面，由 Wulff 形性质~\ref{prop:wulff_polar} 和引理~\ref{lem:support_radial}，有 $\rho_{[f_\epsilon]}=\rho_{\langle 1/f_\epsilon\rangle^\circ}=1/h_{\langle 1/f_\epsilon\rangle}$，带入上式，得到
+\[
+V_n([f_\epsilon])=\frac1n\int_{\mathbb{S}^{n-1}}\frac1{h^{n}_{\langle 1/f_\epsilon\rangle} (u)}\mathrm{d}u
+\]
+
+欸， $1/f_\epsilon$ 写起来太不方便了，我们不妨把它记作 $g_\epsilon:=1/f_\epsilon$，这样一来就有  $\displaystyle V_n([f_\epsilon])=\frac1n\int_{\mathbb{S}^{n-1}}\frac1{h^n_{\langle g_\epsilon\rangle}(u)}\mathrm{d}u$， 且
+\begin{align*}
+&g_0=\frac1{f_0}=\frac1{h_K}=\rho_{K^\circ}\\
+\implies \; &\langle g_0\rangle=K^\circ\\
+\implies \;& V_n(K)=\int_{\mathbb{S}^{n-1}}\rho^n_K(v)\mathrm{d}v=\int_{\mathbb{S}^{n-1}}\frac1{h_{\langle g_0\rangle}^n(u)}\mathrm{d}u
+\end{align*}
+
+\eqref{eq:4-5} 中左侧的极限就可以改写成
+\begin{equation}
+\lim_{\epsilon\to0^+}\frac{V_n([f_\epsilon])-V_n(K)}{\epsilon}=\lim_{\epsilon\to 0^+}\frac1n\int_{\mathbb{S}^{n-1}}\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}{\epsilon}\mathrm{d}u \label{eq:4-6}\tag{4-6}
+\end{equation}
+
+\item 选定 $u\in\mathbb{S}^{n-1}$，我们把目光放在  $\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}{\epsilon}$ 上面，先来看一下它在 $\epsilon\to 0^+$ 的极限是什么，后面可以想办法用控制收敛定理交换~\eqref{eq:4-6}中极限与积分。
+
+由于 $g_\epsilon$ 一致收敛于 $g_0$， $\epsilon\to 0^+$，所以在 Hausdorff 度量下 $\langle g_\epsilon\rangle\to \langle g_0\rangle$，可得 $h_{\langle g_\epsilon\rangle}\to h_{\langle g_0\rangle}$ 一致收敛，有
+\begin{align*}
+&\lim_{\epsilon\to 0^+}\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}\epsilon\\
+&=\lim_{\epsilon\to 0^+}\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}{\color{DarkBlue}{h_{\langle g_\epsilon\rangle}(u)-h_{\langle g_0\rangle}(u)}}\frac{\color{DarkBlue}{h_{\langle g_\epsilon\rangle}(u)-h_{\langle g_0\rangle}(u)}}{\epsilon}\\
+&=-nh_{\langle g_0\rangle}^{-n-1}(u)\lim_{\epsilon\to 0^+}\frac{h_{\langle g_\epsilon\rangle}(u)-h_{\langle g_0\rangle}(u)}{\epsilon} \label{eq:4-7}\tag{4-7}
+\end{align*}
+
+现在问题又变成了算 $\displaystyle \lim_{\epsilon\to 0^+}\frac{h_{\langle g_\epsilon\rangle}(u)-h_{\langle g_0\rangle}(u)}{\epsilon}$。
+
+首先，取定 $\epsilon>0$，
+\begin{align*}
+h_{\langle g_\epsilon\rangle}(u)&=\max_{x\in\langle g_\epsilon\rangle}\langle x,u\rangle\\
+&=\max\Big\{\langle x,u\rangle:x\in\mathrm{Conv}\big(\{g_\epsilon(v)v,v\in\mathbb{S}^{n-1}\}\big)\Big\}\\
+&=:\langle x_\epsilon,u\rangle
+\end{align*}
+第三行是因为连续函数在紧集上一定存在最大值，因而我们记其最大值点为 $x_\epsilon$；并且进一步，我们知道这个最大值必然在 $\langle g_\epsilon\rangle$ 的极点处取得，换言之，必然有某 $v_\epsilon\in\mathbb{S}^{n-1}$ 使得 $x_\epsilon=g_\epsilon(v_\epsilon)v_\epsilon$。总结起来就是：
+\begin{equation}
+\begin{aligned}
+\exists\, v_\epsilon\in\mathbb{S}^{n-1},&\quad h_{\langle g_\epsilon\rangle }(u)=\langle g_\epsilon(v_\epsilon)v_\epsilon,u\rangle\\
+\forall\,v\in\mathbb{S}^{n-1},&\quad h_{\langle g_\epsilon\rangle }(u)\ge\langle g_\epsilon(v)v,u\rangle 
+\end{aligned}\label{eq:4-8}\tag{4-8}
+\end{equation}
+
+对 $h_{\langle g_0\rangle}(u)$ 同理，
+\begin{equation}
+\begin{aligned}
+\exists\, v_0\in\mathbb{S}^{n-1},&\quad h_{\langle g_0\rangle }(u)=\langle g_0(v_0)v_0,u\rangle\\
+\forall\,v\in\mathbb{S}^{n-1},&\quad h_{\langle g_0\rangle }(u)\ge\langle g_0(v)v,u\rangle
+\end{aligned} \label{eq:4-9}\tag{4-9}
+\end{equation}
+
+综合起来可以推出
+\begin{align*}
+h_{\langle g_\epsilon\rangle}(u)-h_{\langle g_0\rangle}(u)&\le \langle g_\epsilon (v_\epsilon)v_\epsilon,u\rangle- \langle g_0 (v_\epsilon)v_\epsilon,u\rangle=\langle v_\epsilon,u\rangle\big(g_\epsilon (v_\epsilon)-g_0(v_\epsilon)\big)\\
+h_{\langle g_\epsilon\rangle}(u)-h_{\langle g_0\rangle}(u)&\ge \langle g_\epsilon (v_0)v_0,u\rangle- \langle g_0 (v_0)v_0,u\rangle=\langle v_0,u\rangle\big(g_\epsilon (v_0)-g_0(v_0)\big)
+\end{align*}
+故
+\begin{equation}
+\langle v_0,u\rangle{\color{red}\underbrace{\frac{g_\epsilon(v_0)-g_0(v_0)}{\epsilon}}_{\Large\text{①}}}\le \frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}\epsilon\le {\color{blue}\underbrace{\frac{g_\epsilon(v_\epsilon)-g_0(v_\epsilon)}{\epsilon}}_{\Large\text{②}}}{\color{DarkGreen}\underbrace{\vphantom{\frac{}{}}\langle v_\epsilon,u\rangle}_{\Large\text{③}}} \label{eq:4-10}\tag{4-10}
+\end{equation}
+这里我们把~\eqref{eq:4-10} 按不同颜色分成了三个部分，需要逐个击破。
+
+\item  先来看 $\Large{\color{red}{\text{①}}}$，这个比较简单，有
+\begin{align*}
+g_{\epsilon}(v_0)-g_0(v_0) & =\frac{1}{(h_K+\epsilon f)(v_0)}-\frac1{h_K(v_0)} \\
+& =\frac{h_K(v_0)-(h_K(v_0)+\epsilon f(v_0))}{h_K(v_0)(h_K(v_0)+\epsilon f(v_0))} \\
+& =\frac{-\epsilon f(v_0)}{h_K^{2}(v_0)+\epsilon h_{k}(v_0)f(v_0)}
+\end{align*}
+故
+\[
+\lim_{\epsilon\to 0^+}\frac{g_\epsilon(v_0)-g_0(v_0)}{\epsilon}=-\lim_{\epsilon\to 0^+}\frac{f(v_0)}{h_K^2(v_0)+\epsilon h_K(v_0)f(v_0)}=-\frac{f(v_0)}{h_K^2(v_0)}
+\]
+
+接下来看 $\Large{\color{DarkGreen}{\text{③}}}$，理想情况下，我们期望应该有 $\lim\limits_{\epsilon\to 0^+}v_\epsilon=v_0$。这要怎么证明呢？
+
+首先， $g_\epsilon$ 一致收敛于 $g$，我们从中任取一列 $\{g_j\}_{j=1}^\infty$，设 $g_j$ 通过式~\eqref{eq:4-8}选取出来 $v_j$。由于 $\mathbb{S}^{n-1}$ (列) 紧，那么其中任一序列必存在收敛子列，不妨设 $\{v_j\}_{j=1}^\infty$ 收敛到某 $v\in\mathbb{S}^{n-1}$（不然，可以用其收敛子列替代之） ；则
+\[
+g_j(v_j)\to g_0(v),\quad j\to\infty
+\]
+再根据
+\begin{align*}
+h_{\langle g_j\rangle}(u)&=g_j(v_j)\langle v_j,u\rangle\to g_0(v)\langle v,u\rangle\\
+h_{\langle g_j\rangle}(u)&\to h_{\langle g_0\rangle}(u)
+\end{align*}
+这两个极限应该是相同的，故 $h_{\langle g_0\rangle}(u)=\langle g_0(v)v,u\rangle$。同时，对于几乎处处 $u\in\mathbb{S}^{n-1}$，该等式不依赖于 $\{v_j\}_{j=1}^\infty$ 的选取，原因正如之前所说， $u$ 的半径逆 Gauss 映射 $\alpha_{\langle g_0\rangle}^{-1}(u)$ 是几乎处处唯一的，有
+\begin{align*}
+h_{\langle g_0\rangle}(u)=\langle g_0(v),u\rangle &\implies g_0(v)v\in \nu^{-1}_{\langle g_0\rangle}(u) \\
+&\implies v=\frac{g_0(v)v}{\|g_0(v)v\|}=\big(r_{\langle g_0\rangle}^{-1}\circ \nu_{\langle g_0\rangle}^{-1}\big)(u)=\alpha_{\langle g_0\rangle}^{-1}(u)
+\end{align*}
+所以 (对几乎处处 $u$)， $v$ 是独立于我们序列的选取的，有 $\lim\limits_{\epsilon\to 0^+}v_\epsilon=v=\alpha^{-1}_{\langle g_0\rangle}(u)$。
+
+哎！可别忘了，根据式~\eqref{eq:4-9}， $h_{\langle g_0\rangle}(u)=\langle g_0(v_0)v_0,u\rangle\implies v_0=\alpha^{-1}_{\langle g_0\rangle}(u)$，那只能有 $v_0=v$。这就证明了  $\lim\limits_{\epsilon\to 0^+}v_\epsilon\to v_0$。
+
+最后算 $\Large{\color{blue}{\text{②}}}$。和 $\Large{\color{red}{\text{①}}}$ 类似，有
+\begin{align*}
+g_{\epsilon}(v_\epsilon)-g_0(v_\epsilon) & =\frac{1}{(h_K+\epsilon f)(v_\epsilon)}-\frac1{h_K(v_\epsilon)} \\
+& =\frac{-\epsilon f(v_\epsilon)}{h_K^{2}(v_\epsilon)+\epsilon h_{k}(v_\epsilon)f(v_\epsilon)}
+\end{align*}
+于是
+\[
+\lim_{\epsilon\to 0^+}\frac{g_\epsilon(v_\epsilon)-g_0(v_\epsilon)}{\epsilon}=-\lim_{\epsilon\to 0^+}\frac{f(v_\epsilon)}{h_K^2(v_\epsilon)+\epsilon h_K(v_\epsilon)f(v_\epsilon)}=-\frac{f(v_0)}{h_K^2(v_0)}
+\]
+最后一步用了 $\Large{\color{DarkGreen}{\text{③}}}$ 的结论。
+
+整理一下，如果 $u\in\mathbb{S}^{n-1}$ 满足 $\alpha^{-1}_{\langle g_0\rangle}(u)$ 唯一，则根据式~\eqref{eq:4-9}，
+\begin{align*}
+\lim_{\epsilon\to 0^+}\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}\epsilon&\ge \langle v_0,u\rangle{\color{red}\underbrace{\frac{g_\epsilon(v_0)-g_0(v_0)}{\epsilon}}_{\Large\text{①}}}=\color{red}{-\frac{f(v_0)}{h^2_K(v_0)}}\langle v_0,u\rangle\\
+\lim_{\epsilon\to 0^+}\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}\epsilon&\le {\color{blue}\underbrace{\frac{g_\epsilon(v_\epsilon)-g_0(v_\epsilon)}{\epsilon}}_{\Large\text{②}}}\color{DarkGreen}{\underbrace{\vphantom{\frac{}{}}\langle v_\epsilon,u\rangle}_{\Large\text{③}}} =\color{blue}{-\frac{f(v_0)}{h^2_K(v_0)}}\color{DarkGreen}{\langle v_0,u\rangle}
+\end{align*}
+即，
+\begin{equation}
+\lim_{\epsilon\to 0^+}\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}\epsilon= -\frac{f(v_0)}{h^2_K(v_0)} \langle v_0,u\rangle \label{eq:4-11}\tag{4-11}
+\end{equation}
+
+\item 来研究一下 $v_0$ 和 $u$ 的关系。由于 $v_0=\alpha^{-1}_{\langle g_0\rangle}(u)=\alpha^{-1}_{K^\circ}(u)$，
+\begin{align*}
+&h_{K^\circ}(u)=h_{\langle g_0\rangle }(u)=\langle u,g_0(v_0)v_0\rangle=\langle u,\rho_{K^\circ}(v_0)v_0\rangle \tag{由~\eqref{eq:4-9}式}\\
+\implies& h_K(v_0)=\frac1{\rho_{K^\circ}(v_0)}=\left\langle\frac u{h_{K^\circ}(u)},v_0\right\rangle=\langle \rho_K(u)u,v_0\rangle\\
+\implies& v_0 = \alpha_K(u) \label{eq:4-12}\tag{4-12}
+\end{align*}
+当然，这里我们仍然可以认为对于几乎处处的 $u\in\mathbb{S}^{n-1}$， $\alpha_K(u)$ 唯一确定，所以写作 $v_0=\alpha_K(u)$ 没问题。
+至此，我们终于能够算出第二步想计算的的目标了。整理一下~\eqref{eq:4-7}，
+\begin{align*}
+&\lim_{\epsilon\to 0^+}\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}\epsilon\\
+&=-nh_{\langle g_0\rangle}^{-n-1}(u)\lim_{\epsilon\to 0^+}\frac{h_{\langle g_\epsilon\rangle}(u)-h_{\langle g_0\rangle}(u)}{\epsilon} \tag{由~\eqref{eq:4-7}式}\\
+&=nh_{K^\circ}^{-n-1}(u) \frac{f(v_0)}{h^2_K(v_0)} \langle v_0,u\rangle \tag{由 ~\eqref{eq:4-11} 式}\\
+&=\frac{nf(v_0)\langle v_0,u\rangle \rho_K^{n+1}(u)}{h^2_K(v_0)}\\
+&=\frac{nf(v_0)\overbrace{\langle v_0, \rho_K^{n}(u)u\rangle}^{h_K(v_0)} \rho_K^{n}(u)}{h^2_K(v_0)}\\
+&=\frac{nf(v_0)\rho_K^n(u)}{h_K(v_0)}\\
+&=\frac{nf(\alpha_K(u))\rho_K^n(u)}{h_K(\alpha_K(u))} \tag{由 ~\eqref{eq:4-12} 式} 
+\end{align*}
+即，对几乎处处的 $u\in\mathbb{S}^{n-1}$，
+\[
+\lim_{\epsilon\to 0^+}\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}\epsilon=\frac{nf(\alpha_K(u))\rho_K^n(u)}{h_K(\alpha_K(u))}\label{eq:4-13}\tag{4-13}
+\]
+这是变分公式的证明中最重要的极限。
+
+\item 证明完极限，我们证明 $\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}\epsilon$ 在 $\mathbb{S}^{n-1}$ 上能被控制，以便能用控制收敛定理搞定~\eqref{eq:4-6}式。也就是说，我们证明：存在一个 $M\in(0,\infty)$ 使得
+\[
+\left|\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}\epsilon\right|\le M,\quad \forall \,u\in\mathbb{S}^{n-1}
+\]
+这个其实很简单，直接用式 ~\eqref{eq:4-10}，有
+\[
+\left|\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}\epsilon\right|\le\max\Bigg\{\left|\frac{g_\epsilon(v_0)-g_0(v_0)}{\epsilon}\right|,\left|\frac{g_\epsilon(v_\epsilon)-g_0(v_\epsilon)}{\epsilon}\right|\Bigg\}
+\]
+（根据 Cauchy-Schwarz 不等式， $|\langle v_0,u\rangle|$ 和 $|\langle v_\epsilon,u\rangle|$ 都不超过 1，这里将之放缩为了 1。）
+
+而上式右侧处理起来也很方便：
+\[
+\left|\frac{g_\epsilon(v_\epsilon)-g_0(v_\epsilon)}{\epsilon}\right|=\left|\frac{f(v_\epsilon)}{h_K(\epsilon)(h_K(\epsilon)+\epsilon f(v_\epsilon))}\right|\le \frac{\max\limits_{v\in\mathbb{S}^{n-1}}|f(v)|}{\min\limits_{v\in\mathbb{S}^{n-1}}h_K^2(v)}=:M
+\]
+同理 $\displaystyle \left|\frac{g_\epsilon(v_0)-g_0(v_0)}{\epsilon}\right|\le M$。
+
+\item 收尾！根据式~\eqref{eq:4-6}，
+\begin{align*}
+&\lim_{\epsilon\to0^+}\frac{V_n([f_\epsilon])-V_n(K)}{\epsilon}\\
+&=\lim_{\epsilon\to 0^+}\frac1n\int_{\mathbb{S}^{n-1}}\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}{\epsilon}\mathrm{d}u \tag{由~\eqref{eq:4-6}式}\\
+&=\frac1n\int_{\mathbb{S}^{n-1}}\lim_{\epsilon\to 0^+}\frac{h^{-n}_{\langle g_\epsilon\rangle}(u)-h^{-n}_{\langle g_0\rangle}(u)}{\epsilon}\mathrm{d}u \tag{控制收敛定理}\\
+&= \frac1n \int_{\mathbb{S}^{n-1}}\frac{nf(\alpha_K(u))}{h_K(\alpha_K(u))}\rho_K^n(u)\mathrm{d}u \tag{由~\eqref{eq:4-13} 式}\\
+&=\int_{\mathbb{S}^{n-1}}\frac{f(v)}{h_K(v)}h_K(v)\mathrm{d}S(K,v) \tag{$v=\alpha_K(u)$ 换元}\\
+&=\int_{\mathbb{S}^{n-1}}f(v)\mathrm{d}S(K,v)
+\end{align*}
+得证！其中第四行用到了我们前文推论~\ref{col:map_diagram}。\end{enumerate}
+\end{proof}
+
+\begin{remark}
+    上述证明来自 Huang, Y., Lutwak, E., Yang, D., \& Zhang, G. (2016). \textit{Geometric measures in the dual Brunn–Minkowski theory and their associated Minkowski problems}. Acta Mathematica, 216(2), 325-388。
+\end{remark}
+\hfill\break
+
+在凸几何中，混合体积的变分公式~\eqref{eq:4-4}是非常重要的结论，有相当一部分研究对象都可以视作是 $V_1(K,L)$ 的优化问题。包括但不限于
+
+\begin{itemize}
+\item Minkowski 问题；
+\item Petty 体 (Petty bodies)；
+\item 著名的 John 椭球 (John ellipsoid，也称 Löwner–John ellipsoid)；
+\item 仿射表面积 (affine surface areas)。
+\end{itemize}
+因此单独一个混合体积的变分公式可以引申出来解决很多问题。
+ 

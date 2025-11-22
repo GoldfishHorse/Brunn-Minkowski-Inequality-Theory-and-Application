@@ -1,0 +1,47 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage{ctex}
+\usepackage{amssymb,amsmath}
+
+\begin{document} 
+\begin{tikzpicture}[>=Stealth, line cap=round]
+
+  % 三个主要顶点
+  \coordinate (L) at (0,0);
+  \coordinate (R) at (6,0);
+  \coordinate (B) at (3,-4);
+
+  % 顶点标签：集合
+  \node (LS) at (L) {$\mathbb{S}^{n-1}$};
+  \node (RS) at (R) {$\mathbb{S}^{n-1}$};
+  \node (K)  at (B) {$\partial K$};
+
+  % 元素标签：单独节点
+  \node[left=0.2cm of LS] {$v \in$};
+  \node[right=0.2cm of RS] {$\ni u$};
+
+  % 顶边：两条平行直线箭头
+  \draw[->,shorten >=15pt,shorten <=15pt] ($(L)+(0,0.08)$) -- ($(R)+(0,0.08)$)
+    node[midway, above=3pt] {$\alpha_K = \nu_K \circ r_K$};
+  \draw[->,shorten >=15pt,shorten <=15pt] ($(R)+(0,-0.08)$) -- ($(L)+(0,-0.08)$)
+    node[midway, below=3pt] {$\alpha_K^{-1} = r_K^{-1}\circ \nu_K^{-1}$};
+
+  % 左斜边
+  \draw[->,shorten >=15pt,shorten <=15pt] ($(L)+(0.08,0.08)$) -- ($(B)+(0.08,0.08)$)
+    node[midway, sloped, above=3pt] {$r_K$};
+  \draw[->,shorten >=15pt,shorten <=15pt] ($(B)+(-0.08,-0.08)$) -- ($(L)+(-0.08,-0.08)$)
+    node[midway, sloped, below=3pt] {$r_K^{-1}$};
+
+  % 右斜边
+  \draw[->,shorten >=15pt,shorten <=15pt] ($(R)+(0.08,-0.08)$) -- ($(B)+(0.08,-0.08)$)
+    node[midway, sloped, below=3pt] {$\nu_K$};
+  \draw[->,shorten >=15pt,shorten <=15pt] ($(B)+(-0.08,0.08)$) -- ($(R)+(-0.08,0.08)$)
+    node[midway, sloped, above=3pt] {$\nu_K^{-1}$};
+
+  % 径向/法向文字
+  \node at ($(L)+(-1.0,-0.4)$) {径向};
+  \node at ($(R)+(1.0,-0.4)$) {法向};
+
+\end{tikzpicture}
+\end{document} 

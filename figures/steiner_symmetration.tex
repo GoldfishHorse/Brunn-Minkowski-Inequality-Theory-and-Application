@@ -1,0 +1,90 @@
+\documentclass[tikz,border=3.14mm]{standalone}
+\usetikzlibrary{arrows.meta}
+
+\begin{document}
+
+\tikzset{
+    every picture/.style={line width=0.75pt},
+    >=Stealth,
+    point/.style={circle,fill=black,inner sep=1.5pt},
+    intersection point/.style={circle,fill=gray,inner sep=1pt},
+    dashed line/.style={dash pattern=on 4pt off 2pt, line width=0.6pt, gray!70}
+}
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+
+% 平面 u^\perp
+\fill[gray!15, opacity=0.6] (148.39,120) -- (566.17,120) -- (484.27,206) -- (66.5,206) -- cycle;
+\draw[gray!50, dashed, line width=0.8pt] (148.39,120) -- (566.17,120) -- (484.27,206) -- (66.5,206) -- cycle;
+
+% 凸体 K (半透明的梨形)
+\fill[blue!40, opacity=0.35] (245.67,130.17) .. controls (269.33,109.33) and (381,65) .. (400.67,88.17) 
+    .. controls (420.33,111.33) and (421.33,193.33) .. (400.67,205.17) 
+    .. controls (380,217) and (310.33,223.83) .. (252,195) 
+    .. controls (193.67,166.17) and (222,151) .. (245.67,130.17) -- cycle;
+\draw[blue!50, line width=1.2pt] (245.67,130.17) .. controls (269.33,109.33) and (381,65) .. (400.67,88.17) 
+    .. controls (420.33,111.33) and (421.33,193.33) .. (400.67,205.17) 
+    .. controls (380,217) and (310.33,223.83) .. (252,195) 
+    .. controls (193.67,166.17) and (222,151) .. (245.67,130.17) -- cycle;
+
+% 投影 P_uK (红色椭圆)
+\draw[red!80, thick, dashed, fill=red!30, opacity=0.4] 
+    (217,163) .. controls (217,151.95) and (261.47,143) .. (316.33,143) 
+    .. controls (371.19,143) and (415.67,151.95) .. (415.67,163) 
+    .. controls (415.67,174.05) and (371.19,183) .. (316.33,183) 
+    .. controls (261.47,183) and (217,174.05) .. (217,163) -- cycle;
+
+% 方向 u 的箭头
+\draw[->, line width=1.2pt, color=black] (520,140.17) -- (520,110.17);
+\node[anchor=west] at (522.83,105) {$u$};
+
+% 主弦 (绿色实线)
+\draw[green!60!black, very thick] (283.83,108.83) -- (283.83,206.83);
+
+% 主弦的点标注
+\node[point, color=green!40!black] (x) at (283.83,163.83) {};
+\node[point, color=green!40!black] (fx) at (283.83,108.83) {};
+\node[point, color=green!40!black] (gx) at (283.83,206.83) {};
+
+% 其他弦 (虚线) 及其交点
+% 弦1
+\draw[dashed line, color=green!60!black] (307.67,99.17) -- (307.67,213.17);
+\node[intersection point] at (307.67,99.17) {};
+\node[intersection point] at (307.67,212) {};
+
+% 弦2
+\draw[dashed line, color=green!60!black] (331.67,90.17) -- (331.67,217.17);
+\node[intersection point] at (331.67,90.17) {};
+\node[intersection point] at (331.67,215) {};
+
+% 弦3
+\draw[dashed line, color=green!60!black] (360.67,83.17) -- (359.67,216.17);
+\node[intersection point] at (360.67,83.17) {};
+\node[intersection point] at (359.67,215) {};
+
+% 弦4
+\draw[dashed line, color=green!60!black] (251.67,125.17) -- (252,195);
+\node[intersection point] at (251.67,126) {};
+\node[intersection point] at (252,195) {};
+
+% 弦5
+\draw[dashed line, color=green!60!black] (407.67,106.17) -- (406.67,195.17);
+\node[intersection point] at (407.67,103) {};
+\node[intersection point] at (406.67,197.17) {};
+
+% 退化弦 - 左右两端
+% 左退化弦 (只标点，不画线)
+\node[intersection point] at (218,162) {};
+\node[intersection point] at (416,162) {};
+
+% 标签
+\node[anchor=south] at (295.83,168.08) {$x$};
+\node[anchor=west, color=red!80!black] at (360,165) {$P_{u} K$};
+\node[anchor=west, color=blue!80!black] at (365,116) {$K$};
+\node[anchor=south] at (283.83,93.08) {$f(x)$};
+\node[anchor=north] at (283.83,220) {$g(x)$};
+\node[anchor=south] at (100,200) {$u^\perp$};
+
+\end{tikzpicture}
+
+\end{document}

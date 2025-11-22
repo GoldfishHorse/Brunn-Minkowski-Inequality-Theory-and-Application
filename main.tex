@@ -1,0 +1,88 @@
+\documentclass[lang=cn]{elegantbook}
+% https://www.zhihu.com/question/444215565
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[dvipsnames,svgnames,table]{xcolor}    % see http://ctan.org/pkg/xcolor
+\usepackage{enumitem}
+\usepackage{hyperref}
+\def\UrlBreaks{\do\/\do-}
+\usepackage{graphicx}
+\usepackage{bm}
+\renewcommand{\examplename}{例}
+
+
+\title{Brunn-Minkowski 不等式：理论与应用}
+\author{\href{https://www.zhihu.com/people/he-eeeeeeeee}{金鱼马}}
+\date{\today}
+\institute{浙江大学}
+\bioinfo{License}{\href{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en}{CC BY-NC-SA 4.0}}
+\bioinfo{封面}{图片来自 pixiv \href{https://www.pixiv.net/artworks/17640094}{17640094} (画师@\href{https://www.pixiv.net/users/2932037}{いずみべる})}
+\cover{figures/17640094_p0.jpg}
+
+\begin{document}
+
+\maketitle
+
+\chapter*{引言}
+
+这份笔记来自笔者在山东大学数学学院 2025 暑期课程《\href{https://www.math.sdu.edu.cn/info/1020/20825.htm}{Brunn-Minkowski 不等式：理论与应用}》中的笔记；
+课程主讲为\href{https://www.math.mun.ca/~depingy/}{叶德平}老师，整体纲举目张、深入浅出，同时清晰易懂，大概只需要读者有基本的实分析基础。
+另外，课中很多证明也是精华所在，其结果、思想、工具都是凸几何领域的核心，也都可以用于其它相关结论。
+\hfill\break
+
+{
+    \renewcommand{\problemname}{摘要}
+    \renewcommand{\theprob}{} % 清空编号
+\begin{problem}
+\textit{
+在数学理论与实际应用中，对函数或集合施加凸性条件往往是关键前提，因为凸函数与凸集合不仅具备丰富的优良性质，还蕴含边界正则性、可微性等核心信息。Brunn-Minkowski 理论作为专注于凸体研究的数学领域，系统整合了凸体的代数结构、几何特性与分析性质。其理论根基源于体积与凸体 Minkowski 加法的深度结合，由此衍生的Brunn-Minkowski不等式及对应的变分公式，推动了一系列里程碑式成果的诞生，如Minkowski 不等式、Minkowski 问题等。本次课程将聚焦Brunn-Minkowski 理论的核心：Brunn-Minkowski 不等式，将从不等式的严格证明出发，深入探讨其在几何分析、泛函不等式等领域的经典应用，并延伸至若干在实际问题中具有重要价值的关联不等式，揭示凸体理论的跨学科应用潜力。
+}
+\end{problem}
+}
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{figures/poster.jpg}
+\end{center}
+
+笔记的六章内容安排如下：
+\begin{itemize}
+    \item 第~\ref{chapter:1} 章：引入、 Brunn-Minkowski 不等式的等定义，两种证明；
+    \item 第~\ref{chapter:2} 章：BM 不等式的泛函形式：Prékopa–Leindler 不等式和 Borell-Brascamp-Lieb 不等式，以及最优传输的视角；
+    \item 第~\ref{chapter:3} 章：Steiner 对称化；
+    \item 第~\ref{chapter:4} 章：混合体积、Minkowski 第一不等式、混合体积的变分公式；
+    \item 第~\ref{chapter:5} 章：Minkowski 问题的解决；
+    \item 第~\ref{chapter:6} 章：Blaschke–Santaló 不等式和仿射等周不等式。
+\end{itemize}
+
+\begin{center} 
+    \includegraphics[width=0.7\textwidth]{figures/outline.png}
+\end{center}
+
+当然，Brunn-Minkowski 理论涉及的内容很多，不仅有凸几何、微分几何、泛函、最优传输，还可以推广到非常丰富的应用中（如群论、环论、流形等等\footnote{一个代表例子是菲尔兹奖得主 Okounkov 的论文 Okounkov, A. (1996). \textit{Brunn–Minkowski inequality for multiplicities.Inventiones mathematicae},125(3), 405-411.}），
+这门课程可以说是只介绍了最基础也最精华的一些部分。关于更多的内容，读者可以去阅读相关教材，笔者参考到的有
+\begin{itemize}
+    \item Schneider, R. (2013). \textit{Convex bodies: the Brunn–Minkowski theory}(Vol. 151). Cambridge university press.
+    \item Gruber, P. M. (2007).\textit{Convex and discrete geometry}. Berlin, Heidelberg: Springer Berlin Heidelberg.
+    \item Böröczky, K. J., Figalli, A., \& Ramos, J. P. (2025).\textit{Isoperimetric inequalities, Brunn-Minkowski theory and Minkowski type Monge-Ampère equations on the sphere}. \url{https://users.renyi.hu/~carlos/Brunn-Minkowski-Book-2026-06-06.pdf} 
+\end{itemize}
+
+以及 Gruber 的一篇经典综述，Gardner, R. (2002).\textit{The brunn-minkowski inequality}. Bulletin of the American mathematical society,39(3), 355-405。
+
+\tableofcontents
+
+\pagenumbering{arabic}
+\mainmatter
+
+\input{sections/section1}
+
+\input{sections/section2}
+
+\input{sections/section3}
+
+\input{sections/section4} 
+
+\input{sections/section5} 
+
+\input{sections/section6} 
+
+\end{document}

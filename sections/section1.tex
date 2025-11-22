@@ -1,0 +1,408 @@
+\chapter{Brunn-Minkowski 不等式}
+\label{chapter:1}
+
+\section{动机}
+
+所谓的"Brunn-Minkowski 不等式"其实不是很神奇的东西，它的动机其实很简单。大家肯定都见过下面的 \emph{Young 不等式}：
+
+\begin{lemma*}[Young 不等式]\label{lem:young}
+对任意的 $a,b\ge 0$ 以及 $\lambda \in [0,1]$，有 
+\[
+\lambda a+(1-\lambda)b\ge a^\lambda b^{1-\lambda}
+\]YY
+取等当且仅当 $a=b$ 或 $\lambda$ 为 0、1。
+\end{lemma*}
+
+Young 不等式本质上是一个"算数平均 $\geq$ 几何平均"的定理，可以看成是 AM-GM 的推广（后者对应 $\lambda=1/2$ 的特殊情况）。后面的证明中我们会经常用到它。
+
+Young 不等式的证明也很容易。最直接和本质的证明方法是"log 函数的凹性"：
+
+\begin{proof}
+当 $a=0$ 或 $b=0$ 时显然成立，当 $a,b>0$ 时，根据 Jensen 不等式：
+\[
+\log(\lambda a + (1-\lambda)b)\ge \lambda \log a +(1-\lambda) \log b,\quad \forall \lambda\in[0,1]
+\] 
+\end{proof}
+
+接下来的问题是：\emph{在集合里面，有没有对应的 Young 不等式}？
+
+如何把``数"与``集合"对应起来呢？自然的想法是，用集合的``大小"—— 如一维空间中线段的长度、二维的面积、三维的体积——在 $n$ 维中则是 \emph{Lebesgue 测度}。此外，加法和乘法也可以推广到集合。
+
+\begin{definition}[Minkowski 和与 Minkowski 扩张]
+设 $A,B \subset\mathbb{R}^n$，定义其 \emph{Minkowski 和}为 
+\[
+A+B:=\{a+b:a\in A,b\in B\}
+\]
+对于 $\lambda\ge 0$，定义集合 $A$ 的 \emph{Minkowski 扩张}为 $\lambda A:=\{\lambda a:a\in A\}$。
+\end{definition}
+
+我们举几个例子：
+
+\begin{example}\label{ex:line_segment}
+在实数轴 $\mathbb{R}^1$ 上有两个集合，$A=[0,a]$、$B=[0,b]$，$a,b\ge 0$。则 
+\[
+\lambda A+(1-\lambda)B:=\{\lambda x+(1-\lambda )y:x\in A,y\in B\}=[0,\lambda a+(1-\lambda )b]
+\]
+如果用 $\ell(\cdot)$ 代表区间长度，那么显然地，
+\[
+\ell(\lambda A+(1-\lambda)B)=\lambda a+(1-\lambda )b= \lambda \ell(A)+(1-\lambda) \ell(B)
+\]
+更重要的是：根据 Young 不等式，对 $\lambda\in[0,1]$：
+\[
+\ell (\lambda A+(1-\lambda)B)\ge  \ell(A)^\lambda\ell (B)^{1-\lambda}
+\]
+\end{example}
+\hfill \break
+
+例~\ref{ex:line_segment}比较简单，不过当来到二维，事情开始变得有趣起来。
+
+\begin{example}\label{ex:minkowski_sum}
+在 $\mathbb{R}^2$ 中有两个集合：$A=[-1,1]\times [-1,1]$ 是一个方形，$B=\{(x,y):x^2+y^2\le \epsilon\}$ 是一个半径为 $\epsilon$ 的圆。简单起见，我们只考察以下 $A+B$。$A+B$ 是什么样子呢？容易看出，其实就是``正方形四周扩展出去一个圆"，见图~\ref{fig:Minkowski_sum}。
+
+\begin{figure}[h]
+    \centering
+\includegraphics[width=0.8\linewidth]{figures/Minkowski_sum.jpg}
+\caption{正方形和圆的 Minkowski 和示意图。\footnotemark}
+\label{fig:Minkowski_sum}
+\end{figure}
+\footnotetext{图片来自 Gardner, R. (2002). \textit{The brunn-minkowski inequality}. Bulletin of the American mathematical society,39(3), 355-405. p. 359.}
+ 
+这时，用 $\ell(\cdot)$ 代表集合的面积，则容易验证 $\ell(A+B)$ 的面积就是 $4+8\epsilon+\pi\epsilon^2$，同时 $\ell(A)=4$、$\ell(B)=\pi\epsilon^2$。
+
+可以注意到的事实有：
+
+\begin{itemize}
+\item 当 $\epsilon\to 0$ 时，$\displaystyle\lim_{\epsilon\to 0}\frac{l(A+B)-l(A)}{\epsilon}=\frac{4+8\epsilon+\pi\epsilon^2-4}{\epsilon}=8$，这个量对应了 $A$ 的周长——在高维情况下，某种程度上，可以用这种方法来定义"表面积"。
+\item 显见，$\ell(A+B)\ge \ell(A)+\ell(B)$。
+\item 由于是在二维，对应维度的提升，我们考虑一下面积的 $\frac12$ 次方，可以验证下面两个不等式也是成立的 (见图~\ref{fig:ineq_comp})：
+\begin{align*}
+\ell(A+B)^{1/2}&=\sqrt{4+8\epsilon+\pi\epsilon^2}\ge 2+\sqrt \pi\epsilon=\ell(A)^{1/2}+\ell(B)^{1/2}\\
+\ell\left(\frac{A+B}{2}\right)&=\frac14\big(4+8\epsilon+\pi\epsilon^2\big)\ge 2\sqrt \pi\epsilon=\ell(A)^{1/2}\ell(B)^{1/2}
+\end{align*}
+\end{itemize}
+
+
+\begin{figure}
+    \centering
+    % \includestandalone[width=0.8\textwidth]{figures/function_compare_1}
+    \includegraphics[width=0.8\textwidth]{figures/function_compare_1.pdf}
+    \caption{比较不等式两侧的值。}\label{fig:ineq_comp}
+\end{figure}
+
+\end{example}
+\hfill\break
+
+在一般的 $\mathbb{R}^n$ 中，能不能有类似的结论呢？
+
+\section{BM 不等式的几个等价形式}
+
+若照搬 Young 不等式，那么我们想要的``$\mathbb{R}^n$ 上的推广"的样子应该是：对内点非空的紧集 $K,L\subset \mathbb{R}^n$，$\lambda\in[0,1]$，记 $V_n$ 代表二者的 ($n$ 维) 体积，则
+\[
+V_n((1-\lambda)K+\lambda L)^{1/n}\ge(1-\lambda)V_n(K)^{1/n}+\lambda V_n(L)^{1/n}
+\]
+在此之前，我们来证明一下，上述不等式有一些等价变形。
+
+\begin{theorem}[BM 不等式的等价形式]\label{thm:BM-equivalence}
+如下不等式等价：
+
+\begin{enumerate}
+\item[(a)] [1/n-凹] $V_n((1-\lambda)K+\lambda L)^{1/n}\ge(1-\lambda)V_n(K)^{1/n}+\lambda V_n(L)^{1/n}$;
+
+\item[(b)] [维度相关] $V_n(K+L)^{1/n}\ge V_n(K)^{1/n}+V_n(L)^{1/n}$;
+
+\item[(c)] [维度无关] $V_n((1-\lambda)K+\lambda L)\ge V_n(K)^{1-\lambda}\cdot V_n(L)^{\lambda}$; 或者写作对数凸的形式 $\log V_n((1-\lambda)K+\lambda L)\ge (1-\lambda)\log V_n(K) +\lambda\log V_n(L)$。(由于维度无关，这种情况更容易推广到其它空间。)
+
+\item[(d)] [体积归一化] 若 $V_n(K)=V_n(L)=1$，那么 $V_n((1-\lambda)K+\lambda L)\ge 1$。
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+$\lambda$ 为 0 或 1 的情况下这些不等式都显然取等。接下来我们均不考虑这些情况。
+
+(a) $\Rightarrow$ (b)：只需在令 $K'=\frac1{1-\lambda}K$、$L'=\frac1\lambda L$，用 $K'$ 和 $L'$ 代入 (a)。
+
+(b) $\Rightarrow$ (a)：令 $K'=(1-\lambda)K$、$L'=\lambda L$ 代入 (b)。
+
+(a) $\Rightarrow$ (c) 用 Young 不等式，
+\begin{align*}
+V_n((1-\lambda)K+\lambda L)&\ge\left[(1-\lambda)V_n(K)^{1/n}+\lambda V_n(L)^{1/n}\right]^n \tag{由 (a)}\\
+&\ge \left[\left(V_n(K)^{1/n}\right)^{1-\lambda}\left(V_n(L)^{1/n}\right)^{\lambda}\right]^n \tag{\hyperref[lem:young]{Young 不等式}}\\
+&=V_n(K)^{1-\lambda}V_n(L)^{\lambda}
+\end{align*}
+
+(c) $\Rightarrow$ (d) 显然。
+
+(d) $\Rightarrow$ (a) 对于给定的集合 $K$、$L$，我们将二者体积归一化，即取 $K'=\frac{K}{V_n(K)^{1/n}}$、$L'=\frac{L}{V_n(L)^{1/n}}$。令 $\lambda':=\frac{\lambda V_n(L)^{1/n}}{(1-\lambda)V_n(K)^{1/n}+\lambda V_n(L)^{1/n}}$，那么，
+\begin{align*}
+1&\le V_n((1-\lambda')K'+\lambda' L') \tag{由 (d)}\\
+&=V_n\left(\frac{(1-\lambda)K+\lambda L}{(1-\lambda)V_n(K)^{1/n}+\lambda V_n(L)^{1/n}}\right)\\
+&=\frac{V_n((1-\lambda)K+\lambda L)}{\left[(1-\lambda)V_n(K)^{1/n}+\lambda V_n(L)^{1/n}\right]^n}
+\end{align*}
+两边取 $1/n$ 次方就得到了 (a)。
+\end{proof}
+
+前面例~\ref{ex:minkowski_sum} 中观察到的两个不等式对应这里的 (b)、(c)。 
+
+\section{凸体的 BM 不等式}
+
+\subsection{凸集与凸体的概念}
+
+我们首先来研究一种重要的情况，即 $K$ 和 $L$ 都是\emph{凸体}(Convex Body)。
+
+\begin{definition}[凸集与凸体]
+集合 $K\subseteq\mathbb{R}^n$ 若满足对任意的 $\lambda\in[0,1]$ 和任意的 $x,y\in K$，有 $\lambda x+(1-\lambda)y\in K$，则称 $K$ 是\emph{凸集}。若 $K$ 是内点非空的紧凸集，则称 $K$ 为\emph{凸体}。
+\end{definition}
+
+在继续介绍 BM 不等式之前，先简单补充几个关于凸集/凸体的构造方法，
+
+\begin{enumerate}[label=\textbf{方法 \chinese*}:, leftmargin=6em]
+
+\item 给定一个集合 $E\subseteq\mathbb{R}^n$，那么可以定义 $E$ 的闭凸包 
+\[
+\mathrm{Conv}(E):=\bigcap\Big\{F:E\subseteq F,\,F\subseteq\mathbb{R}^n\text{ 是闭凸集 }\Big\}
+\]
+
+\item 闭凸包也可用 $E$ 中点的凸组合定义 
+\[
+\mathrm{Conv}(E)=\bigg\{\sum_{i=1}^m\lambda_ix_i:m\in\mathbb{N},x_i\in E,\lambda_i\in[0,1],\sum_{i=1}^m\lambda_i=1\bigg\}
+\]
+
+\item 用 Hahn–Banach 定理的几何形式，即点与闭凸集的分离定理。简而言之，对于某闭凸集和不在此集合中的一个点，总能找到一个超平面将点与集合分离开来。设 $a\in\mathbb{R}$ 代表水平 (level)、$u\in\mathbb{S}^{n-1}$ 代表法向量，我们用 
+\[
+H_{u,a}:=\{x\in\mathbb{R}^n:\langle x,u\rangle=a\}
+\]
+代表超平面；同时，记 $H_{u,a}^-:=\{x\in\mathbb{R}^n:\langle x,u\rangle\le a\}$ 和 $H_{u,a}^+:=\{x\in\mathbb{R}^n:\langle x,u\rangle \ge a\}$ 代表超平面划分出的半空间。分离超平面定理可以用下面的图表示。
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/separate_plane.pdf}
+    \caption{分离超平面图示。}
+\end{figure}
+
+则 $E$ 的闭凸包也可以表示为 
+\[
+\mathrm{Conv}(E)=\bigcap\big\{H_{u,a}^-:E\subset H_{u,a}^-\big\}
+\]
+即用半空间来替代方法一中的闭凸集 $F$。
+
+\item 注意到，若 $0\in\mathrm{int}(E)$，则在方法 3 里，每个包含 $E$ 的半空间 $H_{u,a}^-$ 必然都满足 $a>0$。故 
+\begin{align*}
+\mathrm{Conv}(E)&=\Big\{x\in\mathbb{R}^n:\langle x,u\rangle\le a,\text{ 其中 }(u,a)\text{ 满足对任意 }y\in E,\,\langle y,u\rangle \le a\Big\}\\
+&=\left\{x\in\mathbb{R}^n:\left\langle x,\frac ua\right\rangle\le 1,\text{ 其中 }(u,a)\text{ 满足对任意 }y\in E,\,\left\langle y,\frac ua\right\rangle \le 1\right\}\\
+&=\big\{x\in\mathbb{R}^n:\langle x,z\rangle \le 1,z\in E^\circ\big\}\\
+&=(E^\circ)^\circ
+\end{align*}
+其中 
+\[
+E^\circ:=\{z\in\mathbb{R}^n:\langle x,z\rangle\le 1\text{ 对任意 }x\in E\text{ 成立 }\}
+\]
+代表 $E$ 的\emph{极集}(polar set)。在某种程度上，极集可以视作集合层面的``倒数"。
+\end{enumerate}
+\subsection{凸体的 BM 不等式之证明}
+
+\begin{theorem}[凸体的 BM 不等式]\label{thm:BM-convex}
+设 $K,L\subset\mathbb{R}^n$ 是凸体，$\lambda\in[0,1]$，则 
+\[
+V_n((1-\lambda)K+\lambda L)^{1/n}\ge(1-\lambda)V_n(K)^{1/n}+\lambda V_n(L)^{1/n}
+\]
+取等当且仅当 $K$ 和 $L$ 是\emph{位似}(homothetic) 的，即，存在 $c>0$ 和 $x_0\in\mathbb{R}^n$ 使得 $K=cL+x_0$。
+\end{theorem}
+\begin{remark}
+    由于体积与集合的位置没有关系，在接下来的证明中，我们经常会为了计算方便而把集合平移到特殊位置。
+\end{remark}
+
+\begin{proof}
+
+用数学归纳法，对维数 $n$ 进行归纳。
+
+当 $n=1$ 时，$K,L$ 都是 $\mathbb{R}^1$ 中的区间，显然 $V_1((1-\lambda)K+\lambda L)=  (1-\lambda)V_1(K) +\lambda V_1(L)$。
+
+下设 BM 不等式对某 $n-1$ 成立，$n\ge 2$。要证 BM 不等式对 $n$ 成立，我们证明定理 \ref{thm:BM-equivalence} 里面等价形式的 (d)，即，设 $V_n(K)=V_n(L)=1$，证 $V_n((1-\lambda)K+\lambda L)\ge 1$。接下来的目标是用 $n-1$ 维的对象来把 $n$ 维凸体体积表示出来。
+
+取定 $u\in\mathbb{S}^{n-1}$ 是一个任意单位方向。记 $K_\lambda:=(1-\lambda)K+\lambda L$，则 $K_\lambda$ 也是凸体（留给读者验证），不妨设 0 是 $K_\lambda$ 的内点 (不然的话总可以平移集合使之成立)。我们总可以找到一个\emph{支撑函数}(support function)：
+\[
+h(K_\lambda,u):=\max_{x\in K_\lambda}\langle x,u\rangle
+\]
+
+注意到 
+\begin{align*}
+h(K_\lambda,u)&=h((1-\lambda)K+\lambda L,u)\\
+&=\max_{x\in K,y\in L}\langle (1-\lambda)x+\lambda y,u\rangle\\
+&=(1-\lambda)\max_{x\in K}\langle x,u\rangle+\lambda\max_{y\in L}\langle y,u\rangle\\
+&=(1-\lambda)h(K,u)+\lambda h(L,u)
+\end{align*}
+所以\emph{集合的 Minkowski 和总对应支撑函数的和}。
+
+
+记 
+\begin{align*}
+\alpha_\lambda&:=-h(K_\lambda,-u)\\
+\beta_\lambda&:=h(K_\lambda,u)
+\end{align*}
+
+则两个超平面 $H_{-u,-\alpha_\lambda}=H_{u,\alpha_\lambda}$、$H_{u,\beta_\lambda}$ 就把集合 $K_\lambda$``夹"了起来。如果我们在 $H_{u,\alpha_\lambda}$、$H_{u,\beta_\lambda}$ 二者间沿着 $u$ 方向平移超平面，将超平面与 $K_\lambda$ 相交的部分称作"截面 (section)"，则这个截面的"面积"就是 $n-1$ 维的体积。见图~\ref{fig:BM_proof_illustration}。
+
+
+\begin{figure}[h]
+    \centering 
+    \includegraphics[width=0.8\textwidth]{figures/BM_proof_illustration.pdf}
+    \caption{左：当原点在凸体内部时，支撑函数相当于原点到支撑超平面的距离。右：截面是 $n-1$ 维的，可以对其用归纳假设。}
+    \label{fig:BM_proof_illustration}
+\end{figure}
+
+
+为此，记 
+\begin{align*}
+v_\lambda(t)&:=V_{n-1}(K_\lambda \cap H_{u,t})\\
+w_\lambda(t)&:=\int_{\alpha_\lambda}^t v_\lambda(s)\mathrm{d}s
+\end{align*}
+
+显见，$\displaystyle V_n(K_\lambda)=w_\lambda(\beta_\lambda)=\int_{\alpha_\lambda}^{\beta_\lambda}v_\lambda (t)\mathrm{d}t$，我们成功用 $n-1$ 维度的体积来刻画了 $n$ 维体积。
+
+定义 $z_\lambda(s):=(1-\lambda)w_0^{-1}(s)+\lambda w_{1}^{-1}(s)$，其中 $^{-1}$ 代表反函数，$s\in[0,1]$（因为 $V_n(K)=V_n(L)=1$）。这个通过插值定义的量很重要，一方面有 
+\begin{align*}
+z_\lambda(0)&=(1-\lambda)w_0^{-1}(0)+\lambda  w_1^{-1}(0)=(1-\lambda)\alpha_0+\lambda\alpha_1=\alpha_\lambda\\
+z_\lambda(1)&=(1-\lambda)w_0^{-1}(1)+\lambda  w_1^{-1}(1)=(1-\lambda)\beta_0+\lambda\beta_1=\beta_\lambda
+\end{align*}
+
+并且不难注意到下式成立：
+\[
+(1-\lambda)\big(K\cap H_{u,z_0(s)}\big)+\lambda\big(L\cap H_{u,z_1(s)}\big)\subseteq K_\lambda\cap H_{u,z_\lambda(s)}
+\]
+
+方便起见，我们记 $K(s):=K\cap H_{u,z_0(s)}$、$L(s):=L\cap H_{u,z_1(s)}$。
+
+此时，我们可以直接推导出
+\begin{align*}
+V_n(K_\lambda)&=\int_{\alpha_\lambda}^{\beta_\lambda}v_\lambda(t)\mathrm{d}t \\
+&=\int_0^1v_\lambda(z_\lambda(s))\mathrm{d}z_\lambda(s) \tag{积分换元}\\
+&=\int_0^1V_{n-1}\big(K_\lambda\cap H_{u,z_\lambda(s)}\big)\mathrm{d}z_\lambda(s) \\
+&\ge \int_0^1{\color{blue} V_{n-1}((1-\lambda)K(s)+\lambda  L(s))}\mathrm{d}z_\lambda(s)  \\
+&\ge \int_0^1{\color{blue} V_{n-1}(K(s))^{1-\lambda}V_{n-1}(L(s))^\lambda}\mathrm{d}z_\lambda(s) \tag{归纳假设}\\
+&=\int_0^1v_0(z_0(s))^{1-\lambda}v_1(z_1(s))^\lambda\mathrm{d}z_\lambda(s) \label{eq:1-1} \tag{$*$}
+\end{align*}
+
+最后一步归纳假设用了定理 \ref{thm:BM-equivalence} 中等价形式 (c)。 
+
+由于对 $\lambda\in [0,1]$，根据 Young 不等式，
+\begin{equation}
+\mathrm{d}z_\lambda(s)=(1-\lambda)\mathrm{d}{w_0^{-1}}(s)+\lambda\mathrm{d}w_1^{-1} (s)=\frac{1-\lambda}{v_0(z_0(s))}+\frac{\lambda}{v_1(z_1(s))}\ge \frac{1}{v_0(z_0(s))^{1-\lambda}v_1(z_1(s))^\lambda} \label{eq:1-2}\tag{$**$}
+\end{equation}
+所以前面最后推导得到的~\eqref{eq:1-1} 式 $\ge 1$，我们就完成了 BM 不等式的证明。
+
+下面证明取等条件。 ~\eqref{eq:1-2} 式取等当且仅当 $v_0(z_0(s))=v_1(z_1(s))$ 对任意 $s\in[0,1]$ 成立，亦即，对任意 $s\in[0,1]$，$z_0'(s)=z_1'(s)$。于是 $z_0(s)-z_1(s)$ 是常数。
+
+方便起见，我们把 $K$ 和 $L$ 的质心 (centroid) 都平移到原点，即，
+\[
+\int_K\langle x,u\rangle\mathrm{d}x=\int_L\langle y,u\rangle\mathrm{d}y=0,\quad \forall u\in\mathbb{S}^{n-1}
+\]
+
+研究一下上述积分：如果考虑变量代换 $t:=\langle x, u\rangle$，则 $x\in H_{u,t}$，则可以得出 
+\begin{align*}
+0&=\int_K\langle x,u\rangle\mathrm{d}x\\
+&=\int_{\alpha_0}^{\beta_0}V_{n-1}(K\cap H_{u,t})t\mathrm{d}t \tag{换元 $t=\langle x,u\rangle$}\\
+&=\int_0^1 V_{n-1}(K\cap H_{u,z_0(s)})z_0(s)\mathrm{d}z_0(s) \tag{换元 $z_0(s)=t$}\\
+&=\int_0^1  v_0(z_0(s)) z_0(s)\mathrm{d}z_0(s)\\
+&=\int_0^1z_0(s)\mathrm{d}s
+\end{align*}
+同理 $\displaystyle \int_0^1z_1(s)\mathrm{d}s=0$，于是 $\displaystyle\int_0^1(\underbrace{z_0(s)-z_1(s)}_{\text{常数}})\mathrm{d}s=0$；显见这个常数只能为 0，那么 $z_0(s)=z_1(s)$ 对所有的 $s\in[0,1]$ 成立。特别地，当 $s=1$ 时，$h(K,u)=z_0(s)=z_1(s)=h(L,u)$，即对所有的 $u\in\mathbb{S}^{n-1}$，$K$ 和 $L$ 的支撑函数都相同，必然 $K=L$，两个集合也相同。
+
+注意，在定理证明的过程中，我们假设了二者体积 $V_n(K)=V_n(L)=1$，同时又将二者质心平移到了原点。在一般的情况下，对仿射变换 $K\mapsto  cK+x_0$、$L\mapsto dL+y_0$，不等式 $V_n((1-\lambda)K+\lambda L)\ge V_n(K)^{1-\lambda}V_n(L)^\lambda$ 都仍成立 (平移不改变体积，乘以常数不改变不等式)。因此 $K=L$ 的条件应该改作：存在 $c>0$、$x_0\in\mathbb{R}$，有 $K=cL+x_0$ 成立。这就是凸体的 BM 不等式的取等条件。
+\end{proof}
+
+虽然上述证明稍显复杂，但是思路非常清晰。BM 不等式最早就是研究的凸体的情形。1887 年， Hermann Brunn 证明了凸体的 BM 不等式在 $n=3$ 的情况\footnote{Hermann Brunn (1887). \textit{Ueber Ovale Und Eiflächen}. PhD thesis.}，后来 Hermann Minkowski 修正了其证明，并推广到了任意的 $n$\footnote{Hermann Minkowski (1910). \textit{Geometrie der Zahlen}.}。上述经典证明来自 H. Kneser 和 W. Süss\footnote{H. Kneser and W. Süss (1932). \textit{Die Volumina in linearen Scharen konvexer körper}, Matematisk. Tidsskrift. B , 19–25. }，也可参考 Schneider, R. (2014).\textit{Convex bodies: the Brunn–Minkowski theory (Vol. 151)}. Cambridge university press 的 Theorem 7.1.1 (pp. 369-371) 等。
+ 
+
+\section{一般 BM 不等式的证明}
+
+之前的证明利用了凸体的特殊性质。能否证明更一般的、Lebesgue 可测的 $K,L$，也有 BM 不等式成立？答案是肯定的。下面我们仍以 $V_{n}(K)$ 代表集合 $K$ 的 $n$ 维"体积"——即 Lebesgue 测度。
+
+\begin{theorem}[一般 BM 不等式]\label{thm:BM-general}
+设 $K,L\subset\mathbb{R}^n$ 是非空的 Lebesgue 可测集，其测度均有限；设对 $\lambda\in[0,1]$ 有 $(1-\lambda)K+\lambda L$ 可测，那么
+\[
+V_n((1-\lambda)K+\lambda L)^{1/n}\ge (1-\lambda)V_n(K)^{1/n}+\lambda V_n(L)^{1/n}
+\]
+\end{theorem}
+
+\begin{proof}
+分三步走：
+
+\begin{enumerate}[label=\textbf{第\chinese*步}:, leftmargin=6em]
+    \item 证明 $K,L$ 都是 $n$ 维盒子 (boxes，即各边与坐标超平面平行的长方体) 的情形；
+    \item 证明 $K,L$ 都是有限个不交盒子之并的情形；
+    \item 用有限个盒子来逼近任意一个可测集。
+\end{enumerate}
+
+第一步，先证明最简单的情况，$K,L$ 都是 $n$ 维盒子，即 
+\begin{align*}
+K&=[0,a_1]\times\cdots\times [0,a_n]\\
+L&=[0,b_1]\times\cdots\times [0,b_n]
+\end{align*}
+
+那么 
+\[
+(1-\lambda)K+\lambda L=[0,(1-\lambda)a_1+\lambda b_1]\times \cdots\times [0,(1-\lambda)a_n+\lambda b_n]
+\]
+
+有 
+\begin{align*}
+V_n((1-\lambda)K+\lambda L)&=\prod_{i=1}^n((1-\lambda)a_i+\lambda b_i)  \\
+&\ge \prod_{i=1}^n\big(a_i^{1-\lambda}b_i^\lambda\big) \tag{\hyperref[lem:young]{Young 不等式}}\\
+&=\left(\prod_{i=1}^na_i\right)^{1-\lambda}\left(\prod_{i=1}^nb_i\right)^\lambda  \\
+&=V_n(K)^{1-\lambda}V_n(L)^\lambda
+\end{align*}
+
+可见，当 $K$ 和 $L$ 都是 $n$ 维盒子时，\emph{BM 不等式就是 Young 不等式}。
+
+第二步，证明 $K$ 和 $L$ 都是有限多个不交盒子之并的情况。用归纳法，对盒子的个数进行归纳，设 BM 不等式对``$K\cup L$ 一共是不超过 $N$ 个盒子之并"成立，假设现有共 $N+1$ 个盒子且 $K$ 至少有两个。
+
+我们记 $e_n$ 是第 $n$ 个单位坐标向量，考虑用超平面 $H:=H_{e_n,0}=\{x\in\mathbb{R}^n:\langle x,e_n\rangle=0\}$``切" $K$ 和 $L$，并且，不失一般性地，设 $H$ 把 $K$ 中的两个盒子分离开，见图~\ref{fig:HO_cut}。
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/HO_cut.png}
+    \caption{用超平面切割盒子。}
+    \label{fig:HO_cut}
+\end{figure}
+
+记 $H$ 将空间分出的两个半平面分别为 $H^+$ 和 $H^-$，并记 
+\begin{align*}
+K^+:=K\cap H^+,&\quad K^-:=K\cap H^-\\
+L^+:=L\cap H^+,&\quad L^-:=L\cap H^-
+\end{align*}
+
+那么：$K^+\cup L^+$、$K^-\cup L^-$ 这两个集合都是不超过 $N$ 个盒子之并（因为至少 $K^+$ 会比 $K$ 少一个盒子、$K^-$ 会比 $K$ 少一个盒子）。我们对 $L$ 进行适当的平移，使得 $L^+$ 与 $L^-$ 两部分的体积比例与 $K^+$、$K^-$ 体积比例相同，即
+\[
+\begin{aligned}
+\alpha&=\frac{V_n(K^+)}{V_n(K)}=\frac{V_n(L^+)}{V_n(L)}\\
+1-\alpha&=\frac{V_n(K^-)}{V_n(K)}=\frac{V_n(L^-)}{V_n(L)}
+\end{aligned}
+\]
+
+由于有 
+\begin{align*}
+&K+L\supseteq (K^++L^+)\cup(K^-+L^-)\\
+\implies\;& V_n(K+L)\ge V_n(K^++L^+)+V_n(K^-+L^-)
+\end{align*}
+
+我们用归纳假设，
+\begin{align*}
+V_n(K+L)&\ge V_n(K^++L^+)+V_n(K^-+L^-)\\
+&\ge \left(V_n(K^+)^{1/n}+V_n(L^+)^{1/n}\right)^n+\left(V_n(K^-)^{1/n}+V_n(L^-)^{1/n}\right)^n\\
+&= \left[\left(\frac{V_n(K^+)}{V_n(K)}\right)^{1/n}V_n(K)^{1/n}+\left(\frac{V_n(L^+)}{V_n(L)}\right)^{1/n}V_n(L)^{1/n}\right]^n\\
+&\quad +\left[\left(\frac{V_n(K^-)}{V_n(K)}\right)^{1/n}V_n(K)^{1/n}+\left(\frac{V_n(L^-)}{V_n(L)}\right)^{1/n}V_n(L)^{1/n}\right]^n\\
+&=\alpha\left(V_n(K)^{1/n}+V_n(L)^{1/n}\right)^n+(1-\alpha)\left(V_n(K)^{1/n}+V_n(L)^{1/n}\right)^n\\
+&=\left(V_n(K)^{1/n}+V_n(L)^{1/n}\right)^n
+\end{align*}
+这就完成了归纳递推。这种非常巧妙的``切割"技术被称作 \emph{Hadwiger–Ohmann cut}。
+
+第三步：令 $n\to\infty$，任何一个 Lebesgue 可测集合都可以用盒子来逼近，且这些盒子的体积总和与 Lebesgue 测度一致（读者可以回忆一下 Lebesgue 外测度的定义 :-)。
+\end{proof}
+
+
+
+定理~\ref{thm:BM-general} 的结论由 H. Hadwiger 与 D. Ohmann 于 1956 年证明\footnote{H. Hadwiger and D. Ohmann (1960). \textit{Brunn-Minkowskischer Satz und Isoperimetrie}. Journal of the Society for Industrial and Applied Mathematics.}。回顾证明可见，第二、三步其实只是一些技术上的处理，证明本质还是来源于第一步的 Young 不等式。因而，我们可以肯定：BM 不等式就是 Young 不等式在集合上面的推广。
+
+定理~\ref{thm:BM-general} 的取等条件是：取等当且仅当 $K$、$L$ 是位似的凸集（至多相差一个零测集）\footnote{确切来说，这指的是存在凸集$Q\subset\mathbb R^n$ 以及$c_1,c_2>0$、$x_1,x_2\in\mathbb{R}^n$，使得 $c_1K+x_1\subset Q$ 且 $c_2L+x_2\subset Q$，并且 $V_n(Q\setminus (c_1K+x_1))=V_n(Q\setminus (c_2L+x_2))=0$。Alessio Figalli 做了很多这方面的工作。}，这个比较繁琐，不再赘述。
+ 

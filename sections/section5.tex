@@ -1,0 +1,443 @@
+\chapter{Minkowski 问题}\label{chapter:5}
+
+\section{引入}
+
+我们回顾一下在第~\ref{chapter:4} 章得到的两个重要定理：Minkowski 第一不等式 (定理~\ref{thm:minkowski})
+\[
+V_1(K,L)\ge V_n(K)^{\frac{n-1}{n}}V_n(L)^{\frac1n}
+\]
+其中 $K,L\subset\mathbb{R}^n$ 是凸体，取等当且仅当 $K,L$ 位似；以及混合体积的变分公式 (定理~\ref{thm:var}) 
+\[
+V_1(K,L)=\frac1n\int_{\mathbb{S}^{n-1}}h_L(u)\mathrm{d}S(K,u)
+\]
+其中 $h_L(u)$ 是 $L$ 的支撑函数、 $\mathrm{d}S(K,u)$ 是 $K$ 的表面积测度，混合体积 $V_1(K,L):=\frac1n\frac{\mathrm{d}}{\mathrm{d}t}V_n(K+tL)$。
+
+把上面两式结合到一起，可得：
+\[
+\frac1n\int_{\mathbb{S}^{n-1}}h_L(u)\mathrm{d}S(K,u)\ge V_n(K)^{\frac{n-1}{n}}V_n(L)^{\frac 1n}
+\]
+我们能从中看出什么呢？
+
+考虑这样的操作，
+\begin{itemize}
+\item 把 $L$ 按体积归一化，也就是用 $\frac L{V_n(L)^{1/n}}$ 取代 $L$，因而 $h_L$ 也变作 $\frac{h_L}{V_n(L)^{1/n}}$；
+\item 把 $K$ 的表面积测度也 (某种程度上) 归一化，考虑测度 $\mathrm{d}\mu:=\frac{\mathrm{d}S(K,u)}{V_n(K)^{\frac{n-1}{n}}}$。
+\end{itemize}
+那么应有如下不等式总成立
+\[
+\frac1n\int_{\mathbb{S}^{n-1}}h_L(u)\mathrm{d}\mu(u)\ge 1
+\]
+取等当且仅当 $K,L$ 位似。
+
+注意到测度 $\mathrm{d}\mu$ 在 $K$ 的位似变化下是不变的 (后文详细解释)，因而若固定 $L$，则\emph{如下关于测度 $\mu$ 的方程}
+\[
+\frac1n\int_{\mathbb{S}^{n-1}}h_L(u)\mathrm{d}\mu(u)= 1
+\]
+\emph{只有一个解}，这个解可以写作 $\mathrm{d}\mu=\mathrm{d}S(L,u)$。
+
+或者，我们也能固定测度 $\mu$ 而变化 $L$，可以这样说：若 $\mu$ 是某个凸体 $L_0\subset\mathbb{R}^n$ 的表面积测度， $V_n(L_0)=1$，那么 $L_0$ 是如下极值问题的解，
+\begin{equation}
+\inf\left\{\int_{\mathbb{S}^{n-1}}h_L\mathrm{d}\mu: V_n(L)=1,L\subset\mathbb{R}^n\text{ 是凸体 }\right\} \label{eq:5-1}\tag{5-1}
+\end{equation}
+
+这表明，表面积测度可以作为凸体本身的``变分"特征——我们在后文中甚至会表明：\emph{凸体其实可以唯一由其表面积测度决定}。于是一个顺理成章的问题就出现了：既然某些测度能刻画凸体，那么如果从反方向出发——给定一个 $\mathbb S^{n-1 }$ 的 Borel 测度 $\mu$——是否也能找到一个凸体 $L_0$，使得它的表面积测度正好是 $\mu$？这就是著名的 \emph{Minkowski 问题}。
+
+\begin{example}
+先举一个最简单的例子，在 $\mathbb{R}^2$ 中，Borel 测度 $\mu$ 聚集在"上下左右" $\{u_1,u_2,u_3,u_4\}$ 四个方向上，且对每个 $u_i$ 都有 $\mu(u_i)=1$。
+
+有没有一个凸体 $L\subset\mathbb{R}^2$ 使得 $\mu=S(L,\cdot)$？答案是显然的，取一个边长为 1 的正方形就行了。见图~\ref{fig:square}。
+\end{example}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\textwidth]{figures/square.pdf}
+\caption{正方形满足表面积测度集中在四个方向上。}\label{fig:square}
+\end{figure}
+
+此外还可以引申一些，比如，
+\begin{example}\label{ex:petty_body}
+    我们能不能把 $L$ 换成它的极集 $L^\circ$？换言之，如下极值问题
+\[
+\inf\left\{\int_{\mathbb{S}^{n-1}}h_L\mathrm{d}\mu: V_n({\color{blue}L^\circ})=1,L\subset\mathbb{R}^n\text{ 是凸体 }\right\}
+\]
+又如何呢？答案是，上述问题的解称作 \emph{Petty 体} (Petty Body) \footnote{C. M. Petty, 1974}，不过这个不再具体介绍。
+\end{example}
+
+\begin{example}
+    再比如，由于平移不变性我们让 $0\in\mathrm{int}L$， 根据引理~\ref{lem:support_radial}，上述引申出来的问题又等价于
+\begin{align*}
+&\inf\left\{\int_{\mathbb{S}^{n-1}}h_{{\color{blue}L^\circ}}(u)\mathrm{d}S(K,u): V_n(L)=1,\,0\in\mathrm{int}L,\,L\subset\mathbb{R}^n\text{ 是凸体 }\right\} \\
+=\;& \inf\left\{\int_{\mathbb{S}^{n-1}}\frac1{\rho_L(u)}\mathrm{d}S(K,u): V_n(L)=1,\,0\in\mathrm{int}L,\,L\subset\mathbb{R}^n\text{ 是凸体 }\right\}
+\end{align*}
+
+这能不能再推广到更一般的集合上？
+\[
+\inf\left\{\int_{\mathbb{S}^{n-1}}\frac1{\rho_L(u)}\mathrm{d}S(K,u): V_n(L)=1,L\subset\mathbb{R}^n\text{ 是}{\color{red}\text{星形体}}\right\}
+\]
+上述问题的答案取决于 $K$ 的\emph{仿射表面积} (affine surface area) \footnotemark。
+\end{example}
+\footnotetext{E. Lutwak, 1991}
+
+这里补充一下所谓星形体的定义
+\begin{definition}[星形集和星形体]
+非空集合 $S\subset\mathbb{R}^n$ 若满足：存在 $x_0\in S$，使得对任意 $s\in S$， $x_0$ 和 $s$ 所连线段都在 $S$ 内，则称 $S$ 是关于 $x_0$ 的\emph{星形集} (star set)。
+
+若紧集 $S\subset\mathbb{R}^n$ 是关于原点 0 的星形集，且其半径函数 $\rho_S(u):=\sup\{\lambda>0:\lambda u\in S\}$ 是 $\mathbb{S}^{n-1}$ 上的正值连续函数，那么称 $S$ 是一个 (关于原点的) \emph{星形体} (star body)。%见图~\ref{fig:star_body}。
+\end{definition}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.3\textwidth]{figures/Star_domain.pdf}
+\caption{星形集, 或称 \emph{Star domain} 的示意图；可以看出星形集并不一定是凸集。\footnotemark}
+\label{fig:star_body}
+\end{figure}
+\footnotetext{图片来自 \url{https://en.wikipedia.org/wiki/Star_domain}}
+
+根据定义，任意非空凸集都是星形集，任意 $0\in\mathrm{int}L$ 的凸体 $L\subset\mathbb{R}^n$ 都是关于原点的星形体 (为什么？)，因此星形体可以视作凸体的推广。
+
+\section{表面积测度的一些性质}
+
+之前我们没有仔细地考察凸体 $K\subset\mathbb{R}^n$ 的表面积测度 $S(K,\cdot)$ 的性质。为了给后文做准备，先证明一些。
+
+\begin{proposition}\label{prop:surface_trans}
+表面积测度是平移不变的，即对任意 $x_0\in\mathbb{R}^n$， $S(K,\cdot)=S(K+x_0,\cdot)$。
+\end{proposition}
+
+\begin{proof}
+注意到 $h_{K+x_0}(u)=h_K(u)+\langle u,x_0\rangle$，因而 \hyperref[def:wulff]{Wulff 形}在平移下对应有
+\[
+[h_{K+x_0}]=[h_K+\langle x_0,\cdot\rangle]=[h_K]+x_0
+\]
+所以 Wulff 形的体积是不变的： $V_n([h_{K+x_0}])=V_n([h_K])$。
+
+根据定理~\ref{thm:var_wulff}，对任意 $\mathbb{S}^{n-1}$ 上的正连续函数 $f\in\mathcal{C}^+\big(\mathbb S^{n-1}\big)$，
+\begin{align*}
+\int_{\mathbb S^{n-1}}f\,\mathrm{d}S(K,u)&=\lim_{\epsilon\to0^+}\frac{V_n([h_K+\epsilon f])-V_n([h_K])}{\epsilon}\\
+&=\lim_{\epsilon\to0^+}\frac{V_n([h_{K+x_0}+\epsilon f])-V_n([h_{K+x_0}])}{\epsilon}\\
+&=\int_{\mathbb S^{n-1}}f\,\mathrm{d}S(K+x_0,u)
+\end{align*}
+即，紧空间 $\mathbb{S}^{n-1}$ 上的有限测度 $\mathrm{d}S(K,u)$ 和 $\mathrm{d}S(K+x_0,u)$ 满足对所有 $f\in\mathcal{C}^+\big(\mathbb S^{n-1}\big)$ 都有
+\[
+\int_{\mathbb S^{n-1}}f\,\mathrm{d}S(K,u)=\int_{\mathbb S^{n-1}}f\,\mathrm{d}S(K+x_0,u)
+\]
+自然只能有 $S(K,\cdot)=S(K+x_0,\cdot)$。
+\end{proof}
+
+\begin{remark}
+证明方法不止这一种，读者可以尝试用其它方法证明此性质。
+\end{remark}
+
+\begin{proposition}\label{prop:surface_scaling}
+设 $\lambda>0$，则表面积测度满足 $S(\lambda K,\cdot)=\lambda^{n-1}S(K,\cdot)$。
+\end{proposition}
+
+\begin{proof}
+注意到 $h_{\lambda K}(u)=\lambda h_K(u)$，于是 $[h_{\lambda K}]=[\lambda h_K]=\lambda [h_K]$，故
+\begin{align*}
+\int_{\mathbb S^{n-1}}f\,\mathrm{d}S(\lambda K,u)&=\lim_{\epsilon\to0^+}\frac{V_n([h_{\lambda K}+\epsilon f])-V_n([h_{\lambda K}])}{\epsilon}\\
+&=\lim_{\epsilon\to0^+}\lambda^{n-1}\frac{ V_n([h_{K}+\frac\epsilon\lambda f])-V_n([h_{  K}])}{\frac\epsilon\lambda}\\
+&=\lambda^{n-1}\int_{\mathbb S^{n-1}} f\,\mathrm{d}(K,u)
+\end{align*}
+基于命题~\ref{prop:surface_trans} 同样的原因， $S(\lambda K,\cdot)=\lambda^{n-1}S( K,\cdot)$。
+\end{proof}
+
+\begin{remark}
+性质~\ref{prop:surface_trans}  和~\ref{prop:surface_scaling}说明测度 $\mathrm{d}\mu:=\frac{\mathrm{d}S(K,u)}{V_n(K)^{\frac{n-1}{n}}}$ 在 $K$ 的平移和缩放——即位似变换下确实是不变的。
+\end{remark}
+
+\begin{proposition}\label{prop:surface_centroid}
+$S(K,\cdot)$ 的重心在原点，即 $\displaystyle \int_{\mathbb{S}^{n-1}}u\,\mathrm{d}S(K,u)=0$。
+\end{proposition}
+
+\begin{proof}
+用混合体积变分公式 (定理~\ref{thm:var})，对任意 $x_0\in\mathbb{R}$，
+\begin{align*}
+\int_{\mathbb{S}^{n-1}}h_{L+x_0}(u)\mathrm{d}S(K,u)&=\lim_{\epsilon\to 0^+}\frac{V_n(K+\epsilon(L+x_0)-V_n(K))}{\epsilon}\\
+&=\lim_{\epsilon\to 0^+}\frac{V_n(K+\epsilon(L)-V_n(K))}{\epsilon}\\
+&= \int_{\mathbb{S}^{n-1}}h_{L }(u)\mathrm{d}S(K,u)
+\end{align*}
+所以
+\begin{align*}
+0&=\int_{\mathbb{S}^{n-1}}\Big(h_{L+x_0}(u)-h_L(u)\Big)\,\mathrm{d}S(K,u)\\
+&=\int_{\mathbb{S}^{n-1}}\langle x_0,u\rangle\,\mathrm{d}S(K,u)\\
+&=\left\langle x_0,\int_{\mathbb{S}^{n-1}}u\,\mathrm{d}S(K,u)\right\rangle
+\end{align*}
+这对任意 $x_0$ 都成立，自然只能有 $\displaystyle \int_{\mathbb{S}^{n-1}}u\,\mathrm{d}S(K,u) =0$。
+\end{proof}
+
+\begin{proposition}\label{prop:surface_great_circle}
+$S(K,\cdot)$ 不集中在任何一个\emph{大圆} (great subsphere) 上。
+\end{proposition}
+
+\begin{remark}
+    这里，所谓``大圆"指的是：取方向 $u\in\mathbb S^{n-1}$，其正交补空间与球面 $\mathbb{S}^{n-1}$ 的交集 $\mathbb{S}^{n-1}\cap u^\perp$，它应该是一个 $n-2$ 维的球面 ( $n\ge 2$)。换言之， $S(K,\cdot)$ 的质量不能全部落在 $\mathbb{R}^{n}$ 的更低维度的子空间中。
+\end{remark}
+\begin{proof}
+反证法，谬设 $S(K,\cdot)$ 集中在某个大圆 $\mathbb{S}^{n-1}\cap u^\perp$ 内，记 $A:=\{v:\langle v,u\rangle>0\}$ 和 $B:= \{v:\langle v,u\rangle<0\}$ 代表两个开半球面，则 $S(K,A)=0$、 $S(K,B)=0$，即 $\mathcal{H}^{n-1}(\nu_K^{-1}(A))=0$、 $\mathcal{H}^{n-1}(\nu_K^{-1}(B))=0$——但是， $\nu^{-1}_K(A)$ 和 $\nu_K^{-1}(B)$ 分别包含了 $\partial K$ 上所有法向量在 $A$、 $B$ 中的点，这表明在 $\partial K$ 中几乎所有的点法向量不在 $A,B$ 中，即与 $u$ 正交。
+
+根据散度定理，
+\begin{align*}
+V_n(K)&=\int_K\mathrm{d}x=\int_K\mathrm{div}(\langle x,u\rangle u)\,\mathrm{d}x\\
+&=\int_{\partial K}\langle x,u\rangle\underbrace{\langle u,\nu_K(x)\rangle}_{\text{几乎处处为 0}}\,\mathrm{d}\mathcal{H}^{n-1}(x)\\
+&=0
+\end{align*}
+与 $K$ 是凸体（内点非空）矛盾！
+\end{proof}
+
+\begin{proposition}\label{prop:surface_half}
+对任意 $u\in\mathbb{S}^{n-1}$，开半球面 $\{v\in\mathbb{S}^{n-1}:\langle v,u\rangle>0\}$ 的 $S(K,\cdot)$ 测度都是正的。更一般地，任意 $\mathbb{S}^{n-1}$ 上的 Borel 测度 $\mu$ 若满足前面性质~\ref{prop:surface_great_circle}、\ref{prop:surface_half} ，则该性质均成立。
+\end{proposition}
+
+\begin{proof}
+记集合 $A:=\{v\in\mathbb S^{n-1},\langle v,u\rangle >0\}$、 $B:=\{v\in\mathbb S^{n-1},\langle v,u\rangle <0\}$、 $E:=\{v\in\mathbb S^{n-1},\langle v,u\rangle =0\}$，那么根据命题~\ref{prop:surface_great_circle}，
+\begin{align*}
+0&=\left\langle v,\int_{\mathbb{S}^{n-1}}u\,\mathrm d\mu(u)\right\rangle=\int_{\mathbb{S}^{n-1}}\langle v,u\rangle\,\mathrm d\mu(u) \\
+&=\int_A \langle v,u\rangle\,\mathrm d\mu(u)+\int_B\langle v,u\rangle\,\mathrm d\mu(u)+\underbrace{\int_E\langle v,u\rangle\,\mathrm d\mu(u)}_{=0}\\
+&=\int_A \langle v,u\rangle\,\mathrm d\mu(u)+\int_B\langle v,u\rangle\,\mathrm d\mu(u)
+\end{align*}
+上面的两个积分中，第一项的被积分项恒正、第二项的被积分项恒负，若 $\mu(A)=0$ 则第一项积分为 0，于是第二项积分也只能为 0，则 $\mu(B)=0$。这样一来， $\mu$ 的质量就全都集中在了大圆 $E$ 上，与命题~\ref{prop:surface_half}  矛盾！所以一定 $\mu(A)> 0$。
+\end{proof}
+
+\begin{lemma}[Hausdorff 测度的上半连续性]\label{lem:hausdorff_semi_cont}
+设 $F_0,F_1,F_2,\ldots\subseteq\partial K$ 是紧集，且 $\{F_j\}_{j=1}^\infty$ 在 Hausdorff 度量下收敛： $F_j\to F_0$，那么 $\limsup\limits_{j \to \infty} \mathcal{H}^{n-1}(F_j) \leq \mathcal{H}^{n-1}(F_0)$。
+\end{lemma}
+
+\begin{proof}
+由于 $F_0$ 紧，它可以表示为递减序列 $\displaystyle N_m := \left( F_0 + \frac{1}{m} B_n \right) \cap \partial K$ 的交集，因此 $\mathcal{H}^{n-1}(F_0) = \lim\limits_{m \to \infty} \mathcal{H}^{n-1}(N_m)$；又每个 $N_m\supset F_0$，对于足够大的 $j$，有 $F_j \subseteq N_m$，于是每个 $m$ 都有 $\limsup\limits_{j \to \infty} \mathcal{H}^{n-1}(F_j) \leq \mathcal{H}^{n-1}(N_m)$，引理得证。
+\end{proof}
+
+\begin{proposition}\label{prop:surface_weak_converge}
+表面积测度在 Hausdorff 度量下有弱收敛性质，即，设 $K_0,K_1,K_2,\dots\subset\mathbb{R}^n$ 是凸体，且在 Hausdorff 度量下有收敛 $K_i\to K_0$，则测度 $S(K_i,\cdot)$ 弱收敛于 $S(K_0,\cdot)$，亦即，对任意 $f\in\mathcal{C}\big(\mathbb S^{n-1}\big)$ 都有 $\displaystyle\int_{\mathbb S^{n-1}}f\,\mathrm{d}S(K_i,u)\to\int_{\mathbb S^{n-1}}f\,\mathrm{d}S(K,u)$。
+\end{proposition}
+
+\begin{proof}
+要证 $S(K_i,\cdot)$ 在 $\mathbb{S}^{n-1}$ 上弱收敛到 $S(K_0,\cdot)$，根据 \emph{Portmanteau 定理}\footnote{\url{https://en.wikipedia.org/wiki/Convergence_of_measures\#Weak_convergence_of_measures}}，我们只需证明对任意紧集 $F\subseteq\mathbb{S}^{n-1}$ 都有 $ \limsup\limits_{i\to\infty}S(K_i,F)\le S(K_0,F)$。
+
+固定紧集 $F\subseteq\mathbb{S}^{n-1}$，不失一般性假设原点 $0$ 为所有 $K_i,K_0$ 的内点。定义沿射线的边界对应映射 
+\[
+\psi_i:\partial K_i\to\partial K_0,\qquad \psi_i(x):=r_{K_0}\big(r^{-1}_{K_i}(x)\big)=r_{K_0}\big(x/\|x\|\big)
+\]
+( $r_K$ 见定义~\ref{def:radial_func})。
+
+不难看出 $\psi_i$ 与其逆在对应的边界上均为\emph{双 Lipschitz}，且其 Lipschitz 常数趋于 1：直观地说，$\psi_i$ 仅在固定方向上把 $\partial K_i$ 的在该方向上的点替换为 $\partial K_0$ 上同方向的点，随着 $i\to\infty$，两者的半径之比趋近于 1。
+
+令 $\nu_K:\partial K\to\mathbb{S}^{n-1}$ 表示外法向的 Gauss 映射。对紧集 $F\subseteq\mathbb{S}^{n-1}$，考虑集合 $E_i:=\nu_{K_i}^{-1}(F)\subseteq\partial K_i$ 及其经 $\psi_i$ 的像 $G_i:=\psi_i\big(E_i\big)\subseteq\partial K_0$。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/weak_converge_proof.pdf}
+\caption{$\psi_i$ 构建起了连接 $\partial K_i$ 子集 $E_i$ 与 $\partial K_0$ 子集 $G_i$ 的桥梁。}
+\end{figure}
+
+由紧集的 \emph{Blaschke 选择定理}
+\footnote{Blaschke 选择定理不仅对凸体成立，也可以推广到紧集上。对于 $\mathbb{R}^n$ 中的一列一致有界的紧集，一定存在 Hausdorff 度量意义下的收敛子列。}，
+ $\{G_i\}$ 在 Hausdorff 度量下存在子列收敛到某个紧集 $G_0\subseteq\partial K_0$，不妨设 $G_i\to G_0$。
+
+我们先证明 $G_0\subseteq \nu_{K_0}^{-1}(F)$。任取 $x\in G_0$，存在点列 $y_i\in G_i$ 使 $y_i\to x$。写 $y_i=\psi_i(x_i)$ 且 $x_i\in E_i$。由 $\psi_i$ 的双 Lipschitz 性及常数趋于 1，可知 $x_i\to x$。对每个 $i$ 取 $u_i\in\nu_{K_i}(x_i)$ 作为 $x_i$ 处的法向，即 $K_i\subseteq H^-_{u_i,\langle u_i,x_i\rangle}$ 且 $\langle u_i,x_i\rangle=h_{K_i}(u_i)$。由紧性取子列使 $u_i\to u\in F$。结合 $K_i\to K_0$、$x_i\to x$、$u_i\to u$，传递到极限得到 $K_0\subset H^-_{u,\langle u,x\rangle}$ 且 $\langle u,x\rangle=h_{K_0}(u)$，从而 $x\in \nu_{K_0}^{-1}(F)$。于是 $G_0\subseteq\nu_{K_0}^{-1}(F)$。
+
+将引理 1 应用于 $G_i\to G_0$ 得 
+\[
+\limsup\limits_{i\to\infty}\mathcal{H}^{n-1}(G_i)\le \mathcal{H}^{n-1}(G_0)\le \mathcal{H}^{n-1}\big(\nu_{K_0}^{-1}(F)\big)
+\]
+再借助 $\psi_i$ 的双 Lipschitz 性，将上述不等式从像集 $G_i$ 传回原集 $E_i$：
+\[
+\limsup_{i\to\infty}\mathcal{H}^{n-1}\big(E_i\big)\le \mathcal{H}^{n-1}\big(\nu_{K_0}^{-1}(F)\big)
+\]
+因面积测度满足 $S(K_i,F)=\mathcal{H}^{n-1}(\nu_{K_i}^{-1}(F))=\mathcal{H}^{n-1}(E_i)$，上式即 
+\[
+\limsup_{i\to\infty}S(K_i,F)\le S(K_0,F)
+\]
+\end{proof}
+
+\begin{remark}
+    上述证明思路参考了 Gruber, P. M. (2007). \textit{Convex and discrete geometry}. Berlin, Heidelberg: Springer Berlin Heidelberg. 的 Proposition 10.2. (pp. 190-192)。
+\end{remark}
+
+\hfill\break
+
+前面这些性质也可以视作是某个 $\mathbb{S}^{n-1}$ 上的测度 $\mu$ 能够作为某凸体的表面积测度 $S(K,\cdot)$ 的必要条件。那么有没有充分条件呢？这就是 Minkowski 问题了。
+
+\section{Minkowski 问题的解决}
+
+{
+    \renewcommand{\problemname}{Minkowski 问题}
+    \renewcommand{\theprob}{} % 清空编号
+\begin{problem}
+给定任意一个 $\mathbb{S}^{n-1}$ 上的 Borel 测度，是否能够找到一个凸体 $K\subset\mathbb{R}^n$，使得 $\mu=S(K,\cdot)$？这样的 $K$ 是否唯一？
+\end{problem}
+}
+\subsection{唯一性}
+
+先解决一个比较容易的结论：若满足 Minkowski 问题的 $K$ 存在，则其在至多相差一个平移的意义下一定是唯一的。
+
+\begin{theorem}\label{thm:minkowski_unique}
+设对于 $\mathbb{S}^{n-1}$ 上的 Borel 测度 $\mu$，凸体 $K,L\subset\mathbb{R}^n$ 均满足
+\begin{align*}
+\mu&=S(K,\cdot)\\
+\mu&=S(L,\cdot)
+\end{align*}
+那么 $K,L$ 至多相差一个平移。
+\end{theorem}
+
+\begin{proof}
+\begin{align*}
+\frac1n\int_{\mathbb{S}^{n-1}}h_K\mathrm{d}\mu&= \frac1n\int_{\mathbb{S}^{n-1}}h_K\mathrm{d}S(K,\mu)=V_n(K)\tag{由~\eqref{eq:4-2}}\\
+\frac1n\int_{\mathbb{S}^{n-1}}h_K\mathrm{d}\mu&=\frac1n\int_{\mathbb{S}^{n-1}}h_K\mathrm{d}S(L,\mu)=V_1(L,K)\tag{由定理~\ref{thm:minkowski}}
+\end{align*} 
+
+得到 $V_n(K)=V_1(L,K)$。
+
+但再根据 Minkowski 第一不等式 (定理~\ref{thm:minkowski})， $V_1(L,K)\ge V_n(L)^{\frac{n-1}n}V_n(K)^{\frac1n}$，带入上式，就得到了 $V_n(K)\ge V_n(L)$。
+
+同理，交换一下 $K$ 和 $L$，我们还能得到 $V_n(L)\ge V_n(K)$，因而只能有 $V_n(K)=V_n(L)$。
+此时，Minkowski 第一不等式是取等的，因为
+\[
+V_1(L,K)=V_n(K)=V_n(K)^{\frac {n-1}n}V_n(L)^{\frac1n}
+\]
+因而 $K,L$ 位似——但二者体积又相等，自然只能至多相差一个平移了。
+\end{proof}
+
+\begin{remark}
+    上述定理也可参考 Schneider, R. (2013). \textit{Convex bodies: the Brunn–Minkowski theory} (Vol. 151). Cambridge university press. 的 Theorem 8.1.1，有时也称作 \emph{Aleksandrov-Fenchel-Jessen 定理}。
+\end{remark}
+
+\subsection{存在性}
+
+下面的定理阐释了``一个 $\mathbb{S}^{n -1}$ 上的 Borel 测度 $\mu$ 能够作为某凸体的表面积测度"的充分条件（实际上是充要条件）。
+
+\begin{theorem}\label{thm:minkowski_exist}
+设 $\mu$ 是 $\mathbb{S}^{n-1}$ 上 的 Borel  测度，若如下两个条件成立：
+
+\begin{enumerate}[label=\textbf{条件 \chinese*}:, leftmargin=5em]
+\item 前文的性质~\ref{prop:surface_centroid} 成立，即 $\mu$ 的重心在原点： $\displaystyle\int_{\mathbb{S}^{n-1}}u\,\mathrm d\mu(u)=0$;
+\item 前文的性质~\ref{prop:surface_great_circle} 成立， $\mu$ 不能集中在任何一个大圆上。
+\end{enumerate}
+
+那么存在一个凸体 $K\subseteq\mathbb{R}^n$ 使得 $\mu=S(K,\cdot)$。
+\end{theorem}
+\begin{proof}
+    
+先整理一下证明思路。我们在本文一开始就提出过这个想法：要想解 Minkowski 问题，某种程度下就是要让 Minkowski 第一不等式取到等号（见式~\eqref{eq:5-1}）。
+
+另外根据条件 1，积分 $\displaystyle \int_{\mathbb{S}^{n-1}}h_L\,\mathrm{d}\mu$ 是平移不变的：
+\begin{align*}
+\int_{\mathbb{S}^{n-1}}h_{L+x_0}\,\mathrm{d}\mu&=  \int_{\mathbb{S}^{n-1}}\Big(h_L(u)+\langle x_0,u\rangle\Big)\,\mathrm{d}\mu(u)\\
+&= \int_{\mathbb{S}^{n-1}}h_L\,\mathrm{d}\mu+\underbrace{\left\langle x_0, \int_{\mathbb{S}^{n-1}}u\mathrm{d}\mu(u)\right\rangle}_{0}\\
+&= \int_{\mathbb{S}^{n-1}}h_L\,\mathrm{d}\mu
+\end{align*}
+所以问题~\eqref{eq:5-1} 是平移不变的，我们可以不失一般性地把~\eqref{eq:5-1} 改写作
+\begin{equation}
+\theta:=\inf\left\{ \int_{\mathbb{S}^{n-1}}h_L\,\mathrm{d}\mu:V_n(L)=1,\;L\text{ 是凸体 },\;0\in\mathrm{int}L\right\} \label{eq:5-2}\tag{5-2}
+\end{equation}
+
+只要解决了上述问题，Minkowski 问题也就完成一半了。接下来的证明分两步走。
+
+\textbf{第一步} (证明 ~\eqref{eq:5-2} 存在解):
+
+观察 ~\eqref{eq:5-2}，首先，显然 ~\eqref{eq:5-2} 是良定义的，因为可行域非空 (如单位体积球就是一个可行的 $L$)，则 $\theta$ 一定有界；其次，得益于 $0\in\mathrm{int}L$， $h_L>0$ 总成立，则目标积分也是正值，下确界一定非负。总的来说，有 $0\le \theta<\infty$。
+
+在 ~\eqref{eq:5-2} 的可行域中找一列 $\{L_j\}_{j=1}^\infty$ 使得 $\displaystyle \lim_{i\to\infty}\int_{\mathbb S^{n-1}}h_{L_j}\,\mathrm{d}\mu=\theta$。为了能对这列凸体用 \emph{Blaschke 选择定理}，我们需要其一致有界，亦即，存在 $R>0$ 使得 $L_j\subseteq R B_n,\;\forall j$( $B_n$ 代表 $\mathbb{R}^n$ 中的单位球)。
+
+用反证法，记 $\rho_{L_j}$ 代表 $L_j$ 的半径函数，定义 $R_j:=\max\limits_{u\in\mathbb S^{n-1}}\rho_{L_j}(u)$，谬设 $\sup\limits_{j\in\mathbb Z_+} R_j=\infty$——不失一般性地，可以 $\lim\limits_{j\to\infty}R_j=\infty$（不然总可以找到一个子序列替代之）。存在 $u_j\in\mathbb S^{n-1}$ 使得 $R_j=\rho_{L_j}(u_j)$，因 $\mathbb S^{n-1}$(列) 紧， $\{u_j\}_{j=1}^\infty$ 存在收敛子列收敛到 $u_0$，不妨设 $u_j\to u_0$。根据半径函数的定义，从原点 0 到 $R_ju_j$ 所连线段都包含在 $L_j$ 内，记该线段为 $[0,R_ju_j]$，算下该线段的支撑函数，显然
+\[
+h_{[0,R_ju_j]}(v)=\max_{x\in[0,R_ju_j]}\langle x,v\rangle=\begin{cases} 0&\text{ 若 }\langle v,u_j\rangle\le 0\\ \langle v,R_ju_j\rangle,&\text{ 若 }\langle v,u_j\rangle>0 \end{cases}
+\]
+因此
+\begin{equation}
+\int_{\mathbb S^{n-1}}h_{L_j}(v)\,\mathrm d\mu(v)\ge R_j\int_{\{v\in\mathbb{S}^{n-1}:\langle v,u_j\rangle>0\}}\langle v,u_j\rangle \,\mathrm d\mu(v) \label{eq:5-3}\tag{5-3}
+\end{equation}
+
+对上式取极限——左侧的极限已知是 $\theta$，而右侧是
+\begin{align*}
+&\lim_{j\to\infty}R_j\int_{\{v\in\mathbb{S}^{n-1}:\langle v,u_j\rangle> 0\}}\langle v,u_j\rangle \,\mathrm d\mu(v)\\
+=\;& \lim_{j\to\infty }R_j\lim_{j\to\infty }\int_{\{v\in\mathbb{S}^{n-1}:\langle v,u_j\rangle> 0\}}\langle v,u_j\rangle\,\mathrm d\mu(v)\\
+=\;& \underbrace{\vphantom{\int_{_{_{_{}}}}}\lim_{j\to\infty }R_j}_{\infty}\underbrace{\int_{\{v\in\mathbb{S}^{n-1}:\langle v,u_0\rangle>0\}}\langle v,u_0\rangle\,\mathrm d\mu(v)}_{>0} \tag{控制收敛定理}\\
+=\;& \infty
+\end{align*}
+第三行的积分大于 0 用到了命题~\ref{prop:surface_half}。
+
+于是，对 ~\eqref{eq:5-3} 式一取极限就变成了 $\theta>\infty$，矛盾！ $\sup\limits_{j\in\mathbb Z_+} R_j<\infty$ 得证。
+
+根据 \emph{Blaschke 选择定理}， $L_j$ 存在收敛子列收敛到闭凸集 $L_0$——这个 $L_0$ 一定是非退化的凸体，因为体积对 Hausdorff 度量满足连续性，有 $V_n(L_0)=1$。不失一般性设 $0\in\mathrm{int}L_0$(不然可以平移 $L_0$ 使之成立)，那么 $L_0$ 就是 ~\eqref{eq:5-2} 的最优解。
+
+\textbf{第二步} (证明 $\mu$ 是表面积测度): 至此我们得到了一个 $L_0$，但要怎么用它呢？首先，利用 Wulff 形构造一个新的问题：
+\begin{equation}
+\widetilde{\theta\,}:=\inf\left\{\int_{\mathbb S^{n-1}}f\,\mathrm{d}\mu:V_n([f])=1,\;f\in\mathcal{C}^+\big(\mathbb S^{n-1}\big)\right\} \label{eq:5-4}\tag{5-4}
+\end{equation}
+
+不难看出， ~\eqref{eq:5-2}、~\eqref{eq:5-4} 最优解的值是一样的，也就是说 $\theta=\widetilde{\theta\,}$，因为
+
+\begin{itemize}
+\item 一方面，Wulff 形 $[f]$ 是一个凸体且 $0\in\mathrm{int}[f]$，且根据命题~\ref{prop:wulff_support}， $h_{[f]}\le f$ 在 $\mathbb S^{n-1}$ 上总成立，于是我们有 $\displaystyle \int_{\mathbb S^{n-1}}h_{[f]}\,\mathrm d\mu\le \displaystyle \int_{\mathbb S^{n-1}}f\,\mathrm d\mu $。这得出 $\widetilde{\theta\,}\ge\theta$。
+\item 另一方面，其实相比于~\eqref{eq:5-2}，~\eqref{eq:5-4} 的范围其实是扩大了，因为对任意满足 $0\in\mathrm{int}L$ 的凸体 $L$ 都有 $L=[h_L]$ (命题~\ref{prop:wulff_eq})。同时 $h_L\in\mathcal{C}^+\big(\mathbb S^{n-1}\big)$ 总是成立的。由于条件放松，有 $\widetilde{\theta\,}\le \theta$。
+\end{itemize}
+
+于是 $h_{L_0}$ 就也是~\eqref{eq:5-4}的解。
+\hfill\break
+
+下面是一个很巧妙的处理：任取连续函数 $g\in\mathcal C(\mathbb S^{n-1})$，我们考虑一个"二维扰动"函数 $h_{L_0}+tg+s$， $s,t\in\mathbb{R}$(可以让二者充分接近 0，使得 $h_{L_0}+tg+s>0$)。根据变分公式，映射$(s,t)\mapsto V_n([h_{L_0}+tg+s])$ 有梯度
+\begin{align*}
+\frac{\partial}{\partial t}V_n([h_{L_0}+tg+s])&=\int_{\mathbb{S}^{n-1}}g\,\mathrm{d}S([h_{L_0}+tg+s])\\
+\frac{\partial}{\partial s}V_n([h_{L_0}+tg+s]) &=\int_{\mathbb{S}^{n-1}} \mathrm{d}S([h_{L_0}+tg+s])
+\end{align*}
+
+该梯度的秩为 1，且依弱收敛性质 (命题~\ref{prop:surface_weak_converge})，该梯度对 $(s,t)$ 是连续的，这也就说明了映射 $(s,t)\mapsto V_n([h_{L_0}+tg+s])$ 是连续可微的。考虑
+\[
+\mathcal{L}(t,s):=\int_{\mathbb S^{n-1}}(h_{L_0}+tg+s)\mathrm{d}\mu-\lambda\Big( V_n\big([h_{L_0}+tg+s]\big)-1\Big)
+\]
+\emph{Lagrange 乘子法}告诉我们
+\begin{align*}
+& \left\{\begin{aligned} \frac{\partial\mathcal{L}}{\partial t }(0,0)&=0\\ \frac{\partial\mathcal{L}}{\partial s}(0,0)&=0 \end{aligned}\right. \\
+\implies & \left\{\begin{aligned} \int_{\mathbb S^{n-1}} g\,\mathrm d\mu&=\lambda\left. \int_{\mathbb S^{n-1}} g(u)\,\mathrm{d}S\big([h_{L_0}+s],u\big)\right|_{s=0}=\lambda\int_{\mathbb S^{n-1}} g(u)\,\mathrm{d}S(L_0,u)\\ \int_{\mathbb S^{n-1}} \mathrm d\mu&=\lambda\left. \int_{\mathbb S^{n-1}}  \mathrm{d}S\big([h_{L_0}+tg],u\big)\right|_{t=0}=\lambda\int_{\mathbb S^{n-1}}\mathrm{d}S(L_0,u)  \end{aligned}\right.
+\end{align*}
+这里第二步用到了体积的变分公式， $\lambda$ 是 Langrange 乘子。来看下最后得到的两个等式：
+
+\begin{itemize}
+\item $\displaystyle\int_{\mathbb S^{n-1}} \mathrm d\mu=\lambda\int_{\mathbb S^{n-1}}\mathrm{d}S(L_0,u)$ 推出 $\lambda= \frac{\int_{\mathbb{S}^{n-1}}\mathrm d\mu}{\int_{\mathbb S^{n-1}}\mathrm{d}S(L_0,u) }=\frac{\int_{\mathbb{S}^{n-1}}\mathrm d\mu}{S(L_0)}$ 代表 $\lambda$ 是一个常数，不依赖于 $g$。（这也是为什么要引入 $s$ 这个"扰动"——不然无法说明此点。）
+\item $\displaystyle \int_{\mathbb S^{n-1}} g\,\mathrm d\mu=\lambda\int_{\mathbb S^{n-1}} g(u)\,\mathrm{d}S(L_0,u)$ 是对任意 $g\in\mathcal C(\mathbb S^{n-1})$ 都成立的，根据测度的Riesz 表示定理 (也叫 \emph{Riesz–Markov–Kakutani 表示定理})，有
+\[
+\mu=\lambda S(L_0,\cdot)
+\]
+\end{itemize}
+
+综合得到 $\mu=\lambda S(L_0,\cdot)= \frac{\int_{\mathbb{S}^{n-1}}\mathrm d\mu}{S(L_0)}S(L_0,\cdot)=S (K,\;\cdot )$，其中 $K:=\left(\frac{\int_{\mathbb{S}^{n-1}}\mathrm d\mu}{S(L_0)}\right)^{\frac1{n-1}}L_0$。这正是我们想要的结论。
+\end{proof}
+
+\begin{remark}
+\begin{itemize}
+\item 根据定理~\ref{thm:minkowski_unique}，我们上述证明得到的 $K$ 在至多相差一个平移的条件下是唯一的。
+\item 根据之前已经证明的性质~\ref{prop:surface_great_circle}、\ref{prop:surface_half}，定理~\ref{thm:minkowski_exist} 的条件是充要的。
+\item 该证明来自 Gardner, R. J., Hug, D., Weil, W., Xing, S., \& Ye, D. (2019). \textit{General volumes in the Orlicz–Brunn–Minkowski theory and a related Minkowski problem I.} {Calculus of Variations and Partial Differential Equations}, 58(1), 12.，其思路在解决Minkowski 问题的相关问题上有一定的通用性。
+\end{itemize}
+\end{remark}
+
+\subsection{应用}
+
+在本文的最后，我们再简单介绍一下 Minkowski 问题的一些应用，不再细述。
+
+\begin{enumerate}
+\item Minkowski 问题可以退化成最优传输中 (弱化的) 的 Monge-Ampere 方程——给定 $f:\mathbb S^{n-1}\to[0,\infty)$，找 $h:\mathbb S^{n-1}\to \mathbb{R}$ 使得 $\mathrm{det}(\nabla ^2h+h\mathbf{I}_{n-1})=f$。
+\item Sobolev 或者有界变分函数 $f$ 允许通过 Minkowski 问题变成一个凸体，称之为 ``\emph{凸化} (convexification)"，这是一个非常强大的工具。例如，可以通过某些凸体的不等式反推出泛函的不等式，如 Sobolev 不等式和 Affine Sobolev 不等式——\href{https://cims.nyu.edu/~gaoyong/}{张高勇}教授有一篇著名工作 Zhang, G. (1999). The affine Sobolev inequality. \textit{Journal of Differential Geometry}, \textit{53}(1), 183-202。
+\item 可以建立 \emph{Blaschke-Santaló 不等式} 的证明 （会在第~\ref{chapter:6} 章中给出, 见定理~\ref{thm:bs}）。
+\end{enumerate}
+
+% \section*{符号表}
+
+% 本文的符号有点多，整理如下：
+
+% \begin{itemize}
+% \item $V_n(K)$：凸体 $K$ 的 $n$ 维体积。
+% \item $V_1(K,L)$：凸体 $K,L$ 的第一混合体积。
+% \item $h_K$：凸体 $K$ 的支撑函数。
+% \item $S(K)$：凸体 $K$ 的表面积。
+% \item $ S(K,\cdot)$：凸体 $K$ 的表面积测度。
+% \item $\mathrm{int}K$： $K$ 的内点。
+% \item $\rho_K$：凸体 $K$ 的半径函数，定义为 $\rho_K(u):=\sup\{\lambda:\lambda u\in K\}$。
+% \item $r_K(u):=\rho_K(u)u$； $r_K^{-1}(x):=x/\|x\|$。
+% \item $\nu_K$、 $\nu_K^{-1}$：凸体 $K$ 的 Gauss 映射及其逆。
+% \item $ \mathcal{C}\big(\mathbb S^{n-1}\big)$：全体 $\mathbb S^{n-1}\to\mathbb{R}$ 的连续函数。
+% \item $ \mathcal{C}^+\big(\mathbb S^{n-1}\big)$：全体 $\mathbb S^{n-1}\to (0,\infty)$ 的连续函数。
+% \item $[f]$：函数 $f\in\mathcal{C}^+\big(\mathbb S^{n-1}\big)$ 的 Wulff 形。
+% \item $B_n$： $\mathbb R^n$ 中的单位球。
+% \item $\mathcal H^{n-1}$： $n-1$ 维 Hausdorff 测度。
+% \end{itemize}
+ 

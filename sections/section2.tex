@@ -1,0 +1,624 @@
+\chapter{BM 不等式的泛函推广}
+\label{chapter:2}
+
+\section{泛函形式的 BM 不等式？}
+
+%\hyperref[thm:BM-general]{BM 不等式} 可以看作 \hyperref[lem:young]{Young 不等式}在集合上的推广。
+我们知道，很多几何对象可以``泛函化"，而且相比于集合，泛函能表达的东西也更加丰富。一个自然的问题便是，能否有 BM 不等式的泛函形式？
+这就需要先想办法把集合“提升”到函数。这其实很简单，最方便且好用的方法就是用集合的\emph{示性函数} (Indicator Function)，对 $E\subseteq\mathbb{R}^n$：
+\[
+1_E(x):=
+\begin{cases}
+1, & \text{若 } x\in E\\
+0, & \text{若 } x\notin E
+\end{cases}
+\]
+
+接着又可以想到：之前用到的一些定义在集合上的东西也可以改成示性函数的形式，并且进一步扩展到一般的函数上。例如，集合 $E$ 可以定义``体积"：
+\[
+V_n(E):=\int_E\mathrm{d}x=\int_{\mathbb{R}^n}1_E\mathrm{d}x
+\]
+因而对于 $\mathbb{R}^n$ 上的非负可积函数 $f$，我们可以自然地将
+\[
+\int_{\mathbb{R}^n}f\mathrm{d}x=\|f\|_1
+\]
+视作函数 $f$ 的``体积"。
+
+集合的 Minkowski 加法为
+\[
+E+F:=\{x+y:x\in E,y\in F\}
+\]
+来看一下如何用示性函数来表示：设 $z=x+y$，分如下四种情况
+
+\begin{enumerate}
+\item $x\in E,y\in F\implies z\in E+F$，此时 $1_{E+F}(z)=1=1_E(x)1_F(y)$；
+\item $x\in E,y\notin F\implies z\notin E+F$，此时 $1_{E+F}(z)=0=1_E(x)1_F(y)$；
+\item $x\notin E,y\in F\implies z\notin E+F$，此时 $1_{E+F}(z)=0=1_E(x)1_F(y)$；
+\item $x\notin E,y\notin F$，$z$ 属于或不属于 $E+F$ 都有可能，$1_E(x)1_F(y)=0\le 1_{E+F}(z)=\text{0 或 1}$。
+\end{enumerate}
+
+可以看出：无论如何，如果 $1_{E+F}(z)=0$，那么 $1_E(x)1_F(y)$ 必然也总是 0；如果 $1_{E+F}(z)=1$，那么 $1_E(x)1_F(y)$ 既可能是 0 也可能是 1。于是有
+\[
+1_{E+F}(z)=\sup_{x+y=z} 1_E(x)1_F(y)
+\]
+
+推广至一般的两个函数 $f,g:\mathbb{R}^n\to[0,\infty)$，
+\begin{definition}
+\[
+(f\oplus g)(z):=\sup_{x+y=z}f(x)g(y)
+\]
+这叫做``\emph{Asplund 和}"。
+\end{definition}
+上述定义可以视作是函数空间对应于``Minkowski 加法"的运算。之前的分析表明 $1_E\oplus 1_F=1_{E+F}$。
+
+集合的“数乘”定义为 $\lambda E:=\{\lambda x:x\in E\}$（$\lambda > 0$），有
+\[
+1_{\lambda E}(x)=
+\begin{cases}
+1, & \text{若 } \frac{x}{\lambda}\in E\\
+0, & \text{若 } \frac{x}{\lambda}\notin E
+\end{cases}
+\]
+类似地，我们\textbf{定义}一个实数与函数的``乘法"：
+\begin{definition}
+\[
+(\lambda \cdot f)(x):=f^\lambda\left(\frac{x}{\lambda}\right)
+\]    
+\end{definition}
+这种``乘法"运算满足 $\lambda \cdot 1_E=1_{\lambda E}$。
+
+至此，有了泛函的``体积"，``加法"和``乘法"。回顾一下 BM 不等式（维度无关版本，见定理 \ref{thm:BM-equivalence}）：%设 $E,F\subset\mathbb{R}^n$ 可测，$\lambda\in[0,1]$，$(1-\lambda)E+\lambda F$ 可测，则有
+\[
+V_n((1-\lambda) E+\lambda F)\ge V_n(E)^{1-\lambda}V_n(F)^\lambda
+\]
+用示性函数可将之改写为
+\[
+\int_{\mathbb{R}^n}1_{(1-\lambda)E+\lambda F}\,\mathrm{d}x\ge \left(\int_{\mathbb{R}^n}1_{E}\,\mathrm{d}x\right)^{1-\lambda}\left(\int_{\mathbb{R}^n}1_{F}\,\mathrm{d}x\right)^{\lambda}
+\]
+于是便\emph{猜想}：在泛函中，可能会有对应的结论：对 $\lambda\in(0,1)$，
+\[
+\int_{\mathbb{R}^n}(1-\lambda)\cdot f\oplus \lambda \cdot g\,\mathrm{d}x\ge \left(\int_{\mathbb{R}^n}f\,\mathrm{d}x\right)^{1-\lambda}\left(\int_{\mathbb{R}^n}g\,\mathrm{d}x\right)^\lambda
+\]
+其中
+\[
+((1-\lambda) \cdot f \oplus \lambda \cdot g)(z):=\sup_{(1-\lambda)x+\lambda y=z}f(x)^{1-\lambda}g(y)^{\lambda}
+\]
+这个形式还是稍微有些复杂，不妨把 $(1-\lambda) \cdot f \oplus \lambda \cdot g$ 替换成一个新的非负函数 $h$，它满足：对任意 $x,y\in\mathbb{R}^n$，有
+\[
+h\big((1-\lambda)x+\lambda y\big)\ge f(x)^{1-\lambda}g(y)^\lambda
+\]
+
+最终，我们就得到了——
+
+\section{Prékopa–Leindler 不等式}
+
+\subsection{证明}
+
+\begin{theorem}[Prékopa–Leindler 不等式]\label{thm:PL}
+设 $f,g,h$ 是 $\mathbb{R}^n$ 上非负的 Lebesgue 可积函数，满足对任意 $\lambda\in(0,1)$、$x,y\in\mathbb{R}^n$ 都有
+\[
+h\big((1-\lambda)x+\lambda y\big)\ge f(x)^{1-\lambda}g(y)^{\lambda}
+\]
+那么，如下不等式成立
+\[
+\int_{\mathbb{R}^n}h\mathrm{d}x\ge\left(\int_{\mathbb{R}^n}f\mathrm{d}x\right)^{1-\lambda}\left(\int_{\mathbb{R}^n}g\mathrm{d}x\right)^{\lambda} \label{eq:2-1}\tag{2-1}
+\]
+\end{theorem}
+\begin{proof}
+    
+分两步走，
+
+\begin{enumerate}[label=\textbf{第\chinese*步}:, leftmargin=6em]
+\item 证明一维即 $n=1$ 的情形；
+\item 用数学归纳法，对 $n$ 进行归纳。
+\end{enumerate}
+
+第一步：设 $n=1$，首先注意到，若 $\displaystyle\int_{\mathbb{R}}f\mathrm{d}x=0$ 或者 $\displaystyle\int_{\mathbb{R}}g\mathrm{d}x=0$，那么不等式显然成立，排除掉这一情况。记
+\[
+F:=\int_{\mathbb{R}}f\,\mathrm{d}x>0,\quad G:=\int_{\mathbb{R}}g\,\mathrm{d}x>0
+\]
+或者也可以写作
+\[
+\int_{\mathbb{R}}\frac{f}{F}\mathrm{d}x=\int_{\mathbb{R}}\frac{g}{G}\mathrm{d}x=1 \label{eq:2-2}\tag{2-2}
+\]
+接下来，定义两个辅助函数 $u,v:[0,1]\to\mathbb{R}$ 使得 $u(t)$ 和 $v(t)$ 是最小的值满足
+\[
+\int_{-\infty}^{u(t)}\frac{f}{F}\mathrm{d}x=\int_{-\infty}^{v(t)}\frac{g}{G}\mathrm{d}x=t
+\]
+考察一下这两个函数的性质
+
+\begin{itemize}
+\item $u,v$ 不一定在 $[0,1]$ 上连续，不过这没问题；
+\item $u,v$ 在 $[0,1]$ 上严格单调上升；
+\item 由于上一条，它们的导数 $u',v'$ 也几乎处处存在；
+\item 于是，几乎处处成立
+\[
+\begin{cases}
+1=\displaystyle \frac{\mathrm{d}}{\mathrm{d}t}\int_{-\infty}^{u(t)}\frac{f}{F}\mathrm{d}x=\frac{f(u(t))u'(t)}{F}\\
+1=\displaystyle \frac{\mathrm{d}}{\mathrm{d}t}\int_{-\infty}^{v(t)}\frac{g}{G}\mathrm{d}x=\frac{g(v(t))v'(t)}{G}
+\end{cases}
+\]
+\end{itemize}
+
+下面定义 $u(t)$ 和 $v(t)$ 的凸组合（或者说插值）
+\[
+w(t):=(1-\lambda)u(t)+\lambda v(t)
+\]
+则 $w(t)$ 也是严格单调上升，因而在 $[0,1]$ 上导数几乎处处存在。Young 不等式此时又派上用场了：
+ 
+\begin{align*}
+w'(t)&=(1-\lambda)u'(t)+\lambda v'(t)\\
+&\ge (u'(t))^{1-\lambda}(v'(t))^\lambda \tag{\hyperref[lem:young]{Young 不等式}}\\
+&=\left(\frac{F}{f(u(t))}\right)^{1-\lambda}\left(\frac{G}{g(v(t))}\right)^{\lambda} \label{eq:2-3}\tag{2-3}
+\end{align*}
+ 
+因此
+ 
+\begin{align*}
+\int_{\mathbb{R}}h(x)\mathrm{d}x&\ge \int_0^1 h(w(t))w'(t)\mathrm{d}t\\
+&=\int_0^1 h\big((1-\lambda)u(t)+\lambda v(t)\big)w'(t)\mathrm{d}t\\
+&\ge\int_0^1 f(u(t))^{1-\lambda}g(v(t))^\lambda \left(\frac{F}{f(u(t))}\right)^{1-\lambda}\left(\frac{G}{g(v(t))}\right)^{\lambda}\mathrm{d}t\\
+&=F^{1-\lambda}G^\lambda\\
+&=\left(\int_\mathbb{R}f\mathrm{d}x\right)^{1-\lambda}\left(\int_\mathbb{R}g\mathrm{d}x\right)^{\lambda}
+\end{align*}
+ 
+这里第一行的不等式是因为 $w(t)$ 的值域不一定能覆盖 $\mathbb{R}$，因而积分换元可能存在“损失”；第三行的不等式来自定理假设 ~\eqref{eq:2-1} 以及 ~\eqref{eq:2-3} 式。第一步证毕。
+
+第二步：用归纳法，假设 PL 不等式在维数小于 $n$ 时成立，$n\ge2$。现考虑 $n$ 维的情况，接下来要做的就是想办法把函数 $f,g,h$“降维”。这里要用到一个技巧：以 $h:\mathbb{R}^n\to\mathbb{R}$ 为例，定义函数
+\[
+h_s(z):=h(z,s),\quad z\in\mathbb{R}^{n-1},s\in\mathbb{R}^1
+\]
+这样函数 $h_s$ 就是 $\mathbb{R}^{n-1}\to\mathbb{R}$ 的函数。同理定义 $f_s$、$g_s$。
+
+接着，在 $f,g,h$ 满足式 ~\eqref{eq:2-1} 的前提下，我们验证 ~\eqref{eq:2-1} 对 $f_s,g_s,h_s$ 是否还成立。对于任意 $x,y\in\mathbb{R}^{n-1}$、$\lambda\in(0,1)$，记 $(x,a)\in\mathbb{R}^n$、$(y,b)\in\mathbb{R}^n$ 是两个 $n$ 维向量，$a,b\in\mathbb{R}^1$，$c:=(1-\lambda)a+\lambda b$，于是
+ 
+\begin{align*}
+&h\big((1-\lambda)(y,a)+\lambda(z,b)\big)\\
+=\;&h\big((1-\lambda)y+\lambda z,\,(1-\lambda)a+\lambda b\big)=h_c((1-\lambda)y+\lambda z)\\
+\ge\;& f(y,a)^{1-\lambda}g(z,b)^\lambda \tag{由式~\eqref{eq:2-1}}\\
+=\; & f_a(y)^{1-\lambda}g_b(z)^\lambda
+\end{align*}
+ 
+总结一下，我们得到了这样的一个结论：对任意 $x,y\in\mathbb{R}^{n-1}$ 以及固定的 $a,b\in\mathbb{R}^1$、$c:=(1-\lambda)a+\lambda b$，有
+\[
+h_c((1-\lambda)x+\lambda y)\ge f_a(x)^{1-\lambda}g_b(y)^\lambda
+\]
+这就可以用 $n-1$ 维的 PL 不等式（归纳假设）了：
+ 
+\begin{align*}
+&\underbrace{\int_{\mathbb{R}^{n-1}}h_c(z)\mathrm{d}z}_{\text{定义为 }H(c)}\ge\bigg(\underbrace{\int_{\mathbb{R}^{n-1}}f_a(x)\mathrm{d}x}_{\text{定义为 }F(a)}\bigg)^{1-\lambda}\bigg(\underbrace{\int_{\mathbb{R}^{n-1}} g_b(y)\mathrm{d}y}_{\text{定义为 }G(b)}\bigg)^\lambda\\
+\implies & H(c)=H\big((1-\lambda)a+\lambda b\big)\ge F(a)^{1-\lambda}G(b)^\lambda
+\end{align*}
+ 
+哎！可以发现，这又完美满足了 PL 不等式在 1 维的条件。
+
+接着用一维的 PL 不等式，有
+ 
+\begin{align*}
+&\int_{\mathbb{R}}H(c)\mathrm{d}c\ge\left(\int_{\mathbb{R}} F(a)\mathrm{d}a\right)^{1-\lambda}\left(\int_{\mathbb{R}} G(b)\mathrm{d}b\right)^\lambda\\
+\implies & \int_{\mathbb{R}}\int_{\mathbb{R}^{n-1}}h_c(z)\mathrm{d}z\mathrm{d}c\ge\left(\int_{\mathbb{R}}\int_{\mathbb{R}^{n-1}}f_a(x)\mathrm{d}x\mathrm{d}a\right)^{1-\lambda}\left(\int_{\mathbb{R}}\int_{\mathbb{R}^{n-1}}g_b(y)\mathrm{d}y\mathrm{d}b\right)^\lambda\\
+\implies & \int_{\mathbb{R}}\int_{\mathbb{R}^{n-1}}h(z,c)\mathrm{d}z\mathrm{d}c\ge\left(\int_{\mathbb{R}}\int_{\mathbb{R}^{n-1}}f(x,a)\mathrm{d}x\mathrm{d}a\right)^{1-\lambda}\left(\int_{\mathbb{R}}\int_{\mathbb{R}^{n-1}}g(y,b)\mathrm{d}y\mathrm{d}b\right)^\lambda\\
+\implies & \int_{\mathbb{R}^n}h(z)\mathrm{d}z\ge \left(\int_{\mathbb{R}^n}f(x)\mathrm{d}x\right)^{1-\lambda}\left(\int_{\mathbb{R}^n}g(y)\mathrm{d}y\right)^\lambda
+\end{align*}
+ 
+最后一步用了 Fubini 定理。% 这就证出了 PL 不等式。
+\end{proof}
+
+
+PL 不等式由 András Prékopa 和 László Leindler 在上世纪 70 年代分别给出。在上述证明中有几个要点：
+
+\begin{itemize}
+\item 第一步引入“体积参数”$t$，以及对 $w'(t)$ 用 Young 不等式；
+\item 第二步将 $n$ 维情形拆成 $n-1$ 维和 1 维。
+\end{itemize}
+
+后来人们又提出了上述第一步的一个更加简单的证明方法，这里补充如下。
+
+\begin{proof}[一维情形的另一种证明]
+    
+不失一般性地可以假设 $f,g$ 有界且 $\|f\|_\infty=\|g\|_\infty=1$（为什么？）。我们引入一个很常用的工具：\emph{上水平集}（super-level set，也译作超水平集）：对于函数 $f:\mathbb{R}\to\mathbb{R}$ 以及常数 $t\in\mathbb{R}$，定义其上水平集为
+\[
+L(f,t):=\big\{x\in\mathbb{R}:f(x)\ge t\big\}
+\]
+ 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/level_set.pdf}
+    \caption{上水平集的示意图。}
+    \label{fig:level_set}
+\end{figure}
+
+根据式 ~\eqref{eq:2-1}，对任意的 $t$，若 $f(x)\ge t$、$g(y)\ge t$，那么
+\[
+h\big((1-\lambda)x+\lambda y\big)\ge f(x)^{1-\lambda}g(y)^\lambda\ge t
+\]
+翻译一下也可以说，若 $x\in L(f,t)$、$y\in L(g,t)$，那么 $(1-\lambda)x+\lambda y\in L(h,t)$，因而
+\[
+L(h,t)\supseteq (1-\lambda)L(f,t)+\lambda L(g,t)
+\]
+由于 $f,g,h$ 可测，则这里涉及的水平集也都是非空的 Borel 可测集，并且 $(1-\lambda)L(f,t)+\lambda L(g,t)$ 也是 Lebesgue 可测的
+\footnote{ 对任意非空的 Borel 可测集 $X,Y$，Minkowski 和 $(1-\lambda)X+\lambda Y$ 都可以看作是 $X\times Y$ 在连续函数 $(x,y)\mapsto \lambda x+(1-\lambda)y$ 下的像，因而是解析集，故 Lebesgue 可测。
+因此，我们能放心讨论 Borel 可测集合的和；如果改成两个 Lebesgue 可测集的和就不行了。
+}。
+
+则根据一维的 BM 不等式，
+\[
+V_1(L(h,t))\ge (1-\lambda)V_1(L(f,t))+\lambda V_1(L(g,t))
+\]
+如何把``上水平集的体积"转变回函数呢？这用到第二个重要的技巧：设 $f$ 是非负实值可测函数，那么
+ 
+\begin{align*}
+\int_{\mathbb{R}}f(x)\mathrm{d}x&=\int_{\mathbb{R}}\int_0^{f(x)}\mathrm{d}t\mathrm{d}x\\
+&=\int_0^\infty\int_{\{x:f(x)\ge t\}}\mathrm{d}x\mathrm{d}t \tag{Fubini}\\
+&=\int_0^\infty V_1(L(f,t))\mathrm{d}t \label{eq:2-4}\tag{2-4}
+\end{align*}
+ 
+这也叫``\emph{千层饼表示} (Layer-cake representation)"\footnote{\url{https://en.wikipedia.org/wiki/Layer_cake_representation}}。你可以把 $V_n(L(f,t))$ 看成一个长方体的长、而 $\mathrm{d}t$ 看成长方体的宽，而非负函数 $f$ 与 $x$ 轴围成的面积就可以用这些长方体来覆盖，见图~\ref{fig:layer_cake}。
+ 
+ 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/layer_cake.png}
+    \caption{``千层饼表示"：用与横轴平行的长方形来覆盖函数下的面积。\footnotemark}
+    \label{fig:layer_cake}
+\end{figure}
+\footnotetext{图片来自 \url{https://math.stackexchange.com/q/4631735}}
+
+回到证明，
+ 
+\begin{align*}
+\int_{\mathbb{R}}h\,\mathrm{d}x&=\int_0^\infty V_1(L(h,t))\,\mathrm{d}t\\
+&\ge\int_0^\infty \Big((1-\lambda)V_1(L(f,t))+\lambda V_1(L(g,t))\Big)\,\mathrm{d}t\\
+&=(1-\lambda)\int_0^\infty V_1(L(f,t))\,\mathrm{d}t+\lambda\int_0^\infty V_1(L(g,t))\,\mathrm{d}t\\
+&=(1-\lambda)\int_{\mathbb{R}} f\,\mathrm{d}x+\lambda \int_{\mathbb{R}}g\,\mathrm{d}x\\
+&\ge \left(\int_{\mathbb{R}}f\,\mathrm dx\right)^{1-\lambda}\left(\int_{\mathbb{R}}g\,\mathrm{d}x\right)^{\lambda} \tag{\hyperref[lem:young]{Young 不等式}}
+\end{align*}
+证讫。
+\end{proof}
+
+
+\begin{remark}
+\begin{itemize}
+\item 该证明可以参考 Pisier, G. (1999). \textit{The volume of convex bodies and Banach space geometry} (Vol. 94). Cambridge University Press. 里面的 Lemma 1.2 (pp. 3-4)。主要思想就是利用上水平集 $L(f,t)$“把函数转成集合”，对集合用 BM 不等式，再利用~\eqref{eq:2-3}“把集合转成函数”。
+\item 请思考：这种证明思路为什么\emph{不能}推广到 $n$ 维？ 
+\item 式~\eqref{eq:2-4} 其实大有文章，其中 $V_n(L(f,\mu))$ 和``分布函数"的概念差不多（distribution function，这是分析里的概念，不是概率论里那个分布函数）。对于测度空间 $(\Omega,\mathcal M,\mu)$ 上一个实值可测函数 $f$，定义其\emph{分布函数} $\lambda_f:(0,\infty)\to[0,\infty]$ 为
+\[
+\lambda_f(t):=\mu\big(\big\{x:|f(x)|>t\big\}\big)
+\]
+分布函数很重要的功能就是把对 $f$ 的 Lebesgue 积分与一个广义 Riemann 积分对应起来。式 ~\eqref{eq:2-3} 可以推广成这样的结论：若 $0<p<\infty$，那么
+\[
+\int_\Omega |f|^p\,\mathrm{d}\mu= p\int_0^\infty t^{p-1}\lambda_f(t)\,\mathrm{d}t
+\]
+推荐参阅 Folland, G. B. (1999). \textit{Real analysis: modern techniques and their applications}. John Wiley \& Sons. 的 §6.4。
+\end{itemize}
+\end{remark}
+
+\subsection{最优传输的视角}
+
+\emph{最优传输} (Optimal Transport, OT) 来自于 Gaspard Monge 提出的一个 ``运输沙子" 的问题, 见图~\ref{fig:optimal_transport}。简而言之，设 $\mu$ 和 $\nu$ 分别是空间 $X$、$Y$ 上的概率测度——你可以将 $\mu$ 想象为一堆沙子，而 $\nu$ 是一个我们想用沙子填满的洞。$c:X\times Y\to [0,\infty]$ 称为\emph{代价函数} (cost function)，$c(x,y)$ 代表将单位质量的沙子从 $x\in X$ 运输到 $y\in Y$ 的成本。
+
+% \begin{center}
+% \includegraphics[width=0.7\textwidth]{https://picx.zhimg.com/v2-f66684d2575f1f17854281d9327ddc69_720w.jpg?source=d16d100b}
+% \end{center}
+
+% \textbf{\url{https://www.cit.tum.de/fileadmin/w00byx/cit/Studium/Studiengaenge/TopMath/TopMath_Studierende/Poster/Bachelorposter_Voegler.pdf}}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/OT_1.png}
+    \caption{Monge 的``运输沙子问题" \footnotemark。}
+    \label{fig:optimal_transport}
+\end{figure}
+\footnotetext{图片来自 \url{https://www.cit.tum.de/fileadmin/w00byx/cit/Studium/Studiengaenge/TopMath/TopMath_Studierende/Poster/Bachelorposter_Voegler.pdf}}
+
+\textbf{定义：} 在上述记号下，如果 $T:X\to Y$ 满足对任意的 $\nu$ 可测集 $A$，有
+\[
+\nu(A)=\mu(T^{-1}(A))
+\]
+则称 $T$ 将 $\mu$``\emph{传输} (transport)"到 $\nu$，文献里一般记作 $T\#\mu=\nu$；也称 $T$ 是一个 ``传输映射"，见图~\ref{fig:transport_map}。
+
+% \begin{center}
+% \includegraphics[width=0.7\textwidth]{https://pic1.zhimg.com/v2-968bc37030b2e359ceaa7b14dabf6ce2_720w.jpg?source=d16d100b}
+% \end{center}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/OT_2.png}
+    \caption{传输映射 $T$ 将测度 $\mu$ 传输到测度 $\nu$ \footnotemark。}
+    \label{fig:transport_map}
+\end{figure}
+\footnotetext{图片来自 雷娜, 顾险峰. (2021). \textit{最优传输理论与计算}. 高等教育出版社. p. 24.}
+
+
+
+最优传输问题便是找到一个传输 $T$ 最小化下述总代价：
+\[
+\int_X c(x,T(x))\mathrm{d}\mu(x)
+\]
+
+\begin{theorem*}[Brenier 定理]\label{thm:brenier}
+设 $X=Y=\mathbb{R}^n$，代价函数为 $c(x,y)=\frac12\|x-y\|^2$，如果 $\mu$ 对 Lebesgue 测度绝对连续，则存在一个唯一的最优传输映射 $T$。并且，存在某个凸函数 $\varphi:\mathbb{R}^n\to\mathbb{R}$，使得 $T=\nabla \varphi$，称 $\varphi$ 为 \emph{Brenier 映射}。更进一步地，有
+\[
+\mathrm{det}\big(\nabla^2\varphi(x)\big)=\frac{\mathrm{d}\mu(x)}{\mathrm{d}\nu(T(x))}
+\]
+\end{theorem*}
+
+我们可以从最优传输的视角为 PL 不等式提供一个非常漂亮的证明。
+
+\begin{proof}[PL 不等式的 OT 证明]
+    
+思路与定理 4 第一步的证明差不多，但是可以直接推广到一般的 $n$ 维，不借助归纳法。和 ~\eqref{eq:2-2} 式一样，依旧是设 $\displaystyle F:=\int_{\mathbb{R}^n}f(x)\mathrm{d}x>0$、$\displaystyle G:=\int_{\mathbb{R}^n}g(x)\mathrm{d}x>0$，考虑这样的两个概率测度：
+\[
+\mathrm{d}\mu(x):=\frac{f(x)}{F}\mathrm{d}x,\quad \mathrm{d}\nu(x):=\frac{g(x)}{G}\mathrm{d}x
+\]
+记 $T$ 是 $\mu$ 到 $\nu$ 的最优传输，则 Brenier 映射 $\varphi$ 满足
+\[
+\mathrm{det}\big(\nabla^2\varphi(x)\big)=\frac{\mathrm{d}\mu(x)}{\mathrm{d}\nu(T(x))}=\frac{f(x)}{F}\frac{G}{g(T(x))}
+\]
+
+下面考虑凸组合
+\[
+z_\lambda(x):=(1-\lambda)x+\lambda T(x)
+\]
+则其 Jacobian 为
+\[
+\nabla z_\lambda =(1-\lambda)\mathbf{I}_n+\lambda\nabla^2\varphi
+\]
+由于 $\varphi$ 凸，则其 Hessian $\nabla^2\varphi$ 半正定，我们总可以将之特征值分解：$\nabla^2\varphi=Q\Sigma Q^{-1}$，其中 $\Sigma=\mathrm{diag}(s_1,s_2,\ldots,s_n)$。于是
+ 
+\begin{align*}
+\mathrm{det}\big(\nabla z_\lambda\big)&=\mathrm{det}\big((1-\lambda)\mathbf{I}_n +\lambda\nabla^2\varphi\big)\\
+&=\mathrm{det}\big((1-\lambda)\mathbf{I}_n +\lambda \Sigma  \big)\\
+&=\prod_{i=1}^n\Big((1-\lambda)+\lambda s_i\Big)\\
+&\ge\bigg(\prod_{i=1}^n s_i\bigg)^\lambda \tag{\hyperref[lem:young]{Young 不等式}}\\
+&=\big(\mathrm{det}\big(\nabla^2\varphi\big)\big)^\lambda \label{eq:2-5}\tag{5}
+\end{align*}
+ 
+则对满足 PL 不等式条件 ~\eqref{eq:2-1} 的 $f,g,h:\mathbb{R}^n\to\mathbb{R}$，
+\begin{align*}
+\int_{\mathbb{R}^n}h(z)\,\mathrm{d}z&\ge\int_{\mathbb{R}^n}h\big((1-\lambda)x+\lambda T(x)\big)\mathrm{d}z_\lambda \tag{换元}\\
+&\ge \int_{\mathbb{R}^n}f(x)^{1-\lambda}g(T(x))^\lambda\mathrm{d}z_\lambda \tag{由式~\eqref{eq:2-1}}\\
+&\ge\int_{\mathbb{R}^n}f(x)^{1-\lambda}g(T(x))^\lambda\left(\frac{f(x)}{F}\frac{G}{g(T(x))}\right)^\lambda\mathrm{d}x \tag{由式~\eqref{eq:2-5}}\\
+&=\left(\frac{G}{F}\right)^\lambda\underbrace{\int_{\mathbb{R}^n}f(x)\mathrm{d}x}_{F}\\
+&=F\left(\frac{G}{F}\right)^\lambda=F^{1-\lambda}G^\lambda\\
+&=\left(\int_{\mathbb{R}^n}f\,\mathrm{d}x\right)^{1-\lambda}\left(\int_{\mathbb{R}^n}g\,\mathrm{d}y\right)^{\lambda}
+\end{align*}
+ 
+\end{proof}
+
+
+\subsection{其它说明}
+
+\begin{enumerate}
+\item PL 不等式也可以反过来推出 BM 不等式：对集合 $K,L$，取 $f=1_K$、$g=1_L$，$h=1_{(1-\lambda) f+\lambda g}$ 即可。
+\item PL 不等式的取等条件比较麻烦，这里只叙述一下结论：PL 不等式取等当且仅当 $f,g,h$ 满足：存在 $c>0$、$x_0\in\mathbb{R}^n$，以及一个可积的对数凹函数 $\psi$ 使得几乎处处成立
+\begin{equation*}\left\{
+\begin{aligned}
+h(x)&=\psi(x)\\
+f(x)&=c^{-\lambda}\psi(x-\lambda x_0)\\
+g(x)&=c^{1-\lambda}\psi\big(x+(1-\lambda)x_0\big)
+\end{aligned}\right.
+\end{equation*}
+这个条件由 S. Dubuc \footnote{Dubuc, S. (1977). \textit{Critères de convexité et inégalités intégrales}. In Annales de l'institut Fourier (Vol. 27, No. 1, pp. 135-165).}给出。可见，$f$ 与 $g$ 之间必须也存在类似于集合的“位似”关系。
+
+\item 与 Hölder 不等式的联系。
+
+\begin{theorem*}[$\mathbb{R}^n$ 上的 Hölder 不等式]
+设非负函数 $f_i\in L^{p_i}(\mathbb{R}^n)$，其中 $p_i\ge 1$，$i=1,\ldots,m$，$\displaystyle\sum_{i=1}^m\frac1{p_i}=1$，则
+\[
+\int_{\mathbb{R}^n}\prod_{i=1}^mf_i(x)\,\mathrm{d}x\leq\prod_{i=1}^m\|f_i\|_{p_i}=\prod_{i=1}^m\left(\int_{\mathbb{R}^n}f_i(x)^{p_i}\,\mathrm{d}x\right)^{1/p_i}
+\]
+\end{theorem*}
+
+%\textbf{证明（概要）：} 对 $m=2$ 用 Young 不等式；对 $m> 2$ 可以用归纳法（或者 Jensen 不等式）证明 Young 不等式的 $n$ 元情形，亦称“加权 AM-GM 不等式”（可见 \url{https://www.zhihu.com/question/424154792} 或者 \url{https://www.zhihu.com/question/611603291}）。$\square$
+
+记 $\lambda\in(0,1)$，在上述结论中取 $m=2$、$1/p_1=1-\lambda$、$1/p_2=\lambda$，函数 $f,g:\mathbb{R}^n\to\mathbb{R}$ 定义为 $f=f_1^{p_1}$、$g=f_2^{p_2}$，那么 Hölder 不等式可以改写为
+\[
+\int_{\mathbb{R}^n} f^{1-\lambda} g^{\lambda}\,\mathrm{d}x\le\left(\int_{\mathbb{R}^n} f\,\mathrm{d}x\right)^{1-\lambda}\left(\int_{\mathbb{R}^n}g\,\mathrm{d}x\right)^{\lambda}
+\]
+可以看出，\emph{PL 不等式刚好是 Hölder 不等式的反向}。
+
+我们可以把 PL 不等式换个形式，写作
+\[
+\overline{\int}_{\mathbb{R}^n}\sup\{f(x)^{1-\lambda}g(y)^\lambda:(1-\lambda)x+\lambda y=z\}\,\mathrm{d}z\geq\left(\int_{\mathbb{R}^n}f(x)\,\mathrm{d}x\right)^{1-\lambda}\left(\int_{\mathbb{R}^n}g(x)\,\mathrm{d}x\right)^\lambda
+\]
+其中 $\overline\int$ 代表``上 Lebesgue 积分（Upper Lebesgue integral）"（因为对那个 $\sup$ 项的积分不一定存在）；这种形式能自然地推广至 $n$ 元情形：
+\[
+\overline{\int}_{\mathbb{R}^n}\sup\left\{\prod_{i=1}^mf_i(x_i):\sum_{i=1}^m\frac{x_i}{p_i}=z\right\}\,\mathrm{d}z\geq\prod_{i=1}^m\|f_i\|_{p_i}=\prod_{i=1}^m\left(\int_{\mathbb{R}^n}f_i(x)^{p_i}\,\mathrm{d}x\right)^{1/p_i}
+\]
+\end{enumerate}
+
+\section{Borell-Brascamp-Lieb 不等式}
+
+既知 BM 不等式有多种等价形式 (定理~\ref{thm:BM-equivalence})，其中有维度相关的，也有维度无关的。PL 不等式是一种``维度无关"的形式，自然，我们会想：它是否也有一个维度相关的形式？下面要介绍的 Borell-Brascamp-Lieb (BLL) 不等式便是。
+
+\subsection{准备和证明}
+
+在介绍 BLL 不等式之前，先做一些准备。
+
+\begin{definition}
+    
+设 $\lambda\in(0,1)$，实数 $a,b\ge 0$。
+
+\begin{itemize}
+\item 当 $a,b$ 均不为 0 时，
+\begin{itemize}
+\item 若 $p\ne 0$，定义 $M_p(a,b,\lambda):=((1-\lambda)a^p+\lambda b^p)^{1/p}$
+\item 当 $p=0$ 时，特别定义 $M_0(a,b,\lambda):=a^{1-\lambda}b^\lambda$；
+\item 当 $p=\infty$ 时，取 $M_\infty(a,b,\lambda):=\max\{a,b\}$；当 $p=-\infty$ 时，取 $M_{-\infty}(a,b,\lambda):=\min\{a,b\}$。
+\end{itemize}
+\item 当 $ab=0$ 时，对任意的 $p\in[-\infty,\infty]$，都取 $M_p(a,b,\lambda)=0$。
+\end{itemize}
+\end{definition}
+
+该记号是幂平均（power mean）的自然推广。其性质有：
+
+\begin{itemize}
+\item 对 $ab\ne 0$，$\displaystyle \frac1{M_p(a,b,\lambda)}=M_{-p}\left(\frac1a,\frac1b,\lambda\right)$；
+\item 对 $c\ge 0$，有 $M_p(ca,cb,\lambda)=c\cdot M_p(a,b,\lambda)$；
+\item 若 $q>p$ 那么 $M_q(a,b,\lambda)\ge M_p(a,b,\lambda)$（可由 Jensen 不等式得出）；
+\item 极限性质：$\lim\limits_{p\to 0}M_p(a,b,\lambda)=M_0(a,b,\lambda)$；$\lim\limits_{p\to \infty}M_p(a,b,\lambda)=M_\infty(a,b,\lambda)$；$\lim\limits_{p\to -\infty}M_p(a,b,\lambda)=M_{-\infty}(a,b,\lambda)$。
+\end{itemize}
+
+\begin{lemma}\label{lem:power_mean_inequality}
+设 $\lambda\in(0,1)$，$a,b,c,d\ge 0$，$p\in\mathbb{R}\cup\{+\infty\}$、$q\in\mathbb{R}$。若 $p+q\ge 0$，那么
+\[
+M_p(a,b,\lambda)M_q(c,d,\lambda)\ge M_r(ac,bd,\lambda)
+\]
+其中，当 $pq=0$ 时，$r=0$；当 $p=-q\ne 0$ 时 $r=-\infty$；除此之外，$\frac1r=\frac{1}{p}+\frac{1}{q}$，即 $r=\frac{pq}{p+q}$。
+\end{lemma}
+\begin{remark}
+    该引理来自 \url{https://faculty.gardner.wwu.edu/gorizia12.pdf} 的 Lemma 10.1。
+\end{remark}
+\begin{proof}
+    
+仅证明 $p,q>0$ 的情形。由 Hölder 不等式，
+ 
+\begin{align*}
+\left(1+\frac{\lambda b^{p}}{(1-\lambda)a^{p}}\right)^{p}\left(1+\frac{\lambda d^{q}}{(1-\lambda)c^{q}}\right)^{q}&\ge\left(1+\left(\frac{\lambda^{1/p}b}{(1-\lambda)^{1/p}a}\frac{\lambda^{1/q}d}{(1-\lambda)^{1/q}c}\right)^r\right)^{1/r}\\
+&=\left(1+\frac{\lambda}{1-\lambda}\left(\frac{bd}{ac}\right)^r\right)^{1/r}
+\end{align*}
+ 
+这等价于
+\[
+\big((1-\lambda)a^p+\lambda b^p\big)^{1/p}+\big((1-\lambda)c^q+\lambda d^q\big)^{1/q}\ge \big((1-\lambda)(ac)^r+\lambda(bd)^r\big)^{1/r}
+\]
+正是
+\[
+M_p(a,b,\lambda)M_q(c,d,\lambda)\ge M_{r}(ac,bd,\lambda)
+\]
+
+其余情况容易，举个例子，$p<0$，$q,r>0$ 的情况，我们用 $-p$ 替换 $p$，再利用 $\displaystyle M_p(a,b,\lambda)=\frac1{M_{-p}\left(\frac1a,\frac1b,\lambda\right)}$，证明目标就变成了 $M_q(c,d,\lambda)\ge M_r(ac,bd,\lambda)M_{-p}\left(\frac1a,\frac1b,\lambda\right)$，正是已经证明的情况。从略。
+\end{proof}
+
+
+
+\begin{theorem}[Borell-Brascamp-Lieb 不等式]\label{thm:BBL}
+设 $\lambda\in(0,1)$，$n\ge 1$，$p\in\left[-\frac1n,\infty\right]$，$f,g,h$ 是 $\mathbb{R}^n$ 上非负可积的函数，满足对任意 $x,y\in\mathbb{R}^n$，
+\begin{equation}
+h((1-\lambda)x+\lambda y)\ge M_p(f(x),g(y),\lambda) \label{eq:2-6}\tag{2-6}
+\end{equation}
+那么定义 $q:=\frac{p}{1+np}$，成立如下的不等式
+\[
+\int_{\mathbb{R}^n}h \,\mathrm{d}x\geq M_{q}\left(\int_{\mathbb{R}^n}f \,\mathrm{d}x,\int_{\mathbb{R}^n}g \,\mathrm{d}x,\lambda\right)
+\]
+\end{theorem}
+
+\begin{remark}
+\begin{itemize}
+\item 当 $p=0$ 时，BBL 不等式正是 PL 不等式；在后面的证明中，我们排除掉 $p=0$ 的情形。
+\item 定理中 $q:=\frac{p}{1+np}$，在特殊取值时需要``自然"地理解——当 $p=-\frac1n$ 时，我特别定义 $q=-\infty$；$p=\infty$ 时定义 $q=-\frac1n$。
+\item 当 $p\in\left(-\frac{1}{n},0\right)\cup(0,\infty)$ 时，BBL 等式还可以写作
+\[
+\begin{cases}
+\displaystyle\left(\int_{\mathbb{R}^n}h\,\mathrm{d}x\right)^{\frac{p}{1+np}}\ge(1-\lambda)\left(\int_{\mathbb{R}^n}f\,\mathrm{d}x\right)^{\frac{p}{1+np}}+\lambda \left(\int_{\mathbb{R}^n}g\,\mathrm{d}x\right)^{\frac{p}{1+np}},&\text{ 若 }p>0\\
+\displaystyle\left(\int_{\mathbb{R}^n}h\,\mathrm{d}x\right)^{\frac{p}{1+np}}\le(1-\lambda)\left(\int_{\mathbb{R}^n}f\,\mathrm{d}x\right)^{\frac{p}{1+np}}+\lambda \left(\int_{\mathbb{R}^n}g\,\mathrm{d}x\right)^{\frac{p}{1+np}},&\text{ 若 }-\frac1n< p<0
+\end{cases}
+\]
+\end{itemize}
+\end{remark}
+
+\begin{proof}
+    
+BBL 是 PL 不等式的推广，其证明过程也与 PL 的证明完全类似。
+
+第一步：证明 $n=1$ 的情形，当 $\displaystyle\int_{\mathbb{R}}f\,\mathrm{d}x$ 或者 $\displaystyle\int_{\mathbb{R}}g\,\mathrm{d}x$ 有一方为 0 时，BBL 不等式右侧项是 0，显然成立。排除掉这种情况，设
+\[
+F:=\int_{\mathbb{R}}f\mathrm{d}x>0,\quad G:=\int_{\mathbb{R}}g\mathrm{d}x>0
+\]
+定义两个辅助函数 $u(t)$ 和 $v(t)$，$t\in[0,1]$，使得二者分别是最小的值使得下式成立
+\[
+\int_{-\infty}^{u(t)}\frac{f}{F}\mathrm{d}x=\int_{-\infty}^{v(t)}\frac{g}{G}\mathrm{d}x=t
+\]
+以及 $w(t):=(1-\lambda)u(t)+\lambda v(t)$，这些都和 PL 不等式的证明（定理~\ref{thm:PL}）一模一样。几乎处处成立
+\begin{align*}
+w'(t)&=(1-\lambda)u'(t)+\lambda v'(t)=(1-\lambda)\frac{F}{f(u(t))}+\lambda\frac{G}{g(v(t))}\\
+&=M_1\left(\frac{F}{f(u(t))},\frac{G}{g(v(t))},\lambda\right)
+\end{align*}
+于是
+\begin{align*}
+\int_{\mathbb{R}}h\mathrm{d}x&\ge \int_0^1h(w(t))w'(t)\mathrm{d}t\\
+&=\int_0^1h\big((1-\lambda)u(t)+\lambda v(t)\big)M_1\left(\frac{F}{f(u(t))},\frac{G}{g(v(t))},\lambda\right)\mathrm{d}t\\
+&\ge \int_0^1 M_p\big(f(u(t)),g(v(t)),\lambda\big)M_1\left(\frac{F}{f(u(t))},\frac{G}{g(v(t))},\lambda\right)\mathrm{d}t \tag{由式~\eqref{eq:2-6}}\\
+&\ge \int_0^1 M_{p/(p+1)}(F,G,\lambda)\mathrm{d}x= \big((1-\lambda)F^q+\lambda G^q\big)^{1/q} \tag{引理~\ref{lem:power_mean_inequality}}\\
+&=\left((1-\lambda)\left(\int_\mathbb{R}f\,\mathrm{d}x\right)^q+\lambda\left(\int_\mathbb{R}g\,\mathrm{d}x\right)^q\right)^{1/q}
+\end{align*}
+其中 $q=\frac{p}{p+1}$。
+
+第二步：下面对 $n$ 进行归纳，设 BBL 不等式对小于 $n$ 的正整数成立。用证明 PL 不等式相同的思路，定义
+\[
+h_s(z):=h(z,s),\,z\in\mathbb{R}^{n-1},s\in\mathbb{R}^1
+\]
+同理定义 $f_s$、$g_s$。则对 $a,b\in\mathbb{R}$、$c:=(1-\lambda)a+\lambda b$ 有
+\begin{align*}
+h_c((1-\lambda)x+\lambda y)&=h\big((1-\lambda)x+\lambda y,(1-\lambda)a+\lambda b\big)\\
+&=h\big((1-\lambda)(x,a)+\lambda(y,b)\big)\\
+&\ge M_p(f(x,a),g(y,b),\lambda) \tag{由式~\eqref{eq:2-6}}\\
+&=M_p(f_a(x),g_b(y),\lambda)
+\end{align*}
+则根据 $n-1$ 维的 BBL 不等式，有
+\[
+\int_{\mathbb{R}^{n-1}}h_c(z) \,\mathrm{d}z\geq M_{\frac{p}{(n-1)p+1}}\left(\int_{\mathbb{R}^{n-1}}f_a(x) \,\mathrm{d}x,\int_{\mathbb{R}^{n-1}}g_b(y) \,\mathrm{d}y,\lambda\right)
+\]
+再由一维的 BBL 不等式，
+\begin{align*}
+&\int_{\mathbb{R}}\int_{\mathbb{R}^{n-1}}h(z,c) \,\mathrm{d}z\mathrm{d}c\geq M_{\frac{p}{np+1}}\left(\int_{\mathbb{R}}\int_{\mathbb{R}^{n-1}}f(x,a) \,\mathrm{d}x\mathrm{d}a,\int_{\mathbb{R}}\int_{\mathbb{R}^{n-1}}g(y,b) \,\mathrm{d}y\mathrm{d}b,\lambda\right)\\
+\implies& \int_{\mathbb{R}^n}h(z)\,\mathrm{d}z\ge M_{\frac{p}{np+1}}\left(\int_{\mathbb{R}^n}f(x)\,\mathrm{d}x,\int_{\mathbb{R}^n}g(y)\,\mathrm{d}y,\lambda\right)
+\end{align*}
+最后一步用了 Fubini 定理。
+\end{proof}
+
+
+\subsection{最优传输的视角}
+
+由于与 PL 不等式的情形非常类似，我们只再简略地说明一下。
+
+\begin{proof}[BBL 不等式的 OT 证明]
+    
+如前所述，排除掉 $p=0$ 以及 $F$ 或 $G$ 为 0 的情况，构造概率测度
+\[
+\mathrm{d}\mu(x):=\frac{f(x)}{F}\mathrm{d}x,\quad \mathrm{d}\nu(x):=\frac{g(x)}{G}\mathrm{d}x
+\]
+
+设 $\mu$ 到 $\nu$ 的最优传输为 $T$，根据 Brenier 定理，存在凸函数 $\varphi$ 满足
+\[
+\begin{cases}
+\nabla \varphi &=T\\
+\mathrm{det}\big(\nabla^2\varphi\big)&=\frac{f(x)}{F}\frac{G}{g(T(x))}
+\end{cases}
+\]
+
+再记 $z_\lambda:=(1-\lambda)x+\lambda T(x)$，$\Sigma=\mathrm{diag}(s_1,\ldots,s_n)$ 是由 $\nabla^2\varphi$ 的特征值组成的对角阵，则有
+\begin{align*}
+\mathrm{d}z_\lambda&=\mathrm{det}\big((1-\lambda)\mathbf{I}_n+\lambda \nabla^2\varphi\big)\,\mathrm{d}x\\
+&=\mathrm{det}\big((1-\lambda)\mathbf{I}_n+\lambda \Sigma\big)\,\mathrm{d}x\\
+&=\prod_{i=1}^n\big((1-\lambda)+\lambda s_i\big)\,\mathrm{d}x
+\end{align*}
+取对数，利用 $t\mapsto \log(1-\lambda +\lambda e^t)$ 是凸函数，有
+\begin{align*}
+\frac1n\sum_{i=1}^n\log\big(1-\lambda+\lambda s_i\big)&=\frac1n\sum_{i=1}^n\log\big(1-\lambda+\lambda e^{\log s_i}\big)\\
+&\ge \log\left(1-\lambda+\lambda \exp\left(\frac1n\sum_{i=1}^n \log s_i\right)\right) \tag{Jensen}\\
+&=\log\left(1-\lambda+\lambda\left(\prod_{i=1}^n s_i\right)^{1/n}\right)\\
+&=\log\Big((1-\lambda)+\lambda\mathrm{det}\big(\nabla^2\varphi\big)^{1/n}\Big)
+\end{align*}
+这表明
+\begin{align*}
+\prod_{i=1}^n\big((1-\lambda)+\lambda s_i\big)&\ge \Big((1-\lambda)+\lambda\mathrm{det}\big(\nabla^2\varphi\big)^{1/n}\Big)^n\\
+&=M_{1/n}\big(1,\mathrm{det}\big(\nabla^2\varphi\big),\lambda\big)\\
+&=M_{1/n}\left(1,\frac{f(x)}{F}\frac{G}{g(T(x))},\lambda\right) \label{eq:2-7}\tag{2-7}
+\end{align*}
+于是我们直接得出
+\begin{align*}
+\int_{\mathbb{R}^n}h(x)\,\mathrm{d}x&\ge\int_{\mathbb{R}^n}h\big((1-\lambda)x+\lambda T(x)\big)\,\mathrm{d}z_\lambda \tag{换元}\\
+&\ge\int_{\mathbb{R}^n}M_p(f(x),g(T(x)),\lambda)\,\mathrm{d}z_\lambda \tag{由式~\eqref{eq:2-6}}\\
+&\ge \int_{\mathbb{R}^n}M_p(f(x),g(T(x)),\lambda)M_{1/n}\left(1,\frac{f(x)}{F}\frac{G}{g(T(x))},\lambda\right)\,\mathrm{d}x \tag{由式~\eqref{eq:2-7}}\\
+&\ge\int_{\mathbb{R}^n}M_{q}\left(f(x),f(x)\frac{GF},\lambda\right)\,\mathrm{d}x \tag{由引理~\ref{lem:power_mean_inequality}}\\
+&=M_q\left(1,\frac{GF},\lambda\right)\underbrace{\int_{\mathbb{R}^n}f(x)\,\mathrm{d} x}_{F}\\
+&=M_q(F,G,\lambda)\\
+&=M_q\left(\int_{\mathbb{R}^n}f(x)\,\mathrm{d}x,\int_{\mathbb{R}^n}g(x)\,\mathrm{d}x,\lambda\right)
+\end{align*}
+其中 $q=\frac{p}{np+1}$。\end{proof}
+
+ 
