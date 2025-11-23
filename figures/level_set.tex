@@ -12,13 +12,13 @@
 % 函数表达式（两个高斯峰）
 \newcommand{\f}[1]{0.15 + 1.6*exp(-((#1-1.0)^2)/0.12) + 1.2*exp(-((#1-3.6)^2)/0.20)}
 
-% 函数路径，命名为 fpath
+% 函数路径, 命名为 fpath
 \path[name path=fpath] plot[variable=\x, domain=0:5.6, samples=400] 
     ({\x}, {\f{\x}});
 \draw[thick, blue, smooth] plot[variable=\x, domain=0:5.6, samples=400] 
     ({\x}, {\f{\x}});
 
-% 水平线 t（取在两峰间低谷之上，确保有 4 个交点）
+% 水平线 t（取在两峰间低谷之上, 确保有 4 个交点）
 \def\t{1.05}
 \path[name path=hline] (0,\t) -- (5.6,\t);
 \draw[red, thick, dashed] (0,\t) -- (5.6,\t) node[right] {$t$};
@@ -33,7 +33,7 @@
   \node[below] at (P\i |- 0,0) {\small $\,$}; % 占位以保持对齐
 }
 
-% 在水平线上突出上水平集区间，并在 x 轴上显示投影区间
+% 在水平线上突出上水平集区间, 并在 x 轴上显示投影区间
 \draw[red, very thick] (P1) -- (P2); % 在水平线上突出第一段
 \draw[red, very thick] (P3) -- (P4); % 在水平线上突出第二段
 \draw[red, very thick] (P1 |- 0,0) -- (P2 |- 0,0); % x 轴投影段 1

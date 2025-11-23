@@ -7,31 +7,31 @@
 Blaschke–Santaló 不等式也是凸分析里的一个十分重要的不等式，它揭示了凸体和其极集的关系，并且可以结合 Brunn-Minkowski 不等式得到一些非常优美的结论。%首先我们补充几个定义。
 \subsection{Santaló  点}
 \begin{lemma}[Santaló 点]
-对于任意凸体 $K\subset\mathbb R^n$，取
+对于任意凸体 $K\subset\mathbb R^n$， 取
 \[
 (K-x)^\circ=\{y\in\mathbb R^n:\langle y,z-x\rangle\le 1,\;\forall z\in K\}
 \]
-那么对 $x\in\mathrm{int}K$，存在唯一的点 $x^*$最小化函数 $g(x):= V_n((K-x)^\circ)$，且
+那么对 $x\in\mathrm{int}K$， 存在唯一的点 $x^*$ 最小化函数 $g(x):= V_n((K-x)^\circ)$， 且
 \begin{equation}
 \int_{\mathbb{S}^{n-1}}\Big(h_K(u)-\langle x^*,u\rangle\Big)^{-(n+1)}u\,\mathrm{d}u=0 \label{eq:6-1}\tag{6-1}
 \end{equation}
-称点 $x^*$为 \emph{Santaló 点}。特别地， $x^*=0$当且仅当 $K$的极集 $K^\circ$重心在原点。
+称点 $x^*$ 为 \emph{Santaló 点}。特别地， $x^*=0$ 当且仅当 $K$ 的极集 $K^\circ$ 重心在原点。
 \end{lemma}
 
 \begin{proof}
-由于对 $x\in\mathrm{int}K$有 $h_{K-x}(u)=h_K(u)-\langle x,u\rangle$，用式 ~\eqref{eq:4-2}和引理~\ref{lem:support_radial}，
+由于对 $x\in\mathrm{int}K$ 有 $h_{K-x}(u)=h_K(u)-\langle x,u\rangle$， 用式 ~\eqref{eq:4-2}和引理~\ref{lem:support_radial}，
 \begin{align*}
 g(x)&=V_n((K-x)^\circ)=\frac1n\int_{\mathbb{S}^{n-1}}\rho_{(K-x)^\circ}^n(u)\mathrm{d}u\\
 &=\frac1n\int_{\mathbb{S}^{n-1}}h_{K-x}^{-n}(u)\mathrm{d}u=\int_{\mathbb{S}^{n-1}}\big(h_K(u)-\langle x,u\rangle\big)^{-n}\mathrm{d}u
 \end{align*}
 注意到
 \begin{enumerate}
-\item $g(x)$这对 $x$是严格凸的 (因为 $t\mapsto t^{-n}$严格凸)；
-\item 当 $x$趋近于 $K$的边界 $\partial K$时，存在 $u$使得 $h_K(u)-\langle x,u\rangle\to 0^+$，故 $g(x)\to\infty$。
+\item $g(x)$ 这对 $x$ 是严格凸的 (因为 $t\mapsto t^{-n}$ 严格凸)；
+\item 当 $x$ 趋近于 $K$ 的边界 $\partial K$ 时，存在 $u$ 使得 $h_K(u)-\langle x,u\rangle\to 0^+$， 故 $g(x)\to\infty$。
 \end{enumerate}
-所以必存在一个唯一的 $x^*\in\mathrm{int}K$最小化 $g(x)$。由梯度 $\nabla g(x^*)=0$即可得到式 \eqref{eq:6-1}。
+所以必存在一个唯一的 $x^*\in\mathrm{int}K$ 最小化 $g(x)$。由梯度 $\nabla g(x^*)=0$ 即可得到式 \eqref{eq:6-1}。
 
-特别地，在 \eqref{eq:6-1}中取 $x^*=0$，有
+特别地，在 \eqref{eq:6-1}中取 $x^*=0$， 有
 \begin{align*}
 K^\circ\text{ 的重心 }&=\int_{K^\circ}x\,\mathrm{d}x\\
 &=\int_{\mathbb S^{n-1}}\int_0^{\rho_{K^\circ}(u)}ru\cdot r^{n-1}\,\mathrm{d}r\mathrm{d}u\\
@@ -43,7 +43,7 @@ K^\circ\text{ 的重心 }&=\int_{K^\circ}x\,\mathrm{d}x\\
 
 \begin{remark}
 \begin{itemize}
-\item 注意式~\eqref{eq:6-1}的被积分项是向量值函数，右侧的 0 也代表全 0 的 $n$维向量。
+\item 注意式~\eqref{eq:6-1}的被积分项是向量值函数，右侧的 0 也代表全 0 的 $n$ 维向量。
 \item 该引理参考了 Böröczky, K. J., Figalli, A., \& Ramos, J. P. (2025). \textit{Isoperimetric inequalities, Brunn-Minkowski theory and Minkowski type Monge-Ampère equations on the sphere}.的 Lemma 6.5.1 (p. 211)。
 \end{itemize}
 \end{remark}
@@ -51,7 +51,7 @@ K^\circ\text{ 的重心 }&=\int_{K^\circ}x\,\mathrm{d}x\\
 \subsection{BS 不等式的证明}
 
 \begin{theorem}[Blaschke–Santaló 不等式]\label{thm:bs}
-设 $K\subset\mathbb R^n$是一个凸体，且其 Santaló 点 在原点，即
+设 $K\subset\mathbb R^n$ 是一个凸体，且其 Santaló 点 在原点，即
 \begin{equation}
 \int_{\mathbb{S}^{n-1}}h_K^{-(n+1)}(u)u\, \mathrm{d}u=0 \label{eq:6-2}\tag{6-2}
 \end{equation}
@@ -59,25 +59,25 @@ K^\circ\text{ 的重心 }&=\int_{K^\circ}x\,\mathrm{d}x\\
 \begin{equation}
 V_n(K)V_n(K^\circ)\le\big(V_n(B_n)\big)^2 \label{eq:6-3}\tag{6-3}
 \end{equation}
-取等当且仅当 $K$是一个中心在原点的椭球。
+取等当且仅当 $K$ 是一个中心在原点的椭球。
 \end{theorem}
 
 \begin{proof}
-由于 $K$有界且 $0\in\mathrm{int}K$，支撑函数 $0<h_K<\infty$恒成立，我们定义一个新的测度
+由于 $K$ 有界且 $0\in\mathrm{int}K$， 支撑函数 $0<h_K<\infty$ 恒成立，我们定义一个新的测度
 \[
 \mathrm{d}\mu:=h_K^{-(n+1)}(u)\,\mathrm{d}u
 \]
-这是一个球面 $\mathbb {S}^{n-1}$上的、非零、有限的 Borel 测度，而且根据式 \eqref{eq:6-2}有 $\mu$的重心在原点：
+这是一个球面 $\mathbb {S}^{n-1}$ 上的、非零、有限的 Borel 测度，而且根据式 \eqref{eq:6-2}有 $\mu$ 的重心在原点：
 \[
 \int_{\mathbb{S}^{n-1}}u\,\mathrm{d}\mu(u)=0
 \]
-同时，由于 $h_K$在球面上恒大于 0，所以 $\mu$肯定不集中在任意一个大圆上。至此， $\mu$满足了 Minkowski 问题的全部条件 (定理~\ref{thm:minkowski_exist})，可以找到凸体 $\Lambda K$使得
+同时，由于 $h_K$ 在球面上恒大于 0， 所以 $\mu$ 肯定不集中在任意一个大圆上。至此， $\mu$ 满足了 Minkowski 问题的全部条件 (定理~\ref{thm:minkowski_exist})， 可以找到凸体 $\Lambda K$ 使得
 \begin{equation}
 \mathrm{d}\mu(u)=h_K^{-(n+1)}(u)\,\mathrm{d}u=\mathrm{d}S(\Lambda K,u) \label{eq:6-4}\tag{6-4}
 \end{equation}
-有的文献中称 $\Lambda K$为"曲率体 (curvature body)"，因为上式同时表明 $\Lambda K$的曲率函数满足，$f_{\Lambda K}:=\frac{\mathrm{d}S(\Lambda K,u)}{\mathrm du}=h_K^{-(n+1)}$。
+有的文献中称 $\Lambda K$ 为``曲率体 (curvature body)"， 因为上式同时表明 $\Lambda K$ 的曲率函数满足，$f_{\Lambda K}:=\frac{\mathrm{d}S(\Lambda K,u)}{\mathrm du}=h_K^{-(n+1)}$。
 
-$\Lambda K$在至多相差一个平移的意义下是唯一的，且还有
+$\Lambda K$ 在至多相差一个平移的意义下是唯一的，且还有
 \begin{align*}
 &f_{\Lambda K}(u)=h_K^{-(n+1)}(u)\\
 \implies \;&V_n(K^\circ)=\frac1n\int_{\mathbb{S}^{n-1}}\rho_{K^\circ}^n(u)\,\mathrm{d}u=\frac1n\int_{\mathbb S^{n-1}}h_K^{-n}(u)\,\mathrm du= \frac1n\int_{\mathbb S^{n-1}}f_{\Lambda K}^{\frac n{n+1}}(u)\,\mathrm du \label{eq:6-5}\tag{6-5}\\
@@ -86,17 +86,17 @@ $\Lambda K$在至多相差一个平移的意义下是唯一的，且还有
 这里补充一下定义，
 
 \begin{definition}[曲率函数]
-设 $K\subset \mathbb R^n$是凸体，且其表面积测度相对于球面测度绝对连续，即 $\mathrm{d}S(K,u)\ll \mathrm du$，那么称二者的 Radon-Nikodym 导数为 $K$的\emph{曲率函数} (curvature function)，记作 $f_K$。
+设 $K\subset \mathbb R^n$ 是凸体，且其表面积测度相对于球面测度绝对连续，即 $\mathrm{d}S(K,u)\ll \mathrm du$， 那么称二者的 Radon-Nikodym 导数为 $K$ 的\emph{曲率函数} (curvature function)， 记作 $f_K$。
 \end{definition}
 
 \begin{definition}[仿射表面积]
-设 $K\subset \mathbb R^n$是凸体且存在曲率函数 $f_K$，那么定义 $K$的\emph{仿射表面积} (affine surface area) 为
+设 $K\subset \mathbb R^n$ 是凸体且存在曲率函数 $f_K$， 那么定义 $K$ 的\emph{仿射表面积} (affine surface area) 为
 \[
 as(K):=\int_{\mathbb S^{n-1}}f_K^{\frac n{n+1}}(u)\,\mathrm du
 \]
 \end{definition}
 
-继续定理~\ref{thm:bs}的证明，回顾一下式~\eqref{eq:6-5}，还能发现
+继续定理~\ref{thm:bs}的证明，回顾一下式~\eqref{eq:6-5}， 还能发现
 \begin{align*}
 V_n(K^\circ)&=\frac1n\int_{\mathbb S^{n-1}}h_K^{-n}(u)\,\mathrm du \tag{由式~\eqref{eq:6-5}}\\
 &=\frac1n\int_{\mathbb S^{n-1}}h_K(u) h_K^{-(n+1)}(u)\,\mathrm du \\
@@ -114,13 +114,13 @@ V_n(K^\circ)&=\frac1n\int_{\mathbb S^{n-1}}h_K^{-n}(u)\,\mathrm du \tag{由式~\
 \begin{equation}
 \frac{as(\Lambda K)^{n+1}}{n^{n+1}V_n(\Lambda K)^{n-1}}\ge V_n(K)V_n(K^\circ) \label{eq:6-7}\tag{6-7}
 \end{equation}
-如果能再证明这个上界不超过 $V_n(B_n)^2$的话，就证明出来了 BS 不等式。
+如果能再证明这个上界不超过 $V_n(B_n)^2$ 的话，就证明出来了 BS 不等式。
 
-实际上可以证明（会在后文中介绍），
+实际上可以证明 (会在后文中介绍)，
 \begin{equation}
 \frac{as(\Lambda K)^{n+1}}{n^{n+1}V_n(\Lambda K)^{n-1}}\le \frac{as(B_n)^{n+1}}{n^{n+1}V_n(B_n)^{n-1}} \label{eq:6-8}\tag{6-8}
 \end{equation}
-等号成立当且仅当 $\Lambda K$是椭球；而这正是我们想要的上界：
+等号成立当且仅当 $\Lambda K$ 是椭球；而这正是我们想要的上界：
 \begin{align*}
 \frac{as(B_n)^{n+1}}{n^{n+1}V_n(B_n)^{n-1}}&=\frac{\displaystyle\left(\int_{\mathbb{S}^{n-1}}f_{B_n}^{\frac n{n+1}}(u)\,\mathrm{d}u\right)^{n+1}}{n^{n+1}V_n(B_2)^{n-1}}\\
 &=\frac{\displaystyle \left(\int_{\mathbb{S}^{n-1}}\mathrm{d}u\right)^{n+1}}{n^{n+1}V_n(B_n)^{n-1}} \tag{$f_{B_n}\equiv 1$}\\
@@ -130,7 +130,7 @@ V_n(K^\circ)&=\frac1n\int_{\mathbb S^{n-1}}h_K^{-n}(u)\,\mathrm du \tag{由式~\
 \end{align*}
 结合 \eqref{eq:6-7}、 \eqref{eq:6-8}、 \eqref{eq:6-9}立即得到 BS 不等式 $V_n(K)V_n(K^\circ)\le V_n(B_n)^2$。
 
-下面简单叙述一下取等条件，显见对任意的非奇异线性变换 $T$， 
+下面简单叙述一下取等条件，显见对任意的非奇异线性变换 $T$，
 \begin{align*}
 (TK)^\circ&=\big\{y\in\mathbb{R}^n:\langle y,Tx\rangle\le 1,\,\forall x\in K\big\}\\
 &=\big\{y\in\mathbb{R}^n:\big\langle T^\top y,x\big\rangle\le 1,\,\forall x\in K\big\}\\
@@ -143,17 +143,17 @@ V_n(TK)V_n((TK)^\circ)&=V_n(TK)V_n\left(\big(T\big)^{-1}K^\circ\right)\\
 &=\mathrm{det}(T)V_n(K)\cdot\frac1{\det(T)}V_n(K)\\
 &=V_n(K)V_n(K^\circ)
 \end{align*}
-即， $V_n(K)V_n(K^\circ)$作为凸体 $K$的泛函在 $T$作用下是不变的。又显然在 $K=B_n$时 BS 不等式取等，根据椭球的定义，对任意中心在原点的椭球都有 BS 不等式取等。
+即， $V_n(K)V_n(K^\circ)$ 作为凸体 $K$ 的泛函在 $T$ 作用下是不变的。又显然在 $K=B_n$ 时 BS 不等式取等，根据椭球的定义，对任意中心在原点的椭球都有 BS 不等式取等。
 
-另一方面，若 BS 不等式取等， \eqref{eq:6-8}就应取等， $\Lambda K$是一个椭球；又由于证明过程中用了 Minkowski 第一不等式 (定理~\ref{thm:minkowski})，其取等条件是 $K$和 $\Lambda K$位似——所以 $K$也得是一个椭球。根据引理 1， $K^\circ$重心在原点，自然 $K$也应该是一个中心在原点的椭球。
+另一方面，若 BS 不等式取等， \eqref{eq:6-8}就应取等， $\Lambda K$ 是一个椭球；又由于证明过程中用了 Minkowski 第一不等式 (定理~\ref{thm:minkowski})，其取等条件是 $K$ 和 $\Lambda K$ 位似——所以 $K$ 也得是一个椭球。根据引理 1，$K^\circ$ 重心在原点，自然 $K$ 也应该是一个中心在原点的椭球。
 \end{proof}
 
 \begin{remark}
 \begin{itemize}
-\item 回忆一下，椭球的定义是：设 $B_n(x,r)$是一个球，则对其进行非奇异线性变换后 $TB_n(x,r)$就是椭球 (见定义~\ref{def:ball})；因而这里所说的``椭球"本身都是包含球的。
-\item $V_n(K)V_n(K^\circ)$有时也称作\emph{体积积} (volume product)。
-\item BS 不等式最早由 W. Blaschke 于 1920s 给出了 $n=2,3$情况下的证明，L. A. Santaló 则在 1949 年给出了一般维度的证明\footnotemark，思路和前面给出的证明基本相同；这个证明本质上是融合了两个重要结论：Minkowski 第一不等式，以及式 \eqref{eq:6-8}——它叫做\emph{仿射等周不等式} (affine isoperimetric inequality)。
-\item 早期，仿射表面积 $as(K)$的概念来自于微分几何，是只定义在足够光滑的凸体上的。尽管，我们直觉上可以用光滑凸体来逼近非光滑凸体，从而表明与仿射表面积相关的不等式在一般凸体下也成立，但这样的话等号成立条件可能就失效了。鉴于上述原因，对仿射等周不等式和  BS 不等式的取等条件讨论直至 1985 年才由 C. M. Petty 给出\footnotemark。
+\item 回忆一下，椭球的定义是：设 $B_n(x,r)$ 是一个球，则对其进行非奇异线性变换后 $TB_n(x,r)$ 就是椭球 (见定义~\ref{def:ball})；因而这里所说的``椭球"本身都是包含球的。
+\item $V_n(K)V_n(K^\circ)$ 有时也称作\emph{体积积} (volume product)。
+\item BS 不等式最早由 W. Blaschke 于 1920s 给出了 $n=2,3$ 情况下的证明，L. A. Santaló 则在 1949 年给出了一般维度的证明\footnotemark， 思路和前面给出的证明基本相同；这个证明本质上是融合了两个重要结论：Minkowski 第一不等式，以及式 \eqref{eq:6-8}——它叫做\emph{仿射等周不等式} (affine isoperimetric inequality)。
+\item 早期，仿射表面积 $as(K)$ 的概念来自于微分几何，是只定义在足够光滑的凸体上的。尽管，我们直觉上可以用光滑凸体来逼近非光滑凸体，从而表明与仿射表面积相关的不等式在一般凸体下也成立，但这样的话等号成立条件可能就失效了。鉴于上述原因，对仿射等周不等式和  BS 不等式的取等条件讨论直至 1985 年才由 C. M. Petty 给出\footnotemark。
 \end{itemize}
 \end{remark}
 % \footnotetext{}
@@ -161,13 +161,13 @@ V_n(TK)V_n((TK)^\circ)&=V_n(TK)V_n\left(\big(T\big)^{-1}K^\circ\right)\\
 \footnotetext{Petty, C. M. (1985). \textit{Affine isoperimetric problems}. Annals of the New York Academy of Sciences, 440(1), 113-127.}
 \subsection{另一种证明}
 
-下面考虑一种特殊情况： $K$是关于原点\emph{中心对称} (origin-symmetric) 的凸体，即 $K=-K$，此时可以利用 BM 不等式 + Steiner 对称化比较容易地给出 BS 不等式的证明。
+下面考虑一种特殊情况： $K$ 是关于原点\emph{中心对称} (origin-symmetric) 的凸体，即 $K=-K$， 此时可以利用 BM 不等式 + Steiner 对称化比较容易地给出 BS 不等式的证明。
 
-回忆一下用 Steiner 对称化证明不等式的一般步骤（见第~\ref{chapter:3} 章），我们得先找到一个在 Hausdorff 度量下连续的泛函，让它在 Steiner 对称化操作下满足单调性。在这里，需要的是
+回忆一下用 Steiner 对称化证明不等式的一般步骤 (见第~\ref{chapter:3} 章) ， 我们得先找到一个在 Hausdorff 度量下连续的泛函，让它在 Steiner 对称化操作下满足单调性。在这里，需要的是
 \begin{equation}
 V_n(K^\circ)\le V_n((S_uK)^\circ) \label{eq:6-10}\tag{6-10}
 \end{equation}
-只要上式成立，就可以根据 Gross 定理 (定理~\ref{thm:gross})，设凸体 $K$在一列单位方向$\{u_j\}_{j=1}^\infty$下依 Hausdorff 度量收敛至球 $\left(\frac{V_n(K)}{V_n(B_n)}\right)^{\frac1n}B_n$，并记 $K_j:=S_{u_j}S_{u_{j-1}}\cdots S_{u_2}S_{u_1}K$，则
+只要上式成立，就可以根据 Gross 定理 (定理~\ref{thm:gross})， 设凸体 $K$ 在一列单位方向$\{u_j\}_{j=1}^\infty$ 下依 Hausdorff 度量收敛至球 $\left(\frac{V_n(K)}{V_n(B_n)}\right)^{\frac1n}B_n$， 并记 $K_j:=S_{u_j}S_{u_{j-1}}\cdots S_{u_2}S_{u_1}K$， 则
 \begin{align*}
 V_n(K)V_n(K^\circ) \le V_n(K_1)V_n(K_1^\circ) \le V_n(K_2)V_n(K_2^\circ)\le \cdots\le V_n(K_j)V_n(K_j^\circ)\le\cdots
 \end{align*}
@@ -183,16 +183,16 @@ V_n(K)V_n(K^\circ)&\le \lim_{j\to\infty}V_n(K_j)V_n(K_j^\circ)\\
 这就得到了 BS 不等式。上面第四行来自于这样的事实：
 
 \begin{lemma}
-设 $K_0,K_1,K_2,\dots\subset\mathbb{R}^n$是凸体，且在 Hausdorff 度量下 $K_j\to K_0$；如果 $0\in\mathrm{int}K_j $对任意 $j=1,2,\ldots$和 $j=0$都成立，则依 Hausdorff 度量收敛可以与取极集交换，即
+设 $K_0,K_1,K_2,\dots\subset\mathbb{R}^n$ 是凸体，且在 Hausdorff 度量下 $K_j\to K_0$；如果 $0\in\mathrm{int}K_j $ 对任意 $j=1,2,\ldots$ 和 $j=0$ 都成立，则依 Hausdorff 度量收敛可以与取极集交换，即
 \[
 \lim_{j\to\infty}K_j^\circ=\left(\lim_{j\to\infty}K\right)^\circ=K_0^\circ
 \]
 \end{lemma}
 
 \begin{proof}
-$0\in\mathrm{int}K_j $保证了半径函数 $0<\rho_{K_j}<\infty$，且 $K_j\to K_0$意味着 $\rho_{K_j}\to\rho_{K_0}$一致收敛（因为 Hausdorff 度量的定义蕴含 $|\rho_{K_j}(u)-\rho_{K_0}(u)|\le d_H(K_j,K_0),\;\forall u\in\mathbb{S}^{n-1}$）。
+$0\in\mathrm{int}K_j $ 保证了半径函数 $0<\rho_{K_j}<\infty$， 且 $K_j\to K_0$ 意味着 $\rho_{K_j}\to\rho_{K_0}$ 一致收敛 (因为 Hausdorff 度量的定义蕴含 $|\rho_{K_j}(u)-\rho_{K_0}(u)|\le d_H(K_j,K_0),\;\forall u\in\mathbb{S}^{n-1}$) 。
 
-设 $r_0:=\min\limits_{u\in\mathbb{S}^{n-1}}\rho_{K_0}(u)>0$，则对任意取定的 $0<\epsilon<1$和充分大的 $j$有 $ \rho_{K_j}\ge (1-\epsilon)r_0$。故
+设 $r_0:=\min\limits_{u\in\mathbb{S}^{n-1}}\rho_{K_0}(u)>0$， 则对任意取定的 $0<\epsilon<1$ 和充分大的 $j$ 有 $ \rho_{K_j}\ge (1-\epsilon)r_0$。故
 \begin{align*}
 d_H(K_j^\circ,K_0^\circ)&=\sup\limits_{u\in\mathbb S^{n-1}}\big|h_{K_j^\circ}(u)-h_{K_0^\circ}(u)\big|\\
 &=\sup\limits_{u\in\mathbb S^{n-1}}\left|\frac1{\rho_{K_j}(u)}-\frac1{\rho_{K_0}(u)}\right|\\
@@ -201,41 +201,41 @@ d_H(K_j^\circ,K_0^\circ)&=\sup\limits_{u\in\mathbb S^{n-1}}\big|h_{K_j^\circ}(u)
 \end{align*}
 \end{proof}
 
-可以看出，只要证明了 \eqref{eq:6-10}，就可以立即得到 BS 不等式成立。再写作引理
+可以看出，只要证明了 \eqref{eq:6-10}， 就可以立即得到 BS 不等式成立。再写作引理
 
 \begin{lemma}\label{lem:ball}
-设 $K\subset\mathbb R^n$是凸体且关于原点中心对称，那么对任意固定的 $u\in\mathbb S^{n-1}$有 $V_n(K^\circ)\le V_n((S_uK)^\circ)$，取等当且仅当每个平行于 $u^\perp$的超平面截 $K^\circ$得到的集合都是中心对称的。
+设 $K\subset\mathbb R^n$ 是凸体且关于原点中心对称，那么对任意固定的 $u\in\mathbb S^{n-1}$ 有 $V_n(K^\circ)\le V_n((S_uK)^\circ)$， 取等当且仅当每个平行于 $u^\perp$ 的超平面截 $K^\circ$ 得到的集合都是中心对称的。
 \footnotemark
 \end{lemma}
 \footnotetext{Keith M. Ball, 1986}
 
 \begin{proof}
-由于 $u$具体方向不重要，不失一般性设 $u=e_n$是第 $n$个坐标向量，则 $u^\perp=\mathbb R^{n-1}$。于是我们可以按前 $n-1$维+第 $n$维来分解 $S_uK$(回忆一下式~\eqref{eq:3-3})：
+由于 $u$ 具体方向不重要，不失一般性设 $u=e_n$ 是第 $n$ 个坐标向量，则 $u^\perp=\mathbb R^{n-1}$。于是我们可以按前 $n-1$ 维+第 $n$ 维来分解 $S_uK$(回忆一下式~\eqref{eq:3-3})：
 \begin{align*}
 S_uK&=\left\{(x,t):x\in\mathbb R^{n-1},|t|\le\frac{f(x)-g(x)}{2}\right\}\\
 &=\left\{\left(x,\frac{t-s}{2}\right):(x,s)\in K, (x,t)\in K\right\}
 \end{align*}
-这里 $(x,t)$代表一个 $n$维向量， $x\in\mathbb R^{n-1}$、 $t\in\mathbb R$。
+这里 $(x,t)$ 代表一个 $n$ 维向量， $x\in\mathbb R^{n-1}$、 $t\in\mathbb R$。
 
 则 Steiner 对称化的极集为
 \begin{align*}
 (S_u K)^\circ&=\left\{(y,r)\in\mathbb R^n:\left\langle(y,r),\left(x,\frac{t-s}{2}\right)\right\rangle\le1,\;\forall\, (x,t)\in K,(x,s)\in K\right\}\\
 &=\left\{(y,r)\in\mathbb R^n:\langle y,x\rangle+\frac{t-s}{2}r\le 1,\;\forall\, (x,t)\in K,(x,s)\in K\right\}
 \end{align*}
-对任意凸体 $L$，定义它在 $u=e_n$方向的截面为 $L_\tau:=\{z\in\mathbb{R}^{n-1}:(z,\tau)\in L\}$（可以视作用与 $u^\perp$平行的超平面截 $L$所获得的一系列切片）。那么对任意的 $r,s>0$，取定 $x\in K^\circ_r$、 $y\in K^\circ_{-s}$，则对任意 $\tau\in\mathbb R^n$和 $z\in K_\tau$有
+对任意凸体 $L$， 定义它在 $u=e_n$ 方向的截面为 $L_\tau:=\{z\in\mathbb{R}^{n-1}:(z,\tau)\in L\}$ (可以视作用与 $u^\perp$ 平行的超平面截 $L$ 所获得的一系列切片) 。那么对任意的 $r,s>0$， 取定 $x\in K^\circ_r$、 $y\in K^\circ_{-s}$， 则对任意 $\tau\in\mathbb R^n$ 和 $z\in K_\tau$ 有
 \begin{align*}
 (x,r)\in K^\circ&\implies \langle x,z\rangle+r\tau\le 1\\
 (y,-s)\in K^\circ&\implies \langle y,z\rangle-s\tau\le 1
 \end{align*}
 
-若令 $w:=\frac{s}{r+s}x+\frac{r}{r+s}y$ (见图~\ref{fig:BS_proof})，那么上面两个关系可以推出：对 $(z,\tau_1)\in K$和 $(z,\tau_2)\in K$有
+若令 $w:=\frac{s}{r+s}x+\frac{r}{r+s}y$ (见图~\ref{fig:BS_proof})， 那么上面两个关系可以推出：对 $(z,\tau_1)\in K$ 和 $(z,\tau_2)\in K$ 有
 \begin{align*}
 &\langle w,z\rangle+\frac{rs}{r+s}(\tau_1-\tau_2)\\
 &=\frac s{r+s}\langle x,z\rangle+\frac r{r+s}\langle y,z\rangle+\frac{s}{r+s}r\tau_1-\frac{r}{r+s}s\tau_2\\
 &=\frac{s}{r+s}\Big(\underbrace{\langle x,z\rangle+r\tau_1}_{\le 1}\Big)+\frac{r}{r+s}\Big(\underbrace{\langle x,z\rangle-s\tau_2}_{\le 1}\Big)\\
 &\le \frac s{r+s}+\frac r{s+r}=1
 \end{align*}
-即 $\displaystyle\left\langle\left(w,\frac{2rs}{r+s}\right),\left(z,\frac{\tau_1-\tau_2}{2}\right)\right\rangle\le 1$；又由于 $(z,\tau_1)\in K$、 $(z,\tau_2)\in K$，有 $\displaystyle \left(z,\frac{\tau_1-\tau_2}{2}\right)\in S_uK$，故 $\displaystyle\left(w,\frac{2rs}{r+s}\right)\in (S_uK)^\circ$，或者说 $w\in (S_uK)^{\circ}_{\frac{2rs}{r+s}}$。
+即 $\displaystyle\left\langle\left(w,\frac{2rs}{r+s}\right),\left(z,\frac{\tau_1-\tau_2}{2}\right)\right\rangle\le 1$；又由于 $(z,\tau_1)\in K$、 $(z,\tau_2)\in K$， 有 $\displaystyle \left(z,\frac{\tau_1-\tau_2}{2}\right)\in S_uK$， 故 $\displaystyle\left(w,\frac{2rs}{r+s}\right)\in (S_uK)^\circ$， 或者说 $w\in (S_uK)^{\circ}_{\frac{2rs}{r+s}}$。
 
 \begin{figure}[htbp]
 \centering
@@ -253,28 +253,28 @@ S_uK&=\left\{(x,t):x\in\mathbb R^{n-1},|t|\le\frac{f(x)-g(x)}{2}\right\}\\
 V_{n-1}\left( (S_uK)^\circ _{\frac{2rs}{r+s}}\right)&\ge V_{n-1}\left(\frac s{r+s}K^\circ_r +\frac r{r+s}K^\circ_{-s}\right)\\
 &\ge V_{n-1}(K_r^\circ)^{\frac s{r+s}}V_{n-1}(K^\circ_s)^{\frac r{r+s}} \tag{BM 不等式}
 \end{align*}
-上述分析对一般的凸体 $K$都成立，不过要是继续分析下去就会变得非常麻烦，故此我们只考虑更加简单的情形： $K$关于原点中心对称。这个条件的好处在于：由于 $K=-K$，有 $K^\circ=-K^\circ$，即 $K^\circ$也是关于原点中心对称的，可以直接在上式取 $s=r$，即
+上述分析对一般的凸体 $K$ 都成立，不过要是继续分析下去就会变得非常麻烦，故此我们只考虑更加简单的情形： $K$ 关于原点中心对称。这个条件的好处在于：由于 $K=-K$， 有 $K^\circ=-K^\circ$， 即 $K^\circ$ 也是关于原点中心对称的，可以直接在上式取 $s=r$， 即
 \begin{align*}
 V_{n-1}((S_u K)^\circ_r)&\ge V_{n-1}(K^\circ_r)^{\frac12}V_{n-1}(K^\circ_{-r})^{\frac12}\\
 &=V_{n-1}(K_r^\circ) \tag{由中心对称}
 \end{align*}
-直接对 $r$积分就得到了想要的结论：
+直接对 $r$ 积分就得到了想要的结论：
 \[
 V_n((S_uK)^\circ)=2\int_0^\infty V_{n-1}((S_uK)^\circ_r)\,\mathrm dr\ge 2\int_0^\infty V_{n-1}(K^\circ_r)\,\mathrm dr=V_n(K^\circ)
 \]
-下面简单讨论一下取等条件，要使得等号成立，BM 不等式那一步就应取等，即 $K_r^\circ$和 $K_{-r}^\circ=-K_r^\circ$位似——二者只能相差一个平移，所以 $K^\circ_r$一定存在一个对称中心，这对所有 $r>0$都成立。
+下面简单讨论一下取等条件，要使得等号成立，BM 不等式那一步就应取等，即 $K_r^\circ$ 和 $K_{-r}^\circ=-K_r^\circ$ 位似——二者只能相差一个平移，所以 $K^\circ_r$ 一定存在一个对称中心，这对所有 $r>0$ 都成立。
 \end{proof}
 
 \begin{remark}
 \begin{itemize}
 \item 上面的引理也可以参考 Böröczky, K. J., Figalli, A., \& Ramos, J. P. (2025). \textit{Isoperimetric inequalities, Brunn-Minkowski theory and Minkowski type Monge-Ampère equations on the sphere}.的 Proposition 6.5.3 (pp. 212-213)。
-\item 一个一般的凸体 $C\subseteq\mathbb R^n$是中心对称的，当且仅当存在 $x_0\in C$使得 $C-x_0$是关于原点中心对称的，即 $(C-x_0)=-(C-x_0)$。
+\item 一个一般的凸体 $C\subseteq\mathbb R^n$ 是中心对称的，当且仅当存在 $x_0\in C$ 使得 $C-x_0$ 是关于原点中心对称的，即 $(C-x_0)=-(C-x_0)$。
 \item 有这样的结论 
 \begin{theorem*}[Brunn]
-给定 $2<m<n$， $K\subset\mathbb R^n$是凸体，若任意一个 $m$维超平面与 $K$的交集都是中心对称的 （可能为空集），那么 $K$一定是一个椭球。
+给定 $2<m<n$，$K\subset\mathbb R^n$ 是凸体，若任意一个 $m$ 维超平面与 $K$ 的交集都是中心对称的  (可能为空集) ，那么 $K$ 一定是一个椭球。
 \end{theorem*}
-这个定理结合引理~\ref{lem:ball}表明，若 $V_n(K^\circ)= V_n((S_uK)^\circ)$对任意 $u\in\mathbb S^{n-1}$成立，则任意方向和位置的 $n-1$维超平面截 $K^\circ$得到的集合都是中心对称的，所以 $K^\circ$只能是椭球，故而 $K$也只能是椭球。这再次刻画了 BS 不等式的取等条件。
-\item 引理~\ref{lem:ball}的思路——对比 $K^\circ$的截面和 $(S_uK)^\circ$的截面，其实可以推广到一般的、不一定中心对称的凸体，这个思路是行得通的，但是分析很复杂，超出了本文的范围。读者可以参阅 Meyer, M., \& Pajor, A. (1990). \textit{On the Blaschke-Santaló inequality}.  Archiv der Mathematik, 55(1), 82-93. 一文的 Lemma 7。
+这个定理结合引理~\ref{lem:ball}表明，若 $V_n(K^\circ)= V_n((S_uK)^\circ)$ 对任意 $u\in\mathbb S^{n-1}$ 成立，则任意方向和位置的 $n-1$ 维超平面截 $K^\circ$ 得到的集合都是中心对称的，所以 $K^\circ$ 只能是椭球，故而 $K$ 也只能是椭球。这再次刻画了 BS 不等式的取等条件。
+\item 引理~\ref{lem:ball}的思路——对比 $K^\circ$ 的截面和 $(S_uK)^\circ$ 的截面，其实可以推广到一般的、不一定中心对称的凸体，这个思路是行得通的，但是分析很复杂，超出了本文的范围。读者可以参阅 Meyer, M., \& Pajor, A. (1990). \textit{On the Blaschke-Santaló inequality}.  Archiv der Mathematik, 55(1), 82-93. 一文的 Lemma 7。
 \end{itemize}
 \end{remark}
 
@@ -283,15 +283,15 @@ V_n((S_uK)^\circ)=2\int_0^\infty V_{n-1}((S_uK)^\circ_r)\,\mathrm dr\ge 2\int_0^
 前文的式~\eqref{eq:6-8}挖了一个大坑，最后还是要填一下。我们需证明下面这样的结论：
 
 \begin{theorem}[仿射等周不等式]\label{thm:as_isoperimetric}
-设 $K\subset\mathbb R^n$是凸体，那么
+设 $K\subset\mathbb R^n$ 是凸体，那么
 \[
 \left(\frac{as(K)}{as(B_n)}\right)^{\frac{n+1}{n-1}}\le \frac{V_n(K)}{V_n(B_n)}
 \]
-取等当且仅当 $K$是一个椭球。
+取等当且仅当 $K$ 是一个椭球。
 \end{theorem}
 
 \begin{remark}
-根据式 \eqref{eq:6-9}，仿射等周不等式的形式也可以改写作
+根据式 \eqref{eq:6-9}， 仿射等周不等式的形式也可以改写作
 \[
 as(K)\le nV_n(B_n)^{\frac2{n+1}}V_n(K)^{\frac{n-1}{n+1}}
 \]
@@ -299,20 +299,20 @@ as(K)\le nV_n(B_n)^{\frac2{n+1}}V_n(K)^{\frac{n-1}{n+1}}
 
 \subsection{仿射表面积}
 
-先重新审视一下仿射表面积的定义。之前的定义是这样的：若凸体 $K\subset\mathbb R^n$存在曲率函数 $f_K\ge 0$使得 $\mathrm{d}S(K,u)=f_K(u)\mathrm{d}u$，那么
+先重新审视一下仿射表面积的定义。之前的定义是这样的：若凸体 $K\subset\mathbb R^n$ 存在曲率函数 $f_K\ge 0$ 使得 $\mathrm{d}S(K,u)=f_K(u)\mathrm{d}u$， 那么
 \[
 as(K):=\int_{\mathbb S^{n-1}}f_K^{\frac n{n+1}}(u)\,\mathrm du
 \]
-就定义为 $K$的仿射表面积。早期这个概念是来自于微分几何，因此限制了 $K$需满足一定的光滑性。这里的光滑性一般指的是
+就定义为 $K$ 的仿射表面积。早期这个概念是来自于微分几何，因此限制了 $K$ 需满足一定的光滑性。这里的光滑性一般指的是
 \begin{itemize}
-\item $K$的边界曲面 $\partial K$是一个 $\mathbb {R}^n$中的正则子流形，且二次可微；
-\item Gauss 映射 $\nu_K:\partial K\to \mathbb{S}^{n-1}$是一个微分同胚。
+\item $K$ 的边界曲面 $\partial K$ 是一个 $\mathbb {R}^n$ 中的正则子流形，且二次可微；
+\item Gauss 映射 $\nu_K:\partial K\to \mathbb{S}^{n-1}$ 是一个微分同胚。
 \end{itemize}
-满足上述条件的凸体集合一般会记为 $C_+^2$。我们不深入探讨这些，简单起见，后文中我们都假设 $K$的表面足够光滑，使得曲率函数 $f_K$存在且非负，并且 $f_K$是连续的。
+满足上述条件的凸体集合一般会记为 $C_+^2$。我们不深入探讨这些，简单起见，后文中我们都假设 $K$ 的表面足够光滑，使得曲率函数 $f_K$ 存在且非负，并且 $f_K$ 是连续的。
 
 仿射表面积有其它等价定义，这里也非常简单地介绍一下。
 
-\textbf{仿射表面积等价定义 1}: 设 $L\subset\mathbb R^n$是任意一个星形体， $0\in\mathrm{int}(L)$，则其半径函数 $\rho_L$恒正且连续，有
+\textbf{仿射表面积等价定义 1}: 设 $L\subset\mathbb R^n$ 是任意一个星形体， $0\in\mathrm{int}(L)$， 则其半径函数 $\rho_L$ 恒正且连续，有
 
 \begin{align*}
 as(K)&=\int_{\mathbb S^{n-1}}f_K^{\frac n{n+1}}\mathrm du\\
@@ -322,43 +322,43 @@ as(K)&=\int_{\mathbb S^{n-1}}f_K^{\frac n{n+1}}\mathrm du\\
 &= \bigg(\underbrace{\int_{\mathbb S^{n-1}}\rho_L^{-1}\mathrm dS(K,u)}_{=:\,nV_1(K,L^\circ)}\bigg)^{\frac n{n+1}}\big(nV_n(L)\big)^{\frac1{n+1}}\\
 &=nV_1(K,L^\circ)^{\frac n{n+1}}V_n(L)^{\frac1{n+1}}  
 \end{align*}
-这里形式上定义 $\displaystyle V_1(K,L^\circ):=\int_{\mathbb S^{n-1}}\rho_L^{-1}(u)\,\mathrm{d}S(K,u)$（这避免了定义 $L^\circ$）。
-上式对所有星形体 $L$都成立，且 $f_K$连续时，不等式取等当且仅当 $f_K=\rho_L^{n+1}$。
+这里形式上定义 $\displaystyle V_1(K,L^\circ):=\int_{\mathbb S^{n-1}}\rho_L^{-1}(u)\,\mathrm{d}S(K,u)$ (这避免了定义 $L^\circ$) 。
+上式对所有星形体 $L$ 都成立，且 $f_K$ 连续时，不等式取等当且仅当 $f_K=\rho_L^{n+1}$。
 
-不难注意到 $nV_1(K,L^\circ)^{\frac n{n+1}}V_n(L)^{\frac1{n+1}}$在 $L$的缩放变换下是不变的（幂次正好消掉），于是，当 $f_K$连续时，可以将 $as(K)$写作如下极值问题的解\footnote{E. Lutwak, 1991}：
+不难注意到 $nV_1(K,L^\circ)^{\frac n{n+1}}V_n(L)^{\frac1{n+1}}$ 在 $L$ 的缩放变换下是不变的 (幂次正好消掉) ， 于是，当 $f_K$ 连续时，可以将 $as(K)$ 写作如下极值问题的解\footnote{E. Lutwak, 1991}：
 \begin{align*}
 \left(\frac1nas(K)\right)^{\frac {n+1}{n}}&=\inf\Big\{V_1(K,L^\circ)V_n(L)^{\frac1n}:\; 0\in\mathrm{int}L,\;L\text{ 是星形体 }\Big\} \\
 &=\inf\Big\{V_1(K,L^\circ):V_n(L)=1,\; 0\in\mathrm{int}L,\;L\text{ 是星形体 }\Big\} \label{eq:6-11}\tag{6-11}
 \end{align*}
-（这个式子在第~\ref{chapter:5} 章的例~\ref{ex:petty_body} 中就引入过，这里算是回收了伏笔 :-）
+ (这个式子在第~\ref{chapter:5} 章的例~\ref{ex:petty_body} 中就引入过，这里算是回收了伏笔 :-) 
 
 
-\textbf{仿射表面积等价定义 2}: 由于之前的定义对 $K$有光滑性限制，人们后来得出了一个推广的仿射表面积定义，是这样的：对一般的凸体 $K\subset\mathbb R^n$，
+\textbf{仿射表面积等价定义 2}: 由于之前的定义对 $K$ 有光滑性限制，人们后来得出了一个推广的仿射表面积定义，是这样的：对一般的凸体 $K\subset\mathbb R^n$，
 \[
 as(K):=\int_{\partial K}\kappa(x)^{\frac1{n+1}}\mathrm{d}\mathcal{H}^{n-1}(x)
 \]
-这里的 $\kappa(x)$是\emph{Gauss 曲率} (Gauss curvature)，
+这里的 $\kappa(x)$ 是\emph{Gauss 曲率} (Gauss curvature)，
 \begin{itemize}
-\item 由于 $K$的表面 (某种程度上) 是几乎处处二次可微的\footnote{Alexandrov 定理}， $\kappa(x)$在 $\partial K$上也几乎处处有定义。
-\item 当 $K$表面光滑，使得 $f_K$存在且恒正时，有 $\displaystyle\kappa(x)=\frac1{f_K(\nu_K(x))}$。可以验证该定义与之前给出的定义相容：
+\item 由于 $K$ 的表面 (某种程度上) 是几乎处处二次可微的\footnote{Alexandrov 定理}， $\kappa(x)$ 在 $\partial K$ 上也几乎处处有定义。
+\item 当 $K$ 表面光滑，使得 $f_K$ 存在且恒正时，有 $\displaystyle\kappa(x)=\frac1{f_K(\nu_K(x))}$。可以验证该定义与之前给出的定义相容：
 \begin{align*}
 \int_{\partial K}  f_K(\nu_K(x))^{-\frac1{n+1}}\mathrm{d}\mathcal{H}^{n-1}(x)&=\int_{\mathbb S^{n-1}}f_K(u)^{-\frac1{n+1}}\underbrace{\vphantom{\int}\mathrm{d}S(K,u)}_{f_K(u)\mathrm{d}u} \tag{换元 $u=\nu_K(x)$}\\
 &=\int_{\mathbb{S}^{n-1}}f_K(u)^{\frac n{n+1}}(u)\,\mathrm du
 \end{align*}
 \end{itemize}
 
-最后我们研究 $as(K)$在 $K$的变换下相应的结论。显然， $as(K)$在平移变换下是不变的，因为 $S(K,\cdot)$平移不变，自然 $f_K$和 $as(K)$也应如此。此外，我们后文中还会用到一个结论，
+最后我们研究 $as(K)$ 在 $K$ 的变换下相应的结论。显然， $as(K)$ 在平移变换下是不变的，因为 $S(K,\cdot)$ 平移不变，自然 $f_K$ 和 $as(K)$ 也应如此。此外，我们后文中还会用到一个结论，
 
 \begin{lemma}\label{lem:as_scaling}
-设 $\lambda>0$，则 $as(\lambda K)=\lambda^{\frac{n(n+1)}{n+1}}as(K)$。
+设 $\lambda>0$， 则 $as(\lambda K)=\lambda^{\frac{n(n+1)}{n+1}}as(K)$。
 \end{lemma}
 
 \begin{proof}
-最简单的方法是用 \eqref{eq:6-11}。由 $S(\lambda K,\cdot)=\lambda^{n-1}S(K,\cdot)$ (命题~\ref{prop:surface_scaling})，故
+最简单的方法是用 \eqref{eq:6-11}。由 $S(\lambda K,\cdot)=\lambda^{n-1}S(K,\cdot)$ (命题~\ref{prop:surface_scaling})， 故
 \[
 V_1(\lambda K,L^\circ):=\int_{\mathbb S^{n-1}}\rho_L^{-1}(u)\mathrm dS(\lambda K,u)=\lambda^{n-1}\int_{\mathbb S^{n-1}}\rho_L^{-1}(u)\mathrm dS(K,u)
 \]
-因此，根据 \eqref{eq:6-11}，
+因此，根据 \eqref{eq:6-11}， 
 \begin{align*}
 \left(\frac1nas(\lambda K)\right)^{\frac {n+1}{n}}&=\lambda^{n-1}\left(\frac1nas(K)\right)^{\frac {n+1}{n}}\\
 \implies as(\lambda K)&=\lambda^{\frac{n(n-1)}{n+1}}as(K)
@@ -366,21 +366,21 @@ V_1(\lambda K,L^\circ):=\int_{\mathbb S^{n-1}}\rho_L^{-1}(u)\mathrm dS(\lambda K
 \end{proof}
 
 \begin{remark}
-    为什么这个名字叫``仿射"表面积呢？因为实际上有一个更一般的仿射不变性的结论：设 $T:\mathbb R^n\to \mathbb{R}^n$是一个仿射变换，那么 $as(TK)=\mathrm{det}(T)^{\frac{n-1}{n+1}}as(K)$。特别地，对任意的 $T\in\mathrm{SL}(n)$，都有 $as(TK)=as(K)$。读者可以尝试自证。
+    为什么这个名字叫``仿射"表面积呢？因为实际上有一个更一般的仿射不变性的结论：设 $T:\mathbb R^n\to \mathbb{R}^n$ 是一个仿射变换，那么 $as(TK)=\mathrm{det}(T)^{\frac{n-1}{n+1}}as(K)$。特别地，对任意的 $T\in\mathrm{SL}(n)$， 都有 $as(TK)=as(K)$。读者可以尝试自证。
 \end{remark}
 
 \subsection{仿射等周不等式的证明}
 
 主要思路就是用 Steiner 对称化，分三步走。
 
-\textbf{第一步}，先证明仿射表面积在 Steiner 对称化下是单调的，
+\textbf{第一步}， 先证明仿射表面积在 Steiner 对称化下是单调的，
 
 \begin{lemma}\label{lem:as_monotone}
-设凸体 $K\subset \mathbb{R}^n$，那么 $as(K)\le as(S_nK)$对任意 $u\in\mathbb{S}^{n-1}$成立。
+设凸体 $K\subset \mathbb{R}^n$， 那么 $as(K)\le as(S_nK)$ 对任意 $u\in\mathbb{S}^{n-1}$ 成立。
 \end{lemma}
 
 \begin{proof}
-回忆一下，在 Steiner 对称化中，我们会将 $K$投影至 $u^\perp$，得到 $P_uK$；随之，对任意 $x\in P_uK$，作 $u$方向过 $x$的直线，与 $K$交于两点；最后平移两点之间的线段使得 $x$位于其中点，达到对称化的效果。不失一般性，设 $u=e_n$是第 $n$个坐标向量，则 $u^\perp=\mathbb{R}^{n-1}$, 见图~\ref{fig:steiner_2}。则 (式~\eqref{eq:3-3})：
+回忆一下，在 Steiner 对称化中，我们会将 $K$ 投影至 $u^\perp$， 得到 $P_uK$；随之，对任意 $x\in P_uK$， 作 $u$ 方向过 $x$ 的直线，与 $K$ 交于两点；最后平移两点之间的线段使得 $x$ 位于其中点，达到对称化的效果。不失一般性，设 $u=e_n$ 是第 $n$ 个坐标向量，则 $u^\perp=\mathbb{R}^{n-1}$， 见图~\ref{fig:steiner_2}。则 (式~\eqref{eq:3-3})：
 \begin{align*}
 K&=\big\{(x,t):g(x)\le t\le f(x),x\in \mathbb{R}^{n-1}\big\}\\
 S_uK&=\left\{(x,t):|t|\le \frac{f(x)-g(x)}2,x\in \mathbb{R}^{n-1}\right\}
@@ -392,10 +392,10 @@ S_uK&=\left\{(x,t):|t|\le \frac{f(x)-g(x)}2,x\in \mathbb{R}^{n-1}\right\}
 \caption{Steiner 对称化的示意图。}\label{fig:steiner_2}
 \end{figure}
 
-可以看出， $(x,f(x))\in\partial K$、 $(x,g(x))\in\partial K$，且 $f$是凹函数、 $g$是凸函数，因而几乎处处二次可微，我们可以认为二者包含了 $K$的边界信息。例如，将\emph{上图} (upper graph) $\{(x,f(x)):x\in\mathrm{int}(P_uK)\}$视作曲面，不难得出
+可以看出， $(x,f(x))\in\partial K$、 $(x,g(x))\in\partial K$， 且 $f$ 是凹函数、 $g$ 是凸函数，因而几乎处处二次可微，我们可以认为二者包含了 $K$ 的边界信息。例如，将\emph{上图} (upper graph) $\{(x,f(x)):x\in\mathrm{int}(P_uK)\}$ 视作曲面，不难得出
 \begin{itemize}
-\item $(x,f(x))$处的法向量为 $\displaystyle\frac{(-\nabla f(x),1)}{\sqrt{1+\|\nabla f\|^2}}$；
-\item $(x,f(x))$处的 Gauss 曲率为 $\kappa (z)=\frac{\mathrm{det}(-\nabla^2 f)}{\left(\sqrt{1+\|\nabla f\|^2}\right)^{n+1}}$\footnote{读者可以算下第一和第二基本型矩阵的行列式，从而得到上式；注意凸体的 Gauss 曲率一定是非负的。}；
+\item $(x,f(x))$ 处的法向量为 $\displaystyle\frac{(-\nabla f(x),1)}{\sqrt{1+\|\nabla f\|^2}}$；
+\item $(x,f(x))$ 处的 Gauss 曲率为 $\kappa (z)=\frac{\mathrm{det}(-\nabla^2 f)}{\left(\sqrt{1+\|\nabla f\|^2}\right)^{n+1}}$\footnote{读者可以算下第一和第二基本型矩阵的行列式，从而得到上式；注意凸体的 Gauss 曲率一定是非负的。}；
 \item 以及，该曲面上的 Hausdorff 测度满足 $\mathrm{d}\mathcal{H}^{n-1}(z)=\sqrt{1+\|\nabla f(x)\|^2}\,\mathrm{d}x$\footnote{这个是曲面的第一基本型矩阵的行列式决定的。}
 \end{itemize}
 
@@ -407,7 +407,7 @@ S_uK&=\left\{(x,t):|t|\le \frac{f(x)-g(x)}2,x\in \mathbb{R}^{n-1}\right\}
 &\quad + \int_{\mathrm{int}(P_uK)}\left(\frac{\mathrm{det}(\nabla^2g(x))}{(\sqrt{1+\|\nabla g(x)\|^2})^{n+1}}\right)^{\frac1{n+1}}\sqrt{1+\|\nabla g(x)\|^2}\mathrm{d}x\\
 &=\int_{\mathrm{int}(P_uK)}\left(\mathrm{det}(-\nabla^2f(x))^{\frac1{n+1}}+\mathrm{det}(\nabla^2g(x))^{\frac1{n+1}}\right)\mathrm{d}x \label{eq:6-12}\tag{6-12}
 \end{align*}
-完全类似地，用 $\frac{f-g}2$替换上式的 $f$、 $-\frac{f-g}2$替换上式的 $g$，有
+完全类似地，用 $\frac{f-g}2$ 替换上式的 $f$、 $-\frac{f-g}2$ 替换上式的 $g$， 有
 \begin{align*}
 as(S_uK)&=\int_{\mathrm{int}(P_uK)}2\mathrm{det}\left(\frac{\nabla^2g(x)-\nabla^2f(x)}{2}\right) ^{\frac1{n+1}}\mathrm{d}x \label{eq:6-13}\tag{6-13}
 \end{align*}
@@ -415,7 +415,7 @@ as(S_uK)&=\int_{\mathrm{int}(P_uK)}2\mathrm{det}\left(\frac{\nabla^2g(x)-\nabla^
 我们用一个矩阵的不等式来比较上面两个式子 
 
 \begin{lemma}[Minkowski 行列式不等式]\label{lem:minkowski_det}
-对任意半正定对称 $n\times n$矩阵 $A,B$，有
+对任意半正定对称 $n\times n$ 矩阵 $A,B$， 有
 \[
 \mathrm{det}(A+B)^{\frac1n}\ge\mathrm{det}(A)^{\frac1n}+\mathrm{det}(B)^{\frac1n}
 \]
@@ -425,17 +425,17 @@ as(S_uK)&=\int_{\mathrm{int}(P_uK)}2\mathrm{det}\left(\frac{\nabla^2g(x)-\nabla^
 
 
 \begin{corollary}\label{col:matrix_ineq}
-对任意半正定对称 $(n-1)\times (n-1)$矩阵 $A,B$，
+对任意半正定对称 $(n-1)\times (n-1)$ 矩阵 $A,B$， 
 \[
 \left(\mathrm{det}\left(\frac{A+B}{2}\right)\right)^{\frac1{n+1}}\ge \frac12\mathrm{det}(A)^{\frac1{n+1}}+\frac12\mathrm{det}(B)^{\frac1{n+1}}
 \]
 \end{corollary}
 
 \begin{proof}
-设 $X$是 $(n-1)\times (n-1)$矩阵，引理~\ref{lem:minkowski_det} 表明函数 $F(X):=\mathrm{det}(X)^{\frac1{n-1}}$是凹函数；再结合 $\varphi(x):=x^{\frac{n-1}{n+1}}$是凹函数且单调递增，二者复合 $\varphi\circ F$就也是凹函数 (见 Boyd 凸优化的 3.2.4 节)，用 Jensen 不等式立得。
+设 $X$ 是 $(n-1)\times (n-1)$ 矩阵，引理~\ref{lem:minkowski_det} 表明函数 $F(X):=\mathrm{det}(X)^{\frac1{n-1}}$ 是凹函数；再结合 $\varphi(x):=x^{\frac{n-1}{n+1}}$ 是凹函数且单调递增，二者复合 $\varphi\circ F$ 就也是凹函数 (见 Boyd 凸优化的 3.2.4 节)， 用 Jensen 不等式立得。
 \end{proof}
 
-把 $-\nabla ^2f$和 $\nabla^2g$代入推论~\ref{col:matrix_ineq} 里，立即可以推出
+把 $-\nabla ^2f$ 和 $\nabla^2g$ 代入推论~\ref{col:matrix_ineq} 里，立即可以推出
 \[
 2\mathrm{det}\left(\frac{\nabla^2g(x)-\nabla^2f(x)}{2}\right)^{\frac1{n+1}}\ge \mathrm{det}(-\nabla^2f(x))^{\frac1{n+1}}+\mathrm{det}(\nabla^2g(x))^{\frac1{n+1}}
 \]
@@ -445,13 +445,13 @@ as(S_uK)&=\int_{\mathrm{int}(P_uK)}2\mathrm{det}\left(\frac{\nabla^2g(x)-\nabla^
 \textbf{第二步}: 证明仿射表面积是上半连续的。其实根据式 \eqref{eq:6-11}——仿射表面积可以表示成下确界的形式，上半连续是自然成立的：
 
 \begin{lemma}\label{lem:as_semi_cont}
-若一列凸体 $K_j$依 Hausdorff 度量收敛到 $K$，记作 $K_j\to K$，那么
+若一列凸体 $K_j$ 依 Hausdorff 度量收敛到 $K$， 记作 $K_j\to K$， 那么
 \[
 \limsup_{j\to\infty}as(K_j)\le as(K)
 \]
 \end{lemma}
 
-\textbf{第三步}: 准备就绪，用 Steiner 对称化！设 $K$在一列单位方向$\{u_j\}_{j=1}^\infty$下依 Hausdorff 度量收敛至球 (定理~\ref{thm:gross})，记 $K_j=S_{u_j}S_{u_{j-1}}\cdots S_{u_2}S_{u_1}K$，那么根据引理~\ref{lem:as_monotone}，
+\textbf{第三步}: 准备就绪，用 Steiner 对称化！设 $K$ 在一列单位方向$\{u_j\}_{j=1}^\infty$ 下依 Hausdorff 度量收敛至球 (定理~\ref{thm:gross})， 记 $K_j=S_{u_j}S_{u_{j-1}}\cdots S_{u_2}S_{u_1}K$， 那么根据引理~\ref{lem:as_monotone}，
 \[
 as(K)\le as(K_1)\le \cdots\le as(K_j)\le \cdots
 \]
@@ -473,14 +473,14 @@ as(K)&\le \lim_{j\to\infty}as(K_j)\\
 \item BS 不等式 (定理~\ref{thm:bs})： $V_n(K)V_n(K^\circ)\le V_n(B_n)^2$；
 \item 仿射等周不等式 (定理~\ref{thm:as_isoperimetric}): $as(K)\le nV_n(B_n)^{\frac2{n+1}}V_n(K)^{\frac{n-1}{n+1}}$；
 \end{itemize}
-在证明定理~\ref{thm:bs}的过程中用到了仿射等周不等式（在式 \eqref{eq:6-8}），因而后者是蕴含前者的。更进一步，可以证明它们俩实际上等价。下面我们用 BS 不等式推一下仿射等周不等式。
+在证明定理~\ref{thm:bs}的过程中用到了仿射等周不等式 (在式 \eqref{eq:6-8}) ， 因而后者是蕴含前者的。更进一步，可以证明它们俩实际上等价。下面我们用 BS 不等式推一下仿射等周不等式。
 
-其实这个特别容易。由平移不变性，我们把 $K$的 Santaló 点平移到原点。仍用~\eqref{eq:6-11}，注意到取 $L=K^\circ$时 $\displaystyle V_n(K,L^\circ)=\int_{\mathbb{S}^{n-1}}h_K(u)\,\mathrm{d}S(K,u)=V_n(K)$，则
+其实这个特别容易。由平移不变性，我们把 $K$ 的 Santaló 点平移到原点。仍用~\eqref{eq:6-11}， 注意到取 $L=K^\circ$ 时 $\displaystyle V_n(K,L^\circ)=\int_{\mathbb{S}^{n-1}}h_K(u)\,\mathrm{d}S(K,u)=V_n(K)$， 则
 \begin{align*}
 as(K)&=\inf\Big\{nV_1(K,L^\circ)^{\frac n{n+1}}V_n(L)^{\frac1{n+1}}:0\in\mathrm{int}(L),\;L\text{ 是星形体}\Big\}\\
 &\le nV_n(K)^{\frac n{n+1}}V_n(K^\circ)^{\frac1{n+1}} \tag{取 $L=K^\circ$}\\
 &=n\big(V_n(K)V_n(K^\circ)\big)^{\frac1{n+1}}V_n(K)^{\frac {n-1}{n+1}}\\
 &\le nV_n(B_n)^{\frac2{n+1}}V_n(K)^{\frac {n-1}{n+1}} \tag{由 BS 不等式}
 \end{align*}
-正是仿射等周不等式，其取等仅当 BS 不等式取等，即 $K$是一个椭球。
+正是仿射等周不等式，其取等仅当 BS 不等式取等，即 $K$ 是一个椭球。
  

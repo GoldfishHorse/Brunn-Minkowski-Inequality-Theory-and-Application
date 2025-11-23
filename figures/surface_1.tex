@@ -42,7 +42,7 @@
   \coordinate (RK4) at ($ (K4) + (\xsep,0) $);
   \coordinate (RK5) at ($ (K5) + (\xsep,0) $);
 
-  % 手工调节的外扩顶点（基于 RK 顶点的局部偏移，视觉上近似 Minkowski 膨胀）
+  % 手工调节的外扩顶点（基于 RK 顶点的局部偏移, 视觉上近似 Minkowski 膨胀）
   \coordinate (OK1) at ($(RK1)+(-\eps,0.22)$);
   \coordinate (OK2) at ($(RK2)+(0.06,\eps)$);
   \coordinate (OK3) at ($(RK3)+(\eps,-0.06)$);
@@ -67,7 +67,7 @@
 \node[above right,xshift=4pt,yshift=2pt] (mylbl) at ($( \xsep-0.5,1.5)$) {$(K+\epsilon B_n)\setminus K$};
 \draw[->, >=Stealth, thick] ($( \xsep,0.6)$) to[bend left=18] (mylbl);
 
-  % % ---- 底部：高度为 epsilon 的长方形，标注 perimeter of K ----
+  % % ---- 底部：高度为 epsilon 的长方形, 标注 perimeter of K ----
   % \begin{scope}[shift={(0,-2.2)}]
   %   \def\W{5.2}
   %   \draw[thick] (-\W/2,0) rectangle (\W/2,\eps);

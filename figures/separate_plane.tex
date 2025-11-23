@@ -38,7 +38,7 @@
 
     % 4. 绘制左侧的点
     \fill (PointLeft) circle (3pt);
-    % 可选：如果需要标记点的名称，取消下面注释
+    % 可选：如果需要标记点的名称, 取消下面注释
     % \node[below left] at (PointLeft) {$x_0$};
 
     % 5. 绘制右侧凸体 (Convex Body)
@@ -50,7 +50,7 @@
     \draw[thick] (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- cycle;
 
     % 6. 绘制法向量 u (Normal Vector)
-    % 蓝色，加粗，从分离线指向左侧
+    % 蓝色, 加粗, 从分离线指向左侧
     \draw[->, >=stealth, color=blue, line width=1.5pt] 
         (-0.2, 0.5) -- (-1.0, 0.5) node[midway, above, text=blue] {$\mathbf{u}$};
         

@@ -1,6 +1,6 @@
 \chapter{Steiner 对称化}\label{chapter:3}
 
-\emph{Steiner 对称化}（Steiner symmetrization）是一个非常强有力的证明凸几何中不等式工具，尤其是，若不等式在单位球情况下达到最大或最小值时，很可能对称化的技巧可以用来解决。
+\emph{Steiner 对称化} (Steiner symmetrization) 是一个非常强有力的证明凸几何中不等式工具，尤其是，若不等式在单位球情况下达到最大或最小值时，很可能对称化的技巧可以用来解决。
 
 \section{定义}
 
@@ -10,12 +10,12 @@ u^\perp :=\big\{x\in\mathbb{R}^n:\langle u,x\rangle=0\big\}
 \]
 这可以视作是空间 $\mathbb{R}^{n-1}$。
 
-将凸体 $K$ 投影到 $u^\perp$ 中，记作 $P_u K$。此时，对任意 $x\in P_u K$，我们都可以沿着 $u$ 方向画一条线 $\{x+tu, t\in\mathbb{R}\}$，这条线会与 $K$ 相交，交集是一条线段，或称``\emph{弦}（chord）"。将这条弦的上端点对应 $t$ 值记作 $f(x)$、下端点对应 $t$ 值记作 $g(x)$\footnote{交集也可能是一个点，此时视作退化的弦，$f(x)=g(x)$。}，见图~\ref{fig:steiner_sym_1}。
+将凸体 $K$ 投影到 $u^\perp$ 中，记作 $P_u K$。此时，对任意 $x\in P_u K$， 我们都可以沿着 $u$ 方向画一条线 $\{x+tu, t\in\mathbb{R}\}$， 这条线会与 $K$ 相交，交集是一条线段，或称``\emph{弦} (chord) "。将这条弦的上端点对应 $t$ 值记作 $f(x)$、下端点对应 $t$ 值记作 $g(x)$\footnote{交集也可能是一个点，此时视作退化的弦，$f(x)=g(x)$。}， 见图~\ref{fig:steiner_sym_1}。
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth]{figures/steiner_symmetration.pdf}
-\caption{将凸体 $K$ 投影到平面 $u^\perp$，再将之表示成由 $u$ 方向的弦组成的集合。对 $x\in P_uK$，$f(x)$ 和 $g(x)$ 分别表示弦的上端点和下端点对应的 $t$ 值。}
+\caption{将凸体 $K$ 投影到平面 $u^\perp$， 再将之表示成由 $u$ 方向的弦组成的集合。对 $x\in P_uK$，$f(x)$ 和 $g(x)$ 分别表示弦的上端点和下端点对应的 $t$ 值。}
 \label{fig:steiner_sym_1}
 \end{figure}
 
@@ -43,26 +43,26 @@ S_uK:=\left\{x+tu:  |t|\le \frac{f(x)-g(x)}{2}, x\in P_uK\right\} \label{eq:3-2}
 \footnotetext{图片来自 Coupier, D., \& Davydov, Y. (2014). \textit{Random symmetrizations of convex bodies}. Advances in Applied Probability, 46(3), 603-621.}
 \hfill\break
 \begin{remark}
-    Steiner 对称化不仅可以用于凸体，也可以用于非凸的集合，不过这个时候直线 $x+tu$ 与 $K$ 的交集可能会很复杂（例如，一条弦可能会被分成好几段），需要将弦长 $f-g$ 定义为 $V_{1}(K\cap \{x+tu,t\in\mathbb{R}\})$。我们文中不涉及这种情况。
+    Steiner 对称化不仅可以用于凸体，也可以用于非凸的集合，不过这个时候直线 $x+tu$ 与 $K$ 的交集可能会很复杂 (例如，一条弦可能会被分成好几段) ， 需要将弦长 $f-g$ 定义为 $V_{1}(K\cap \{x+tu,t\in\mathbb{R}\})$。我们文中不涉及这种情况。
 \end{remark}
 
 \section{性质}
 
-下面设 $K,L\subset\mathbb{R}^n$ 是凸体、$u\in\mathbb{S}^{n-1}$，我们给出关于 Steiner 对称化的一些重要性质。
+下面设 $K,L\subset\mathbb{R}^n$ 是凸体、$u\in\mathbb{S}^{n-1}$， 我们给出关于 Steiner 对称化的一些重要性质。
 
 \begin{proposition}[保体积]\label{prop:steiner_volume}
 经过 Steiner 对称化之后体积不变，即 $V_n(K)=V_n(S_uK)$。
 \end{proposition}
 
 \begin{proof}
-只需注意到对任意的 $x\in P_uK$，直线 $x+tu$ 来截 $K$ 和 $S_uK$ 的弦长是一样的，都是 $f(x)-g(x)$：
+只需注意到对任意的 $x\in P_uK$， 直线 $x+tu$ 来截 $K$ 和 $S_uK$ 的弦长是一样的，都是 $f(x)-g(x)$：
 \[
 V_n(S_uK)=\int_{P_u}(f-g)\mathrm{d}x=V_n(K)
 \]
 \end{proof}
 
 \begin{proposition}[保包含关系]\label{prop:steiner_contain}
-设 $K\subseteq L$，那么 $S_uK\subseteq S_u L$。
+设 $K\subseteq L$， 那么 $S_uK\subseteq S_u L$。
 \end{proposition}
 
 \begin{proof}
@@ -74,11 +74,11 @@ $S_uK$ 仍是凸体。
 \end{proposition}
 
 \begin{proof}
-任取两点 $x,y\in S_uK$，考虑二者所在直线截 $K$ 得到的弦，取两弦之并的凸包
+任取两点 $x,y\in S_uK$， 考虑二者所在直线截 $K$ 得到的弦，取两弦之并的凸包
 \[
 T:=\mathrm{Conv}\Big(\big(\{x+tu, t\in\mathbb{R}\}\cap K\big)\cup\big(\{y+tu, t\in\mathbb{R}\}\cap K\big)\Big)
 \]
-这个 $T$ 是两弦所夹的凸的梯形（trapezoid）。由于 $K$ 自身是凸的，则两弦的凸包仍位于 $K$ 中，则 $T\subset K$；可见梯形 $T$ 在对称化之后，$S_uT$ 也是一个凸的梯形，且包含于 $S_uK$ 内（命题~\ref{prop:steiner_contain}），见图~\ref{fig:steiner_sym_3}。故
+这个 $T$ 是两弦所夹的凸的梯形 (trapezoid) 。由于 $K$ 自身是凸的，则两弦的凸包仍位于 $K$ 中，则 $T\subset K$；可见梯形 $T$ 在对称化之后，$S_uT$ 也是一个凸的梯形，且包含于 $S_uK$ 内 (命题~\ref{prop:steiner_contain}) ， 见图~\ref{fig:steiner_sym_3}。故
 \[
 \{(1-\lambda)x+\lambda y:0\le\lambda\le 1\}\subseteq S_uT\subseteq S_uK
 \]
@@ -97,7 +97,7 @@ $S_u(K+L)\supseteq S_uK+S_uL$。
 \end{proposition}
 
 \begin{proof}
-由于 $u$ 的值不重要，我们可以不失一般性地假设 $u=e_n$（第 $n$ 个坐标向量），则 $u^\perp=\mathbb{R}^{n-1}$。前面的~\eqref{eq:3-1}、\eqref{eq:3-2} 又可写作
+由于 $u$ 的值不重要，我们可以不失一般性地假设 $u=e_n$ (第 $n$ 个坐标向量) ， 则 $u^\perp=\mathbb{R}^{n-1}$。前面的~\eqref{eq:3-1}、\eqref{eq:3-2} 又可写作
 \begin{equation}
 \begin{aligned}
 K&=\big\{(x,t):g(x)\le t\le f(x),x\in \mathbb{R}^{n-1}\big\}\\
@@ -107,7 +107,7 @@ S_uK&=\left\{(x,t):|t|\le \frac{f(x)-g(x)}2,x\in \mathbb{R}^{n-1}\right\}
 \end{equation}
 
 记 $K_x:=K\cap \{(x,t),t\in\mathbb{R}\}$ 是 $x$ 沿 $u$ 方向直线截 $K$ 的弦，$x\in \mathbb{R}^{n-1}$。
-首先，对任意的 $z\in \mathbb{R}^{n-1}$，有
+首先，对任意的 $z\in \mathbb{R}^{n-1}$， 有
 \begin{align*}
 (K+L)_z&=(K+L)\cap \{(z,t):t\in \mathbb{R}\}\\
 &=\Big\{(x+y,r+s): \text{ 存在 } (x,r)\in K,\,(y,s)\in L,\\
@@ -116,14 +116,14 @@ S_uK&=\left\{(x,t):|t|\le \frac{f(x)-g(x)}2,x\in \mathbb{R}^{n-1}\right\}
 \end{align*}
 于是 $(K+L)_{x+y}\supseteq (K_x+L_y)$，$\forall x,y\in \mathbb{R}^{n-1}$。
 
-\eqref{eq:3-3} 式表明 $(S_uK)_x=\left\{(x,r):  |r|\le V_1(K_x)/2 \right\}$。可以注意到，对任意的 $(x,r)\in S_uK$、$(y,s)\in S_uL$，有
+\eqref{eq:3-3} 式表明 $(S_uK)_x=\left\{(x,r):  |r|\le V_1(K_x)/2 \right\}$。可以注意到，对任意的 $(x,r)\in S_uK$、$(y,s)\in S_uL$， 有
 \begin{align*}
 |r+s|&\le |r|+|s|\\
 &\le\frac{V_1(K_x)}{2}+\frac{V_1(L_y)}{2}\\
 &=\frac{V_1(K_x+L_y)}{2}\\
 &\le \frac{V_1((K+L)_{x+y})}{2}
 \end{align*}
-（第三行是因为 $K_x$ 和 $L_y$ 都是线段，故 $V_1(K_x+L_y)=V_1(K_x)+V_1(L_y)$，回忆一下例~\ref{ex:line_segment}。）
+ (第三行是因为 $K_x$ 和 $L_y$ 都是线段，故 $V_1(K_x+L_y)=V_1(K_x)+V_1(L_y)$， 回忆一下例~\ref{ex:line_segment}。) 
 
 于是对任意 $z \in \mathbb{R}^{n-1}$，
 \begin{align*}
@@ -150,16 +150,16 @@ S_uK&=\left\{(x,t):|t|\le \frac{f(x)-g(x)}2,x\in \mathbb{R}^{n-1}\right\}
 
 \section{Gross 定理}
 
-\emph{Gross 定理}，或者叫 \emph{Sphericity Theorem of Gross}，是一个关于 Steiner 对称化的至关重要的定理。通俗地说：\emph{给定某个凸体 $K$，反复对其进行合适的 Steiner 对称化操作，那么在极限情形下，我们总能将 $K$ 变成一个球}。
+\emph{Gross 定理}， 或者叫 \emph{Sphericity Theorem of Gross}， 是一个关于 Steiner 对称化的至关重要的定理。通俗地说：\emph{给定某个凸体 $K$， 反复对其进行合适的 Steiner 对称化操作，那么在极限情形下，我们总能将 $K$ 变成一个球}。
 
 我们首先进行一些准备。首先定义球的概念：
 \begin{definition}[球和椭球]\label{def:ball}
-    设 $x\in\mathbb{R}^n$、$r>0$，我们定义``\emph{球}（balls）"或者说``欧氏球"是 $B_n(x,r):=\{y\in\mathbb{R}^n:\|x-y\|_2\le r\}$。单位球记作 $B_n:=B_n(0,1)$，它在所有方向上都对称，因而天然贴合对称化的目标。设 $T$ 是 $\mathbb{R}^n$ 上的非奇异线性变换，则称 $E= TB_n(x,r)$ 为``\emph{椭球}（ellispoid）"。
+    设 $x\in\mathbb{R}^n$、$r>0$， 我们定义``\emph{球} (balls) "或者说``欧氏球"是 $B_n(x,r):=\{y\in\mathbb{R}^n:\|x-y\|_2\le r\}$。单位球记作 $B_n:=B_n(0,1)$， 它在所有方向上都对称，因而天然贴合对称化的目标。设 $T$ 是 $\mathbb{R}^n$ 上的非奇异线性变换，则称 $E= TB_n(x,r)$ 为``\emph{椭球} (ellispoid) "。
 \end{definition}
 
-其次我们定义如何衡量两个凸体之间的差距。$\mathbb{R}^n$ 中全部凸体构成的集合上有自然拓扑，它可以视作是由 \emph{Hausdorff 度量}（Hausdorff metric）诱导得出。
+其次我们定义如何衡量两个凸体之间的差距。$\mathbb{R}^n$ 中全部凸体构成的集合上有自然拓扑，它可以视作是由 \emph{Hausdorff 度量} (Hausdorff metric) 诱导得出。
 \begin{definition}[Hausdorff 距离]\label{def:hausdorff_distance}
-定义点 $a\in\mathbb{R}^n$ 到集合 $X\subseteq\mathbb{R}^n$ 的距离为 $d(a,X):=\inf\limits_{x\in X}\|x-a\|_2$，那么凸体 $X,Y$ 之间的 \emph{ Hausdorff 距离} 定义为：
+定义点 $a\in\mathbb{R}^n$ 到集合 $X\subseteq\mathbb{R}^n$ 的距离为 $d(a,X):=\inf\limits_{x\in X}\|x-a\|_2$， 那么凸体 $X,Y$ 之间的 \emph{ Hausdorff 距离} 定义为：
 \begin{align*}
 d_H(X,Y)&:=\max\Big\{\sup_{x\in X}d(x,y),\sup_{y\in Y}d(X,y)\Big\}\\
 &=\inf\Big\{\delta\ge 0:X\subseteq Y+\delta B_n,\,Y\subseteq X+\delta B_n\Big\}
@@ -174,15 +174,15 @@ d_H(X,Y):=\sup_{u\in \mathbb{S}^{n-1}}|h(X,u)-h(Y,u)|
 
 最后还需要 Steiner 对称化的一个性质作为引理，
 \begin{proposition}[Steiner 对称化的连续性]\label{prop:steiner_continuous}
-设有一列 $\mathbb{R}^n$ 中的凸体 $\{C_j\}_{j=1}^\infty$ 满足 $C_j\to C_0$，那么 $S_u C_j\to S_u C_0$。这里的收敛是在 Hausdorff 度量意义下的收敛。
+设有一列 $\mathbb{R}^n$ 中的凸体 $\{C_j\}_{j=1}^\infty$ 满足 $C_j\to C_0$， 那么 $S_u C_j\to S_u C_0$。这里的收敛是在 Hausdorff 度量意义下的收敛。
 \end{proposition}
 
 \begin{proof}
-不失一般性设原点 $0\in C_0$，上述收敛可以表述为对任意 $\epsilon>0$，都存在充分大的 $j$ 使得 $(1-\epsilon)C_0\subseteq C_j\subseteq (1+\epsilon)C_0$，用性质~\ref{prop:steiner_contain} 和 \ref{prop:steiner_scaling}，得出 $(1-\epsilon)S_uC_0\subseteq S_uC_j\subseteq (1+\epsilon)S_uC_0$。
+不失一般性设原点 $0\in C_0$， 上述收敛可以表述为对任意 $\epsilon>0$， 都存在充分大的 $j$ 使得 $(1-\epsilon)C_0\subseteq C_j\subseteq (1+\epsilon)C_0$， 用性质~\ref{prop:steiner_contain} 和 \ref{prop:steiner_scaling}， 得出 $(1-\epsilon)S_uC_0\subseteq S_uC_j\subseteq (1+\epsilon)S_uC_0$。
 \end{proof}
 
 \begin{theorem}[Gross 定理]\label{thm:gross}
-对任意给定的凸体 $K\subset\mathbb{R}^n$，记 $\mathscr{H}$ 代表一切通过对 $K$ 进行有限次 Steiner 对称化操作能够得到的集合，则 $\mathscr{H}$ 中存在一列凸体 $\{K_j\}_{j=1}^\infty$ 能收敛到一个同体积的球，即
+对任意给定的凸体 $K\subset\mathbb{R}^n$， 记 $\mathscr{H}$ 代表一切通过对 $K$ 进行有限次 Steiner 对称化操作能够得到的集合，则 $\mathscr{H}$ 中存在一列凸体 $\{K_j\}_{j=1}^\infty$ 能收敛到一个同体积的球，即
 \[
 K_j\to \left(\frac{V_n(K)}{V_n(B_n)}\right)^{1/n}B_n,\qquad j\to\infty
 \]
@@ -190,13 +190,13 @@ K_j\to \left(\frac{V_n(K)}{V_n(B_n)}\right)^{1/n}B_n,\qquad j\to\infty
 \end{theorem}
 
 \begin{proof}
-我们要用到一个引理，称作 \emph{Blaschke 选择定理}：设 $\mathbb{R}^n$ 中有一列凸体一致有界\footnote{均被某个有界集包含。}，则其存在子列在 Hausdorff 度量意义下收敛，其极限是一个（可能退化\emph{i.e.}, 内点为空）的凸体。
+我们要用到一个引理，称作 \emph{Blaschke 选择定理}：设 $\mathbb{R}^n$ 中有一列凸体一致有界\footnote{均被某个有界集包含。}， 则其存在子列在 Hausdorff 度量意义下收敛，其极限是一个 (可能退化\emph{i.e.}， 内点为空) 的凸体。
 \footnote{Blaschke 选择定理是一个非常有用的工具。该定理可以由泛函分析中的 Arzelà–Ascoli 定理推出。证明可以参考 Schneider, R. (2014). \textit{Convex bodies: the Brunn-Minkowski theory}. Cambridge University Press. 的定理 1.8.7 (p. 48)；抑或是 Gruber, P. M. (2007). \textit{Convex and discrete geometry}. Berlin, Heidelberg: Springer Berlin Heidelberg. 的 Theorem 6.3. (pp. 85-88)。}
 
-根据性质~\ref{prop:steiner_convex}，$\mathscr{H}$ 中的集合都是凸体。记 $\rho(K):=\inf\{r:K\subseteq B_n(0,r)\}$（这个函数也是对 Hausdorff 度量连续），$\sigma:=\inf\limits_{X\in\mathscr{H}}\rho(X)$，则存在一列凸体 $\{C_j\}_{j=1}^\infty\subseteq\mathscr{H}$ 使得 $\rho(C_j)\to \sigma$。由于 $K\subseteq \rho(K)B_n$，根据性质 2，$C_j\subseteq \rho(K)B_n$，因此该序列一致有界。我们假设 $\{C_j\}_{j=1}^\infty$ 在 Hausdorff 度量下有极限 $C_0$，如若不然，依 Blaschke 选择定理，可以用其收敛子列替代之；$C_0$ 显然一定是未退化的凸体，因为 $\rho(C_0)=\sigma$。
+根据性质~\ref{prop:steiner_convex}, $\mathscr{H}$ 中的集合都是凸体。记 $\rho(K):=\inf\{r:K\subseteq B_n(0,r)\}$ (这个函数也是对 Hausdorff 度量连续) , $\sigma:=\inf\limits_{X\in\mathscr{H}}\rho(X)$， 则存在一列凸体 $\{C_j\}_{j=1}^\infty\subseteq\mathscr{H}$ 使得 $\rho(C_j)\to \sigma$。由于 $K\subseteq \rho(K)B_n$， 根据性质 2, $C_j\subseteq \rho(K)B_n$， 因此该序列一致有界。我们假设 $\{C_j\}_{j=1}^\infty$ 在 Hausdorff 度量下有极限 $C_0$， 如若不然，依 Blaschke 选择定理，可以用其收敛子列替代之；$C_0$ 显然一定是未退化的凸体，因为 $\rho(C_0)=\sigma$。
 
-接下来我们宣称 $C_0=\sigma B_n$。用反证法，如若不然，必有 $C_0$ 真包含于 $B_n$，则存在一个``球冠\footnote{即球与某个半空间的交。}"与 $C_0$ 不交。读者可以想象：一个球冠只覆盖球面的一部分，但是我们总可以进行有限多次镜像操作让这个球冠覆盖整个平面；这些镜像操作是关于某个通过球心的超平面而言的，设这些超平面的法向量是 $v_1,\ldots,v_k$。
-考虑在 $v_1,\ldots,v_k$ 方向上调整 $C_0$，从而使它``挤"进 $B_n$ 内 (见图~\ref{fig:gross})，记
+接下来我们宣称 $C_0=\sigma B_n$。用反证法，如若不然，必有 $C_0$ 真包含于 $B_n$， 则存在一个``球冠\footnote{即球与某个半空间的交。}"与 $C_0$ 不交。读者可以想象：一个球冠只覆盖球面的一部分，但是我们总可以进行有限多次镜像操作让这个球冠覆盖整个平面；这些镜像操作是关于某个通过球心的超平面而言的，设这些超平面的法向量是 $v_1,\ldots,v_k$。
+考虑在 $v_1,\ldots,v_k$ 方向上调整 $C_0$， 从而使它``挤"进 $B_n$ 内 (见图~\ref{fig:gross})， 记
 \[
 D_0:=S_{v_k}S_{v_{k-1}}\cdots S_{v_1}C_0
 \]
@@ -214,8 +214,8 @@ D_0:=S_{v_k}S_{v_{k-1}}\cdots S_{v_1}C_0
     \label{fig:gross}
 \end{figure}
 
-这时不难看出矛盾：如果我们对 $\{C_j\}_{j=1}^\infty$ 也都进行同样的挤压操作，记 $D_j:=S_{v_k}S_{v_{k-1}}\cdots S_{v_1}C_j$，显见 $D_j\in\mathscr{H}$，故由 $\sigma$ 的定义知 $\rho(D_j)\ge\sigma$；但是根据性质 6，$D_j\to D_0$，故应有 $\rho (D_0)\ge\sigma$，矛盾！这就证明了 $C_0=\sigma B_n$。
-由于 Steiner 对称化保体积（性质~\ref{prop:steiner_volume}），故 $V_n(\sigma B_n)=V_n(K)$，即
+这时不难看出矛盾：如果我们对 $\{C_j\}_{j=1}^\infty$ 也都进行同样的挤压操作，记 $D_j:=S_{v_k}S_{v_{k-1}}\cdots S_{v_1}C_j$， 显见 $D_j\in\mathscr{H}$， 故由 $\sigma$ 的定义知 $\rho(D_j)\ge\sigma$；但是根据性质 6, $D_j\to D_0$， 故应有 $\rho (D_0)\ge\sigma$， 矛盾！这就证明了 $C_0=\sigma B_n$。
+由于 Steiner 对称化保体积 (性质~\ref{prop:steiner_volume}) ， 故 $V_n(\sigma B_n)=V_n(K)$， 即
 \[
 \sigma =\left(\frac{V_n(K)}{V_n(B_n)}\right)^{1/n}
 \]
@@ -223,7 +223,7 @@ D_0:=S_{v_k}S_{v_{k-1}}\cdots S_{v_1}C_0
 \end{proof}
 \hfill\break
 \begin{corollary}\label{col:double_gross}
-设 $K,L\subset\mathbb{R}^n$ 是凸体，则存在一列单位方向 $\{u_j\}_{j=1}^\infty$，$u_j\in\mathbb{S}^{n-1},\;\forall j$，通过 Steiner 对称化可以同时让二者收敛到欧氏球，即
+设 $K,L\subset\mathbb{R}^n$ 是凸体，则存在一列单位方向 $\{u_j\}_{j=1}^\infty$，$u_j\in\mathbb{S}^{n-1},\;\forall j$， 通过 Steiner 对称化可以同时让二者收敛到欧氏球，即
 \begin{align*}
 K_j&:=S_{u_j}\cdots S_{u_1}K\to\left(\frac{V_n(K)}{V_n(B_n)}\right)^{1/n}B_n\\
 L_j&:=S_{u_j}\cdots S_{u_1}L\to\left(\frac{V_n(K)}{V_n(B_n)}\right)^{1/n}B_n
@@ -232,19 +232,19 @@ L_j&:=S_{u_j}\cdots S_{u_1}L\to\left(\frac{V_n(K)}{V_n(B_n)}\right)^{1/n}B_n
 \end{corollary}
 
 \begin{proof}
-任取 $\epsilon>0$，则根据定理~\ref{thm:gross}，存在充分大的 $j_1\in\mathbb Z_+$ 和单位向量 $u_1,\ldots,u_{j_1}$，使得
+任取 $\epsilon>0$， 则根据定理~\ref{thm:gross}， 存在充分大的 $j_1\in\mathbb Z_+$ 和单位向量 $u_1,\ldots,u_{j_1}$， 使得
 \[
 S_{u_{j_1}}\cdots S_{u_1}K\subseteq (1+\epsilon)\left(\frac{V_n(K)}{V_n(B_n)}\right)^{1/n}B_n
 \]
-接着，再次应用定理~\ref{thm:gross}，可知存在充分大的 $j_2\ge j_1$ 和单位向量 $u_{j_1+1},\ldots,u_{j_2}$，使得
+接着，再次应用定理~\ref{thm:gross}， 可知存在充分大的 $j_2\ge j_1$ 和单位向量 $u_{j_1+1},\ldots,u_{j_2}$， 使得
 \[
 S_{u_{j_2}}\cdots S_{u_{j_1+1}}(S_{u_{j_1}}\cdots S_{u_1}L)\subseteq (1+\epsilon)\left(\frac{V_n(L)}{V_n(B_n)}\right)^{1/n}B_n
 \]
-而根据 Steiner 对称化的性质~\ref{prop:steiner_contain}，对 $K$ 也仍然满足
+而根据 Steiner 对称化的性质~\ref{prop:steiner_contain}， 对 $K$ 也仍然满足
 \[
 S_{u_{j_2}}\cdots S_{u_{j_1+1}}(S_{u_{j_1}}\cdots S_{u_1}K)\subseteq (1+\epsilon)\left(\frac{V_n(K)}{V_n(B_n)}\right)^{1/n}B_n
 \]
-用 $\epsilon/2$ 代替 $\epsilon$，用得到的新凸体 $S_{u_{j_2}}\cdots S_{u_1}K$、$S_{u_{j_2}}\cdots S_{u_1}L$ 替代 $K$ 和 $L$，可以继续应用上述步骤，考虑极限情形即证。
+用 $\epsilon/2$ 代替 $\epsilon$， 用得到的新凸体 $S_{u_{j_2}}\cdots S_{u_1}K$、$S_{u_{j_2}}\cdots S_{u_1}L$ 替代 $K$ 和 $L$， 可以继续应用上述步骤，考虑极限情形即证。
 \end{proof}
 
 \begin{remark}
@@ -253,13 +253,13 @@ S_{u_{j_2}}\cdots S_{u_{j_1+1}}(S_{u_{j_1}}\cdots S_{u_1}K)\subseteq (1+\epsilon
 
 \section{牛刀小试：证明 BM 不等式}
 
-回顾一下前面的性质~\ref{prop:steiner_volume} 和~\ref{prop:steiner_monotone}，我们可以得出：对任意 $u\in \mathbb S^{n-1}$，
+回顾一下前面的性质~\ref{prop:steiner_volume} 和~\ref{prop:steiner_monotone}， 我们可以得出：对任意 $u\in \mathbb S^{n-1}$，
 \begin{equation}
 V_n(S_uK+S_uL)\le V_n(S_u(K+L))=V_n(K+L) \label{eq:3-4}\tag{3-4}
 \end{equation}
 不过 $V_n(S_uK+S_uL)$ 要怎么计算？
 
-这时定理~\ref{thm:gross} 就派上用场了。只要通过一系列 Steiner 对称化操作，让 $K$ 和 $L$ 收敛到一个球，不久好办了吗？根据推论~\ref{col:double_gross} ，存在一列单位向量 $\{u_j\}_{j=1}^\infty$，使得 $K_j:=S_{u_j}\cdots S_{u_1}K$ 和 $L_j:=S_{u_j}\cdots S_{u_1}L$ 都收敛到欧氏球。根据式~\eqref{eq:3-4}，
+这时定理~\ref{thm:gross} 就派上用场了。只要通过一系列 Steiner 对称化操作，让 $K$ 和 $L$ 收敛到一个球，不久好办了吗？根据推论~\ref{col:double_gross} ， 存在一列单位向量 $\{u_j\}_{j=1}^\infty$， 使得 $K_j:=S_{u_j}\cdots S_{u_1}K$ 和 $L_j:=S_{u_j}\cdots S_{u_1}L$ 都收敛到欧氏球。根据式~\eqref{eq:3-4}，
 \begin{align*}
 V_n(K+L)\ge V_n(K_1+L_1)\ge V_n(K_2+L_2)\ge\cdots\ge V_n(K_j+L_j)\ge\cdots
 \end{align*}
@@ -271,13 +271,13 @@ V_n(K+L)&\ge\lim_{j\to\infty} V_n(K_j+L_j)\\
 &=\left(\left(\frac{V_n(K)}{V_n(B_n)}\right)^{1/n}+\left(\frac{V_n(L)}{V_n(B_n)}\right)^{1/n}\right)^{n}V_n(B_n)\\
 &=\left(V_n(K)^{1/n}+V_n(L)^{1/n}\right)^{n}
 \end{align*}
-根据定理~\ref{thm:BM-equivalence}，这正是 Brunn-Minkowski 不等式的等价形式。这样我们就利用 Steiner 对称化轻松证明了 BM 不等式。
+根据定理~\ref{thm:BM-equivalence}， 这正是 Brunn-Minkowski 不等式的等价形式。这样我们就利用 Steiner 对称化轻松证明了 BM 不等式。
 
 根据上面的步骤，可以得出利用 Steiner 对称化来解决问题的一般步骤，
 
 \begin{enumerate}
-\item Steiner 对称化可以保持体积（或其它的不变量）；
-\item 用定理~\ref{thm:gross}，存在一列 Steiner 对称化操作，可以把问题里的凸体变成欧氏球；
+\item Steiner 对称化可以保持体积 (或其它的不变量) ；
+\item 用定理~\ref{thm:gross}， 存在一列 Steiner 对称化操作，可以把问题里的凸体变成欧氏球；
 \item 某个凸体的泛函 $F(K)$ 对 Steiner 对称化有单调性，并且该泛函对 Hausdorff 度量连续，取极限就能得到该泛函的不等式。
 \end{enumerate}
 
@@ -286,7 +286,7 @@ V_n(K+L)&\ge\lim_{j\to\infty} V_n(K_j+L_j)\\
 \hfill\break
 
 \begin{remark}
-Steiner 对称化实际上是一种所谓``\emph{纤维对称化}（fiber symmetrization）" 的特殊情形。Steiner 对称化是用一维的``弦"来截凸体；而``纤维对称化"中可能是用高维的空间来截凸体，所得的交集称作``纤维"，同样能达到对称化的效果。可以参考一些文章，如 Bianchi, G., Gardner, R. J., \& Gronchi, P. (2017). \textit{Symmetrization in geometry}.  Advances in Mathematics, 306, 51-88。课程主讲的叶德平老师和其合作者们有一些工作利用了纤维对称化来证明不等式，亦可参阅之：
+Steiner 对称化实际上是一种所谓``\emph{纤维对称化} (fiber symmetrization) " 的特殊情形。Steiner 对称化是用一维的``弦"来截凸体；而``纤维对称化"中可能是用高维的空间来截凸体，所得的交集称作``纤维"， 同样能达到对称化的效果。可以参考一些文章，如 Bianchi, G., Gardner, R. J., \& Gronchi, P. (2017). \textit{Symmetrization in geometry}.  Advances in Mathematics, 306, 51-88。课程主讲的叶德平老师和其合作者们有一些工作利用了纤维对称化来证明不等式，亦可参阅之：
 
 \begin{itemize}
 \item Haddad, J., Langharst, D., Putterman, E., Roysdon, M., \& Ye, D. (2025). \textit{Affine isoperimetric inequalities for higher-order projection and centroid bodies}: J. Haddad et al. Mathematische Annalen, 1-49.
