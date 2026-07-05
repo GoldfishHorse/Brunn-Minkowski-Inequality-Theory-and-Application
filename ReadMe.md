@@ -1,6 +1,6 @@
 # Brunn-Minkowski 不等式：理论与应用
 
-本项目采用 [![CC BY-NC-SA Logo](https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png) CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en) 协议。内容同步发布在 ![loco](https://static.zhihu.com/heifetz/favicon.ico){ width=16; } [知乎](https://zhuanlan.zhihu.com/p/1973423321602348153) 平台。
+本项目采用 [![CC BY-NC-SA Logo](https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png) CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en) 协议。内容同步发布在 <a href="https://zhuanlan.zhihu.com/p/1973423321602348153"><img src="https://static.zhihu.com/heifetz/favicon.ico" alt="logo" width="16" height="16" style="display:inline-block; vertical-align:middle;"> 知乎</a> 平台。
 
 这份笔记自笔者在山东大学数学学院 2025 暑期课程 [Brunn-Minkowski 不等式：理论与应用](https://www.math.sdu.edu.cn/info/1020/20825.htm) 》中的笔记；
 课程主讲为[叶德平](https://www.math.mun.ca/~depingy/)老师, 整体纲举目张、深入浅出, 同时清晰易懂, 大概只需要读者有基本的实分析基础。

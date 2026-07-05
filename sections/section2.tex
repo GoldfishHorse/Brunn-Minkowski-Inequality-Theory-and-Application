@@ -32,12 +32,10 @@ E+F:=\{x+y:x\in E,y\in F\}
 
 \begin{enumerate}
 \item $x\in E,y\in F\implies z\in E+F$， 此时 $1_{E+F}(z)=1=1_E(x)1_F(y)$；
-\item $x\in E,y\notin F\implies z\notin E+F$， 此时 $1_{E+F}(z)=0=1_E(x)1_F(y)$；
-\item $x\notin E,y\in F\implies z\notin E+F$， 此时 $1_{E+F}(z)=0=1_E(x)1_F(y)$；
-\item $x\notin E,y\notin F$，$z$ 属于或不属于 $E+F$ 都有可能，$1_E(x)1_F(y)=0\le 1_{E+F}(z)=\text{0 或 1}$。
+\item $x\in E,y\notin F$、或者 $x\notin E,y\in F$、或者 $x\notin E,y\notin F$ 这三种情况，$z$ 属于或不属于 $E+F$ 都有可能，$1_E(x)1_F(y)=0\le 1_{E+F}(z)=\text{0 或 1}$。
 \end{enumerate}
 
-可以看出：无论如何，如果 $1_{E+F}(z)=0$， 那么 $1_E(x)1_F(y)$ 必然也总是 0；如果 $1_{E+F}(z)=1$， 那么 $1_E(x)1_F(y)$ 既可能是 0 也可能是 1。于是有
+于是有
 \[
 1_{E+F}(z)=\sup_{x+y=z} 1_E(x)1_F(y)
 \]
